@@ -1,0 +1,52 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import seoData from '../data/seo.json';
+import schemaData from '../data/schema.json';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const pathname = new URL(Astro.request.url).pathname;
+const slug = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+const seo = seoData[slug as keyof typeof seoData] || seoData['/'];
+
+const { title = seo.title, description = seo.description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`https://www.standardmethodgroup.com${slug === '/' ? '' : slug}`} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`https://www.standardmethodgroup.com${slug === '/' ? '' : slug}`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://www.standardmethodgroup.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <Nav />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

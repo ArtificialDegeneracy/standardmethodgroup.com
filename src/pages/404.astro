@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page Not Found | Standard Method Group" description="The page you're looking for doesn't exist.">
+  <section class="not-found">
+    <div class="not-found-inner">
+      <h1>This page doesn't exist.</h1>
+      <p>The page you're looking for may have been moved or removed. Here's where you can go:</p>
+      <div class="not-found-links">
+        <a href="/" class="not-found-btn">Back to home</a>
+        <a href="/contact" class="not-found-link">Get in touch</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .not-found {
+    padding: var(--space-12) 0;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .not-found h1 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 2.5rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-2);
+  }
+
+  .not-found p {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-5);
+  }
+
+  .not-found-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .not-found-btn {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 200ms ease;
+  }
+
+  .not-found-btn:hover {
+    background: var(--color-deep-teal);
+    color: var(--color-white);
+  }
+
+  .not-found-link {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 1rem;
+    color: var(--color-teal);
+    text-decoration: none;
+  }
+
+  .not-found-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .not-found h1 {
+      font-size: 1.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .not-found-btn {
+      transition: none;
+    }
+  }
+</style>

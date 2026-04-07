@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text);
+  background-color: var(--color-warm-white);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-heading);
+  line-height: 1.2;
+}
+
+a {
+  color: var(--color-teal);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-deep-teal);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-heading);
+}
+
+/* Global focus indicator for keyboard navigation */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-teal);
+  outline-offset: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-3);
+  z-index: 200;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-navy);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  top: var(--space-1);
+  color: var(--color-white);
+}

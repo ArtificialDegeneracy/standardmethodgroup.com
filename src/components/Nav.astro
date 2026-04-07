@@ -1,0 +1,259 @@
+---
+const currentPath = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
+
+const navLinks = [
+  { label: 'How We Work', href: '/how-we-work' },
+  { label: 'Who We Help', href: '/who-we-help' },
+  { label: 'About', href: '/about' },
+  { label: 'Calculator', href: '/calculator' },
+];
+---
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Standard Method Group — Home">
+      <img src="/images/smg-logo-white.png" alt="Standard Method Group" class="nav-logo-img" width="308" height="43" />
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={['nav-link', { active: currentPath === link.href }]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="/contact" class="nav-cta">Let's Talk</a>
+    </nav>
+
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" aria-hidden="true">
+    <nav class="mobile-menu-inner" aria-label="Mobile navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={['mobile-link', { active: currentPath === link.href }]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="/contact" class="mobile-cta">Let's Talk</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const hamburger = document.querySelector('.nav-hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', String(!isOpen));
+    hamburger.classList.toggle('open');
+    mobileMenu?.classList.toggle('open');
+    mobileMenu?.setAttribute('aria-hidden', String(isOpen));
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  });
+
+  // Close menu on link click
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger?.setAttribute('aria-expanded', 'false');
+      hamburger?.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-navy);
+    height: 72px;
+  }
+
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav-logo-img {
+    height: 32px;
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .nav-link {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: opacity 200ms ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-white);
+  }
+
+  .nav-cta {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 200ms ease;
+  }
+
+  .nav-cta:hover {
+    background: var(--color-deep-teal);
+    color: var(--color-white);
+  }
+
+  .nav-cta:focus-visible {
+    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline-offset: 2px;
+  }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: var(--space-1);
+    cursor: pointer;
+  }
+
+  .nav-hamburger:focus-visible {
+    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-white);
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+
+  .nav-hamburger.open .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-hamburger.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-hamburger.open .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-navy);
+    z-index: 99;
+  }
+
+  .mobile-menu.open {
+    display: flex;
+  }
+
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    width: 100%;
+    padding: var(--space-8);
+  }
+
+  .mobile-link {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+  }
+
+  .mobile-link:hover,
+  .mobile-link.active {
+    color: var(--color-white);
+  }
+
+  .mobile-cta {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: 14px var(--space-3);
+    border-radius: var(--radius);
+    text-decoration: none;
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      height: 56px;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .nav-hamburger {
+      display: flex;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hamburger-line,
+    .nav-cta,
+    .nav-link {
+      transition: none;
+    }
+  }
+</style>

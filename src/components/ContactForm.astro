@@ -1,0 +1,123 @@
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="booking">
+      <a href="https://calendar.app.google/hH5ewNekVCHFKrcc9" target="_blank" rel="noopener" class="booking-btn">
+        Book a discovery conversation
+      </a>
+      <p class="booking-note">Pick a time that works — 30 minutes, no pitch, no obligation.</p>
+    </div>
+
+    <div class="divider">
+      <span>or</span>
+    </div>
+
+    <div class="direct-contact">
+      <a href="mailto:dan@standardmethodgroup.com" class="direct-email">dan@standardmethodgroup.com</a>
+      <p class="direct-hours">Monday–Friday, 8am–5pm</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    padding: 0 0 var(--space-8);
+  }
+
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .booking {
+    text-align: center;
+    padding: var(--space-5) 0;
+  }
+
+  .booking-btn {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: 18px 40px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 200ms ease;
+  }
+
+  .booking-btn:hover {
+    background: var(--color-deep-teal);
+    color: var(--color-white);
+  }
+
+  .booking-btn:focus-visible {
+    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline-offset: 2px;
+  }
+
+  .booking-note {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-2);
+    line-height: 1.5;
+  }
+
+  .divider {
+    text-align: center;
+    position: relative;
+    margin: var(--space-3) 0;
+  }
+
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .divider span {
+    position: relative;
+    background: var(--color-warm-white);
+    padding: 0 var(--space-2);
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .direct-contact {
+    text-align: center;
+    padding: var(--space-3) 0;
+  }
+
+  .direct-email {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    color: var(--color-teal);
+    text-decoration: none;
+    margin-bottom: var(--space-1);
+  }
+
+  .direct-email:hover {
+    text-decoration: underline;
+  }
+
+  .direct-hours {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .booking-btn {
+      transition: none;
+    }
+  }
+</style>

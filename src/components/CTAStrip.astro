@@ -1,0 +1,86 @@
+---
+interface Props {
+  headline?: string;
+  buttonText?: string;
+  buttonHref?: string;
+}
+
+const {
+  headline = '30 minutes. No pitch. Just a conversation about your operations.',
+  buttonText = 'Book a discovery call',
+  buttonHref = '/contact',
+} = Astro.props;
+---
+
+<section class="cta-strip">
+  <div class="cta-inner">
+    <h2 class="cta-headline">{headline}</h2>
+    <a href={buttonHref} class="cta-button">{buttonText}</a>
+  </div>
+</section>
+
+<style>
+  .cta-strip {
+    background: var(--color-navy);
+    padding: var(--space-12) 0;
+  }
+
+  .cta-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .cta-headline {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.75rem;
+    color: var(--color-white);
+    line-height: 1.2;
+    max-width: 640px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 200ms ease;
+  }
+
+  .cta-button:hover {
+    background: var(--color-deep-teal);
+    color: var(--color-white);
+  }
+
+  .cta-button:focus-visible {
+    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .cta-strip {
+      padding: var(--space-8) 0;
+    }
+
+    .cta-headline {
+      font-size: 1.375rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-button {
+      transition: none;
+    }
+  }
+</style>

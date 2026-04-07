@@ -1,0 +1,204 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTAStrip from '../components/CTAStrip.astro';
+---
+
+<Base>
+  <PageHeader
+    headline="We work with owners who are too busy running the business to fix how it runs."
+    subheadline="These are the industries we know. If your business looks like one of these, we should talk."
+  />
+
+  <!-- Trades & Construction -->
+  <section class="vertical" id="trades-construction">
+    <div class="vertical-inner">
+      <h2>Trades &amp; Construction</h2>
+      <p class="situation">You're running crews, managing subs, and handling permits — and every evening you're back at the desk catching up on paperwork. Job costing lives in a spreadsheet or someone's head. Change orders happen on the phone and sometimes make it to the office, sometimes don't.</p>
+      <div class="problems">
+        <p>A change order costs you $15K because it was never documented.</p>
+        <p>A permit renewal slips and a job shuts down.</p>
+        <p>Your best foreman leaves and takes all the process knowledge with him.</p>
+      </div>
+      <p class="outcome">Change orders get logged in the field and show up in the office the same day. Permit deadlines get tracked and flagged before they're due. Your monthly job cost report is ready on the first — without anyone pulling it together.</p>
+    </div>
+  </section>
+
+  <!-- Marine Contracting -->
+  <section class="vertical alt" id="marine-contracting">
+    <div class="vertical-inner">
+      <h2>Marine Contracting</h2>
+      <p class="situation">Everything a general contractor deals with, plus DEP permits, USACE compliance, submerged land leases, and a schedule that changes with the weather. You're in the field most days and your "system" is a combination of texts, emails, and a whiteboard in the office.</p>
+      <div class="problems">
+        <p>A compliance filing almost gets missed because nobody was tracking the deadline.</p>
+        <p>You take on more work but your coordination breaks down at the current volume.</p>
+        <p>A weather delay cascades through three projects because the schedule updates are manual.</p>
+      </div>
+      <p class="outcome">Permit deadlines are tracked automatically and flag before they're due. Weather delays update dependent schedules without someone re-doing the math. Your compliance documentation stays current without anyone maintaining it by hand.</p>
+    </div>
+  </section>
+
+  <!-- Property Management -->
+  <section class="vertical" id="property-management">
+    <div class="vertical-inner">
+      <h2>Property Management</h2>
+      <p class="situation">You're managing 50, 100, maybe 200 units. Tenants expect instant responses. Maintenance requests come in by text, email, phone, and portal — and half of them get lost in the handoff to vendors. Month-end reporting takes two full days because nobody's pulling the numbers until the last minute.</p>
+      <div class="problems">
+        <p>You lose the one person who knew how the filing system worked.</p>
+        <p>Maintenance response times slip and tenants don't renew.</p>
+        <p>An owner asks for a report and it takes three days to compile something that should exist already.</p>
+      </div>
+      <p class="outcome">Maintenance requests get routed to the right vendor automatically, with status updates back to the tenant. Month-end reports compile themselves from data that's already being captured. A new hire can follow the process on day one because it's built into the system, not someone's memory.</p>
+    </div>
+  </section>
+
+  <!-- Law Offices -->
+  <section class="vertical alt" id="law-offices">
+    <div class="vertical-inner">
+      <h2>Law Offices</h2>
+      <p class="situation">You're a 2–5 attorney firm and the managing partner is also handling intake, billing, document management, and making sure nothing falls through the cracks between 40 open matters. Client communication is inconsistent because everyone's too busy to follow up on time.</p>
+      <div class="problems">
+        <p>A filing deadline gets missed because it was tracked on a calendar that nobody checked.</p>
+        <p>A conflict check doesn't happen until it's too late.</p>
+        <p>Trust accounting reconciliation is manual and you're one audit away from a problem.</p>
+      </div>
+      <p class="outcome">Intake information flows from the first call to the file without re-entry. Deadlines are tracked and escalated automatically. Trust accounting reconciliation happens continuously instead of in a monthly scramble.</p>
+    </div>
+  </section>
+
+  <!-- Cross-Vertical CTA -->
+  <section class="cross-vertical">
+    <div class="cross-vertical-inner">
+      <h2>Don't see your industry?</h2>
+      <p>If your business runs on repetitive processes and manual handoffs, we can probably help.</p>
+      <a href="/contact" class="cross-cta">Let's talk about your operations</a>
+    </div>
+  </section>
+
+  <CTAStrip />
+</Base>
+
+<style>
+  .vertical {
+    padding: var(--space-12) 0;
+    background: var(--color-warm-white);
+  }
+
+  .vertical.alt {
+    background: var(--color-warm-white-alt);
+  }
+
+  .vertical-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .vertical-inner > * {
+    max-width: 720px;
+  }
+
+  .vertical h2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 2rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-3);
+  }
+
+  .situation {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+  }
+
+  .problems {
+    margin-bottom: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .problems p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.125rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .outcome {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .cross-vertical {
+    padding: var(--space-8) 0;
+    text-align: center;
+  }
+
+  .cross-vertical-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .cross-vertical h2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.5rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-2);
+  }
+
+  .cross-vertical p {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+  }
+
+  .cross-cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 200ms ease;
+  }
+
+  .cross-cta:hover {
+    background: var(--color-deep-teal);
+    color: var(--color-white);
+  }
+
+  @media (max-width: 768px) {
+    .vertical {
+      padding: var(--space-8) 0;
+    }
+
+    .vertical h2 {
+      font-size: 1.5rem;
+    }
+
+    .situation,
+    .problems p,
+    .outcome {
+      font-size: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cross-cta {
+      transition: none;
+    }
+  }
+</style>

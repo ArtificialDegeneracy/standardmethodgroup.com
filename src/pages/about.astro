@@ -1,0 +1,165 @@
+---
+import Base from '../layouts/Base.astro';
+import CTAStrip from '../components/CTAStrip.astro';
+---
+
+<Base>
+  <!-- Founder Section -->
+  <section class="founder">
+    <div class="founder-inner">
+      <div class="founder-text">
+        <h1>Built by someone who's seen how it's done at scale — and thinks your business deserves the same.</h1>
+        <p>Dan founded Standard Method Group after years of building process systems at Deloitte — the kind of work that Fortune 500 companies pay seven figures for. The problem: none of that discipline was reaching the businesses that needed it most. A 20-person contracting firm has the same operational problems as a Fortune 500 company. They just can't afford the same solution.</p>
+        <p>SMG exists to close that gap. Same rigor, same attention to failure recovery and audit trails, same expectation that the system works when nobody's watching — built for a small business budget and a small business reality.</p>
+      </div>
+      <!-- Portrait placeholder: add <img> here when headshot is available -->
+    </div>
+  </section>
+
+  <!-- Competitive Positioning -->
+  <section class="positioning">
+    <div class="positioning-inner">
+      <div class="position-item">
+        <strong>We're not an IT company.</strong>
+        <span>We don't sell hardware, networks, or software licenses. If you need that, we'll point you to someone who does it well.</span>
+      </div>
+      <div class="position-item">
+        <strong>We're not a software vendor.</strong>
+        <span>There's no product to buy, no per-seat fee, no annual contract for a platform you'll stop using in six months.</span>
+      </div>
+      <div class="position-item">
+        <strong>We're not a freelancer.</strong>
+        <span>We don't build what you spec. We figure out what your business needs by understanding how it runs, then we build that.</span>
+      </div>
+      <p class="positioning-line">Think of us like your accountant or your attorney — a professional you keep on retainer because they know your business and they handle the things you shouldn't be spending your time on.</p>
+    </div>
+  </section>
+
+  <!-- Local Presence -->
+  <section class="local">
+    <div class="local-inner">
+      <p>Based in Pinellas County, Florida. We work with businesses across Tampa Bay — in person, on the phone, or at your office.</p>
+    </div>
+  </section>
+
+  <CTAStrip
+    headline="Want to see if we're a fit?"
+    buttonText="Book a 30-minute conversation"
+  />
+</Base>
+
+<style>
+  /* Founder */
+  .founder {
+    padding: var(--space-12) 0 var(--space-8);
+  }
+
+  .founder-inner {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .founder-text {
+    flex: 1;
+  }
+
+  .founder-text h1 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 2.5rem;
+    color: var(--color-navy);
+    line-height: 1.2;
+    margin-bottom: var(--space-3);
+  }
+
+  .founder-text p {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+  }
+
+  .founder-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Positioning */
+  .positioning {
+    padding: var(--space-8) 0;
+    background: var(--color-warm-white-alt);
+  }
+
+  .positioning-inner {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .position-item {
+    line-height: 1.6;
+  }
+
+  .position-item strong {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-navy);
+  }
+
+  .position-item span {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-left: 4px;
+  }
+
+  .positioning-line {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+  }
+
+  /* Local */
+  .local {
+    padding: var(--space-5) 0;
+  }
+
+  .local-inner {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .local-inner p {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .founder {
+      padding: var(--space-8) 0 var(--space-5);
+    }
+
+    .founder-text h1 {
+      font-size: 1.75rem;
+    }
+
+    .founder-text p,
+    .position-item strong,
+    .position-item span {
+      font-size: 1rem;
+    }
+  }
+</style>

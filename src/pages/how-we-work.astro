@@ -1,0 +1,191 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTAStrip from '../components/CTAStrip.astro';
+---
+
+<Base>
+  <PageHeader
+    headline="Here's what happens when you call us."
+    subheadline="No contracts to sign. No software to buy. We start with a conversation and don't ask for a commitment until you've seen what we can build."
+  />
+
+  <!-- Engagement Timeline -->
+  <section class="timeline">
+    <div class="timeline-inner">
+      <div class="timeline-step">
+        <div class="step-marker">1</div>
+        <div class="step-content">
+          <h2>We talk</h2>
+          <p>A 30-minute conversation — on the phone, over coffee, or at your office. We ask how your business runs day to day: what's manual, what gets missed, what takes too long. You don't need to prepare anything.</p>
+        </div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-marker">2</div>
+        <div class="step-content">
+          <h2>We come back with something real</h2>
+          <p>Before you spend a dollar, we return with a working example or mockup showing exactly what a solution looks like for your business. Not a slide deck — something you can see running.</p>
+        </div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-marker">3</div>
+        <div class="step-content">
+          <h2>We build it</h2>
+          <p>Once you say go, we build the system inside tools your business already uses — or inexpensive ones that fit. Everything is tested, documented, and built to keep working when we're not looking at it.</p>
+        </div>
+      </div>
+      <div class="timeline-step">
+        <div class="step-marker">4</div>
+        <div class="step-content">
+          <h2>We stay on it</h2>
+          <p>A monthly engagement where we monitor what's running, deliver a quality report you can actually read, and keep improving things as your business changes. You get a single point of contact who knows your operations — not a ticket queue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Differentiator Block -->
+  <section class="differentiators">
+    <div class="diff-inner">
+      <div class="diff-item">
+        <h3>Your systems don't break and start over.</h3>
+        <p>If something fails — a server hiccup, bad data, a missed connection — the system picks up where it left off. No duplicate entries, no missed steps, no manual cleanup.</p>
+      </div>
+      <div class="diff-item">
+        <h3>Compliance paperwork writes itself.</h3>
+        <p>Every step is logged automatically. At the end of the month, those logs become your quality report. If you need to prove something happened for an inspection or an audit, it's already documented.</p>
+      </div>
+      <div class="diff-item">
+        <h3>You stay in control of what matters.</h3>
+        <p>Payments, permit submissions, legal filings — anything high-stakes still goes through a person. The system handles the routine so you can focus on the judgment calls.</p>
+      </div>
+      <div class="diff-item">
+        <h3>We're not selling you software.</h3>
+        <p>There's no platform, no login, no per-seat fee. We build with whatever fits your business — whether that's tools you already pay for or something simple and inexpensive.</p>
+      </div>
+    </div>
+  </section>
+
+  <CTAStrip
+    headline="Want to see what this looks like for your business?"
+    buttonText="Let's talk"
+  />
+</Base>
+
+<style>
+  /* Timeline */
+  .timeline {
+    padding: 0 0 var(--space-8);
+  }
+
+  .timeline-inner {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    position: relative;
+  }
+
+  .timeline-inner::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+  }
+
+  .timeline-step {
+    display: flex;
+    gap: var(--space-3);
+    padding-bottom: var(--space-5);
+    position: relative;
+  }
+
+  .timeline-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .step-marker {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: var(--color-navy);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content h2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.5rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-2);
+  }
+
+  .step-content p {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  /* Differentiators */
+  .differentiators {
+    padding: var(--space-8) 0;
+    background: var(--color-warm-white-alt);
+  }
+
+  .diff-inner {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .diff-item h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-2);
+  }
+
+  .diff-item p {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-inner::before {
+      display: none;
+    }
+
+    .step-marker {
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
+    }
+
+    .step-content h2 {
+      font-size: 1.25rem;
+    }
+
+    .step-content p,
+    .diff-item p {
+      font-size: 1rem;
+    }
+  }
+</style>

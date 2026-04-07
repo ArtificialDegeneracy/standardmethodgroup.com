@@ -1,0 +1,325 @@
+---
+import Base from '../layouts/Base.astro';
+import CTAStrip from '../components/CTAStrip.astro';
+---
+
+<Base>
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-headline">We build systems that run your business the way you'd run it — if you had the time.</h1>
+      <p class="hero-sub">Standard Method Group helps small business owners in Tampa Bay stop losing time to paperwork, missed steps, and manual processes. We find what's falling through the cracks and build something that catches it.</p>
+      <div class="hero-ctas">
+        <a href="/contact" class="hero-cta">Let's talk about how your business runs</a>
+        <a href="/calculator" class="hero-cta-secondary">See what manual work is costing you &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Recognition Strip -->
+  <section class="problem-strip">
+    <div class="problem-inner">
+      <p>Your office runs on texts, emails, and one person who knows where everything is.</p>
+      <p>Month-end reporting takes two days because nobody's pulling the data until the last minute.</p>
+      <p>You've bought software before. It solved half the problem and nobody uses it.</p>
+      <p>You spend your evenings on paperwork instead of with your family.</p>
+    </div>
+  </section>
+
+  <!-- Service Summary -->
+  <section class="services">
+    <div class="services-inner">
+      <div class="service-item">
+        <h3>We find the problem first</h3>
+        <p>A free 30-minute conversation about how your business actually runs today. No pitch, no demo. We come back with a working example before you spend a dollar.</p>
+      </div>
+      <div class="service-item">
+        <h3>We build systems that handle the routine</h3>
+        <p>Document routing, status updates, approvals, reports — the stuff that happens the same way every time gets built into a system that runs it without you.</p>
+      </div>
+      <div class="service-item">
+        <h3>We stay on it</h3>
+        <p>A monthly check-in and quality report that shows exactly what ran, what needs attention, and what's improving. Not a help desk — an operations partner.</p>
+      </div>
+    </div>
+    <div class="services-cta">
+      <a href="/how-we-work" class="service-link">See how it works &rarr;</a>
+      <span class="services-cta-divider">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <a href="/calculator" class="service-link">Calculate your costs &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Credibility Strip -->
+  <section class="credibility">
+    <div class="credibility-inner">
+      <p>SMG was founded by a former Deloitte process engineer who got tired of watching small businesses try to solve operations problems with more software. We bring the same discipline Fortune 500 companies pay for — at a scale and price that works for a 15-person crew.</p>
+    </div>
+  </section>
+
+  <!-- Industry Grid -->
+  <section class="industries">
+    <div class="industries-inner">
+      <a href="/who-we-help#trades-construction" class="industry-card">Trades &amp; Construction</a>
+      <a href="/who-we-help#marine-contracting" class="industry-card">Marine Contracting</a>
+      <a href="/who-we-help#property-management" class="industry-card">Property Management</a>
+      <a href="/who-we-help#law-offices" class="industry-card">Law Offices</a>
+    </div>
+  </section>
+
+  <CTAStrip />
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    background: var(--color-warm-white);
+    padding: var(--space-12) 0;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    max-width: 60%;
+  }
+
+  .hero-headline {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 2.5rem;
+    color: var(--color-navy);
+    line-height: 1.2;
+  }
+
+  .hero-sub {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 200ms ease;
+  }
+
+  .hero-cta:hover {
+    background: var(--color-deep-teal);
+    color: var(--color-white);
+  }
+
+  .hero-cta:focus-visible {
+    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline-offset: 2px;
+  }
+
+  .hero-cta-secondary {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 1rem;
+    color: var(--color-teal);
+    text-decoration: none;
+  }
+
+  .hero-cta-secondary:hover {
+    color: var(--color-deep-teal);
+    text-decoration: underline;
+  }
+
+  .services-cta-divider {
+    color: var(--color-border);
+  }
+
+  /* Problem Recognition Strip */
+  .problem-strip {
+    background: var(--color-navy);
+    padding: var(--space-12) 0;
+  }
+
+  .problem-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+  }
+
+  .problem-inner p {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--color-white);
+    line-height: 1.6;
+  }
+
+  /* Service Summary */
+  .services {
+    padding: var(--space-8) 0;
+  }
+
+  .services-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+
+  .service-item h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 1.5rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-2);
+  }
+
+  .service-item p {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .services-cta {
+    max-width: var(--max-width);
+    margin: var(--space-3) auto 0;
+    padding: 0 var(--space-3);
+    text-align: center;
+  }
+
+  .service-link {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    color: var(--color-teal);
+    text-decoration: none;
+  }
+
+  .service-link:hover {
+    color: var(--color-deep-teal);
+    text-decoration: underline;
+  }
+
+  /* Credibility Strip */
+  .credibility {
+    background: var(--color-warm-white-alt);
+    padding: var(--space-8) 0;
+  }
+
+  .credibility-inner {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .credibility-inner p {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  /* Industry Grid */
+  .industries {
+    padding: var(--space-8) 0;
+  }
+
+  .industries-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-2);
+  }
+
+  .industry-card {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-navy);
+    text-decoration: none;
+    text-align: center;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: border-color 200ms ease, color 200ms ease;
+  }
+
+  .industry-card:hover {
+    border-color: var(--color-teal);
+    color: var(--color-teal);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: auto;
+      padding: var(--space-8) 0;
+    }
+
+    .hero-inner {
+      max-width: 100%;
+    }
+
+    .hero-headline {
+      font-size: 1.75rem;
+    }
+
+    .hero-sub {
+      font-size: 1.125rem;
+    }
+
+    .problem-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+
+    .problem-inner p {
+      font-size: 1.125rem;
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .problem-inner p:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .services-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .industries-inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-cta,
+    .industry-card {
+      transition: none;
+    }
+  }
+</style>

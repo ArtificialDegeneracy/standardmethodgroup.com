@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+
+<Base
+  title="Privacy Policy | Standard Method Group"
+  description="Privacy policy for Standard Method Group. How we collect, use, and protect your information."
+>
+  <PageHeader headline="Privacy Policy" />
+
+  <section class="privacy">
+    <div class="privacy-inner">
+      <p class="updated">Last updated: April 2026</p>
+
+      <h2>Who we are</h2>
+      <p>Standard Method Group ("SMG," "we," "us") is an operations consultancy based in Pinellas County, Florida. This policy explains how we handle information collected through standardmethodgroup.com.</p>
+
+      <h2>What we collect</h2>
+      <p>When you fill out a contact form or the operations cost calculator on our site, we collect the information you provide — typically your name, email address, business name, and any details you share about your operations. We also collect basic analytics data (pages visited, referral source) to understand how visitors use the site.</p>
+
+      <h2>How we use it</h2>
+      <p>We use your contact information to respond to your inquiry — usually by email within one business day. We do not sell, rent, or share your information with third parties. We do not add you to a marketing list unless you ask us to.</p>
+
+      <h2>Third-party services</h2>
+      <p>Our site uses the following third-party services:</p>
+      <ul>
+        <li><strong>Formspree</strong> — processes form submissions and delivers them to our email. Formspree's privacy policy governs their handling of your data.</li>
+        <li><strong>Cloudflare</strong> — hosts the site and provides security. Cloudflare may collect standard server logs (IP address, browser type, pages visited).</li>
+      </ul>
+
+      <h2>Cookies</h2>
+      <p>This site does not use cookies for tracking or advertising. If we add analytics in the future, we will update this policy accordingly.</p>
+
+      <h2>Your rights</h2>
+      <p>You can request that we delete any information you've submitted by emailing <a href="mailto:dan@standardmethodgroup.com">dan@standardmethodgroup.com</a>. We'll confirm deletion within 5 business days.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>If we make changes to this policy, we'll update the date at the top of this page. For significant changes, we'll note them here.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about this policy? Email <a href="mailto:dan@standardmethodgroup.com">dan@standardmethodgroup.com</a>.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .privacy {
+    padding: 0 0 var(--space-12);
+  }
+
+  .privacy-inner {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .updated {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-5);
+  }
+
+  .privacy-inner h2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    color: var(--color-navy);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-2);
+  }
+
+  .privacy-inner p {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+  }
+
+  .privacy-inner ul {
+    list-style: disc;
+    padding-left: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+
+  .privacy-inner li {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: var(--space-1);
+  }
+
+  .privacy-inner a {
+    color: var(--color-teal);
+  }
+
+  .privacy-inner a:hover {
+    text-decoration: underline;
+  }
+</style>

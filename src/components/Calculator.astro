@@ -1,0 +1,452 @@
+<section class="calc-section">
+  <div class="calc-inner">
+    <div class="calc-inputs">
+      <div class="input-group">
+        <label for="hours">Hours per week spent on paperwork, status updates, and chasing information</label>
+        <p class="input-hint">Think: filing, reporting, following up, re-entering data, compiling numbers someone already has</p>
+        <div class="slider-row">
+          <input type="range" id="hours" min="2" max="40" value="10" step="1" />
+          <output for="hours" class="slider-value" id="hours-value">10 hrs</output>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="rate">What that time costs per hour</label>
+        <p class="input-hint">The hourly rate of the person doing this work — you, your office manager, or whoever it falls to</p>
+        <div class="rate-presets">
+          <button class="rate-btn" data-rate="20">$20</button>
+          <button class="rate-btn active" data-rate="25">$25</button>
+          <button class="rate-btn" data-rate="30">$30</button>
+          <button class="rate-btn" data-rate="35">$35</button>
+          <button class="rate-btn" data-rate="40">$40</button>
+        </div>
+        <div class="rate-custom">
+          <span>or enter your own:</span>
+          <div class="custom-rate-wrap">
+            <span class="dollar-sign">$</span>
+            <input type="number" id="rate" min="15" max="300" value="25" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-results">
+      <h3>What that adds up to</h3>
+
+      <div class="result-row">
+        <span class="result-label">Monthly hours on admin</span>
+        <span class="result-number" id="monthly-hours">43</span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Monthly cost</span>
+        <span class="result-number" id="monthly-cost">$9,675</span>
+      </div>
+
+      <div class="result-row">
+        <span class="result-label">Annual cost</span>
+        <span class="result-number" id="annual-cost">$116,100</span>
+      </div>
+
+      <div class="result-divider"></div>
+
+      <div class="result-recovery">
+        <h3>What typically changes</h3>
+        <p class="recovery-text">Businesses like yours typically recover <strong id="recovery-low">26</strong> to <strong id="recovery-high">32</strong> hours per month — roughly <strong id="savings-low">$1,290</strong> to <strong id="savings-high">$1,613</strong> back in your pocket.</p>
+        <p class="recovery-annual">That's <strong id="annual-low">$15,480</strong> to <strong id="annual-high">$19,350</strong> per year in time your team gets back.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-lead">
+    <div class="calc-lead-inner">
+      <h3>Want to talk through these numbers?</h3>
+      <p>Book a 30-minute conversation and we'll walk through what's realistic for your business.</p>
+      <a href="https://calendar.app.google/hH5ewNekVCHFKrcc9" target="_blank" rel="noopener" class="lead-book">Book a discovery conversation</a>
+      <p class="lead-alt">or email your results to <a href="mailto:dan@standardmethodgroup.com">dan@standardmethodgroup.com</a></p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const hoursSlider = document.getElementById('hours') as HTMLInputElement;
+  const rateInput = document.getElementById('rate') as HTMLInputElement;
+  const rateBtns = document.querySelectorAll('.rate-btn');
+
+  function formatCurrency(n: number): string {
+    return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+  }
+
+  function calculate() {
+    const hours = parseFloat(hoursSlider.value);
+    const rate = parseFloat(rateInput.value) || 25;
+
+    const monthlyHours = Math.round(hours * 4.33);
+    const monthlyCost = monthlyHours * rate;
+    const annualCost = monthlyCost * 12;
+
+    const recoveryLowPct = 0.40;
+    const recoveryHighPct = 0.50;
+
+    const recoveryHoursLow = Math.round(monthlyHours * recoveryLowPct);
+    const recoveryHoursHigh = Math.round(monthlyHours * recoveryHighPct);
+    const savingsLow = Math.round(monthlyCost * recoveryLowPct);
+    const savingsHigh = Math.round(monthlyCost * recoveryHighPct);
+    const annualLow = savingsLow * 12;
+    const annualHigh = savingsHigh * 12;
+
+    // Update display
+    (document.getElementById('hours-value') as HTMLElement).textContent = hours + ' hrs';
+    (document.getElementById('monthly-hours') as HTMLElement).textContent = monthlyHours.toString();
+    (document.getElementById('monthly-cost') as HTMLElement).textContent = formatCurrency(monthlyCost);
+    (document.getElementById('annual-cost') as HTMLElement).textContent = formatCurrency(annualCost);
+    (document.getElementById('recovery-low') as HTMLElement).textContent = recoveryHoursLow.toString();
+    (document.getElementById('recovery-high') as HTMLElement).textContent = recoveryHoursHigh.toString();
+    (document.getElementById('savings-low') as HTMLElement).textContent = formatCurrency(savingsLow);
+    (document.getElementById('savings-high') as HTMLElement).textContent = formatCurrency(savingsHigh);
+    (document.getElementById('annual-low') as HTMLElement).textContent = formatCurrency(annualLow);
+    (document.getElementById('annual-high') as HTMLElement).textContent = formatCurrency(annualHigh);
+
+  }
+
+  hoursSlider.addEventListener('input', calculate);
+  rateInput.addEventListener('input', calculate);
+
+  rateBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      rateBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      rateInput.value = (btn as HTMLElement).dataset.rate || '25';
+      calculate();
+    });
+  });
+
+  // Sync: if user types a custom rate, deselect preset buttons
+  rateInput.addEventListener('input', () => {
+    const val = rateInput.value;
+    rateBtns.forEach(btn => {
+      btn.classList.toggle('active', (btn as HTMLElement).dataset.rate === val);
+    });
+  });
+
+  // Initial calculation
+  calculate();
+</script>
+
+<style>
+  .calc-section {
+    padding: 0 0 var(--space-8);
+  }
+
+  .calc-inner {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  /* Inputs */
+  .calc-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .input-group label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    color: var(--color-navy);
+    margin-bottom: 4px;
+  }
+
+  .input-hint {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--space-2);
+  }
+
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .slider-row input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: var(--color-border);
+    border-radius: 3px;
+    outline: none;
+  }
+
+  .slider-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--color-teal);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid var(--color-white);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .slider-row input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: var(--color-teal);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid var(--color-white);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .slider-row input[type="range"]:focus-visible::-webkit-slider-thumb {
+    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline-offset: 2px;
+  }
+
+  .slider-value {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    color: var(--color-navy);
+    min-width: 56px;
+    text-align: right;
+  }
+
+  /* Rate presets */
+  .rate-presets {
+    display: flex;
+    gap: var(--space-1);
+    margin-bottom: var(--space-2);
+  }
+
+  .rate-btn {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.875rem;
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-white);
+    color: var(--color-navy);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 150ms ease;
+  }
+
+  .rate-btn:hover {
+    border-color: var(--color-teal);
+    color: var(--color-teal);
+  }
+
+  .rate-btn.active {
+    background: var(--color-teal);
+    color: var(--color-white);
+    border-color: var(--color-teal);
+  }
+
+  .rate-custom {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .custom-rate-wrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .dollar-sign {
+    padding: 6px 0 6px 10px;
+    font-family: var(--font-heading);
+    color: var(--color-text-secondary);
+  }
+
+  .custom-rate-wrap input {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-text);
+    border: none;
+    outline: none;
+    width: 64px;
+    padding: 6px 8px;
+    background: transparent;
+  }
+
+  .custom-rate-wrap:focus-within {
+    border-color: var(--color-teal);
+    box-shadow: 0 0 0 3px rgba(42, 125, 110, 0.15);
+  }
+
+  /* Results */
+  .calc-results {
+    background: var(--color-warm-white-alt);
+    border-radius: var(--radius);
+    padding: var(--space-5);
+  }
+
+  .calc-results h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-3);
+  }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .result-label {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+  }
+
+  .result-number {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.5rem;
+    color: var(--color-navy);
+  }
+
+  .result-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: var(--space-3) 0;
+  }
+
+  .result-recovery h3 {
+    margin-bottom: var(--space-2);
+  }
+
+  .recovery-text {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+  }
+
+  .recovery-text strong,
+  .recovery-annual strong {
+    color: var(--color-teal);
+    font-weight: var(--font-weight-body-semibold);
+  }
+
+  .recovery-annual {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  /* Lead capture */
+  .calc-lead {
+    background: var(--color-navy);
+    padding: var(--space-8) 0;
+  }
+
+  .calc-lead-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    text-align: center;
+  }
+
+  .calc-lead h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.5rem;
+    color: var(--color-white);
+    margin-bottom: var(--space-1);
+  }
+
+  .calc-lead > .calc-lead-inner > p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--space-5);
+  }
+
+  .lead-book {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: 16px 36px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 200ms ease;
+  }
+
+  .lead-book:hover {
+    background: var(--color-deep-teal);
+    color: var(--color-white);
+  }
+
+  .lead-book:focus-visible {
+    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline-offset: 2px;
+  }
+
+  .lead-alt {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: var(--space-3);
+  }
+
+  .lead-alt a {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .lead-alt a:hover {
+    color: var(--color-white);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .calc-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+
+    .lead-fields {
+      grid-template-columns: 1fr;
+    }
+
+    .rate-presets {
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rate-btn,
+    .lead-submit {
+      transition: none;
+    }
+  }
+</style>

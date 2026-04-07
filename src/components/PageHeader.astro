@@ -1,0 +1,61 @@
+---
+interface Props {
+  headline: string;
+  subheadline?: string;
+}
+
+const { headline, subheadline } = Astro.props;
+---
+
+<section class="page-header">
+  <div class="page-header-inner">
+    <h1 class="page-header-headline">{headline}</h1>
+    {subheadline && (
+      <p class="page-header-sub">{subheadline}</p>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-header {
+    padding: var(--space-12) 0 var(--space-8);
+  }
+
+  .page-header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .page-header-headline {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 2.5rem;
+    color: var(--color-navy);
+    line-height: 1.2;
+  }
+
+  .page-header-sub {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-top: var(--space-2);
+    max-width: 720px;
+  }
+
+  @media (max-width: 768px) {
+    .page-header {
+      padding: var(--space-8) 0 var(--space-5);
+    }
+
+    .page-header-headline {
+      font-size: 1.75rem;
+    }
+
+    .page-header-sub {
+      font-size: 1.125rem;
+    }
+  }
+</style>

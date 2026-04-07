@@ -25,14 +25,14 @@ const { title = seo.title, description = seo.description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={`https://www.standardmethodgroup.com${slug === '/' ? '' : slug}`} />
+    <link rel="canonical" href={`https://standardmethodgroup.com${slug === '/' ? '' : slug}`} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={`https://www.standardmethodgroup.com${slug === '/' ? '' : slug}`} />
+    <meta property="og:url" content={`https://standardmethodgroup.com${slug === '/' ? '' : slug}`} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://www.standardmethodgroup.com/og-image.png" />
+    <meta property="og:image" content="https://standardmethodgroup.com/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Structured Data -->

@@ -7,7 +7,7 @@ const isGitHubPages = process.env.GITHUB_ACTIONS === 'true';
 export default defineConfig({
   site: isGitHubPages
     ? 'https://artificialdegeneracy.github.io'
-    : 'https://www.standardmethodgroup.com',
+    : 'https://standardmethodgroup.com',
   base: isGitHubPages ? '/standardmethodgroup.com' : '/',
   integrations: [sitemap()],
 });

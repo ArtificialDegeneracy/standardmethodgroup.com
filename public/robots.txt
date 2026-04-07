@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.standardmethodgroup.com/sitemap-index.xml
+Sitemap: https://standardmethodgroup.com/sitemap-index.xml

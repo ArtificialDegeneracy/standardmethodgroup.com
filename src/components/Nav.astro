@@ -12,7 +12,8 @@ const navLinks = [
 <header class="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo" aria-label="Standard Method Group — Home">
-      <img src="/images/smg-logo-white.png" alt="Standard Method Group" class="nav-logo-img" width="308" height="43" />
+      <span class="nav-logo-top">Standard Method</span>
+      <span class="nav-logo-bottom">Group</span>
     </a>
 
     <nav class="nav-links" aria-label="Main navigation">
@@ -95,13 +96,50 @@ const navLinks = [
 
   .nav-logo {
     display: flex;
+    flex-direction: column;
     align-items: center;
     text-decoration: none;
+    line-height: 1;
+    gap: 2px;
   }
 
-  .nav-logo-img {
-    height: 32px;
-    width: auto;
+  .nav-logo-top {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: var(--color-white);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-variant: small-caps;
+  }
+
+  .nav-logo-bottom {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    position: relative;
+    padding: 0 2px;
+  }
+
+  .nav-logo-bottom::before,
+  .nav-logo-bottom::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    width: 20px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .nav-logo-bottom::before {
+    right: calc(100% + 6px);
+  }
+
+  .nav-logo-bottom::after {
+    left: calc(100% + 6px);
   }
 
   .nav-links {
@@ -238,6 +276,19 @@ const navLinks = [
   @media (max-width: 768px) {
     .nav {
       height: 56px;
+    }
+
+    .nav-logo-top {
+      font-size: 1rem;
+    }
+
+    .nav-logo-bottom {
+      font-size: 0.5rem;
+    }
+
+    .nav-logo-bottom::before,
+    .nav-logo-bottom::after {
+      width: 14px;
     }
 
     .nav-links {

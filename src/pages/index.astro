@@ -55,13 +55,14 @@ import CTAStrip from '../components/CTAStrip.astro';
     </div>
   </section>
 
-  <!-- Industry Grid -->
+  <!-- Problem Grid -->
   <section class="industries">
+    <h2 class="industries-heading">Sound familiar?</h2>
     <div class="industries-inner">
-      <a href="/who-we-help#trades-construction" class="industry-card">Trades &amp; Construction</a>
-      <a href="/who-we-help#marine-contracting" class="industry-card">Marine Contracting</a>
-      <a href="/who-we-help#property-management" class="industry-card">Property Management</a>
-      <a href="/who-we-help#law-offices" class="industry-card">Law Offices</a>
+      <a href="/who-we-help" class="industry-card">Paperwork piles up every evening</a>
+      <a href="/who-we-help" class="industry-card">One person holds all the process knowledge</a>
+      <a href="/who-we-help" class="industry-card">Month-end reporting takes days</a>
+      <a href="/who-we-help" class="industry-card">You bought software nobody uses</a>
       <a href="/contact" class="industry-card industry-card-other">Something else?</a>
     </div>
   </section>
@@ -241,9 +242,20 @@ import CTAStrip from '../components/CTAStrip.astro';
     line-height: 1.6;
   }
 
-  /* Industry Grid */
+  /* Problem Grid */
   .industries {
     padding: var(--space-8) 0;
+  }
+
+  .industries-heading {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.5rem;
+    color: var(--color-navy);
+    text-align: center;
+    max-width: var(--max-width);
+    margin: 0 auto var(--space-3);
+    padding: 0 var(--space-3);
   }
 
   .industries-inner {

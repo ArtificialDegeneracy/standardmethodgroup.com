@@ -2,14 +2,18 @@
 
 ## What this is
 Marketing website for Standard Method Group (standardmethodgroup.com).
-5-page static site built with Astro. Hosted on Cloudflare Pages.
+5-page static site built with Astro. Hosted on GitHub Pages.
 
 ## Architecture
 - Framework: Astro (static output, zero client JS)
 - CSS: Vanilla CSS with custom properties in src/styles/tokens.css
 - Form: Formspree (endpoint: TBD)
-- Analytics: TBD (Plausible or GA4)
-- Hosting: Cloudflare Pages
+- Analytics: Cloudflare Web Analytics (beacon in src/layouts/Base.astro)
+- Hosting: GitHub Pages (repo: ArtificialDegeneracy/standardmethodgroup.com,
+  custom domain via public/CNAME; deploy via .github/workflows/deploy.yml)
+- DNS: Google/Squarespace Domains (nameservers ns-cloud-*.googledomains.com)
+- Note: NOT on Cloudflare Pages despite earlier notes; Cloudflare is only
+  used for the Web Analytics beacon
 
 ## Design system
 - Colors: Navy #1B2A4A, Warm White #F7F5F2, Teal #2A7D6E, Deep Teal #1F5F53

@@ -15,6 +15,12 @@ const legalLinks = [
 
 <footer class="footer">
   <div class="footer-inner">
+    <div class="footer-col footer-brand">
+      <span class="footer-wordmark">Standard Method Group</span>
+      <p class="footer-blurb">An operations partner for Tampa Bay small businesses. We build systems that handle the routine work, so you can get back to running the business.</p>
+      <a href="/contact" class="footer-cta">Start a conversation &rarr;</a>
+    </div>
+
     <div class="footer-col">
       <h4 class="footer-heading">Company</h4>
       <ul class="footer-list">
@@ -58,8 +64,42 @@ const legalLinks = [
     margin: 0 auto;
     padding: 0 var(--space-3);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
     gap: var(--space-5);
+  }
+
+  .footer-brand {
+    max-width: 320px;
+  }
+
+  .footer-wordmark {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.0625rem;
+    color: var(--color-white);
+    margin-bottom: var(--space-2);
+  }
+
+  .footer-blurb {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: var(--space-2);
+  }
+
+  .footer-cta {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 0.875rem;
+    color: var(--color-white);
+    text-decoration: none;
+  }
+
+  .footer-cta:hover {
+    color: var(--color-white);
+    text-decoration: underline;
   }
 
   .footer-heading {
@@ -112,6 +152,17 @@ const legalLinks = [
     font-family: var(--font-heading);
     font-size: 0.8125rem;
     color: rgba(255, 255, 255, 0.65);
+  }
+
+  @media (max-width: 900px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+      max-width: none;
+    }
   }
 
   @media (max-width: 768px) {

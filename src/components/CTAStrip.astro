@@ -13,6 +13,7 @@ const {
 ---
 
 <section class="cta-strip">
+  <div class="cta-texture" aria-hidden="true"></div>
   <div class="cta-inner">
     <h2 class="cta-headline">{headline}</h2>
     <a href={buttonHref} class="cta-button">{buttonText}</a>
@@ -21,11 +22,25 @@ const {
 
 <style>
   .cta-strip {
+    position: relative;
+    overflow: hidden;
     background: var(--color-navy);
     padding: var(--space-12) 0;
+    isolation: isolate;
+  }
+
+  .cta-texture {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, #000 25%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, #000 25%, transparent 72%);
   }
 
   .cta-inner {
+    position: relative;
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-3);
@@ -52,15 +67,18 @@ const {
     font-size: 1rem;
     color: var(--color-white);
     background: var(--color-teal);
-    padding: 14px 28px;
+    padding: 15px 30px;
     border-radius: var(--radius);
     text-decoration: none;
-    transition: background 200ms ease;
+    box-shadow: var(--shadow-md);
+    transition: background 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
   }
 
   .cta-button:hover {
     background: var(--color-deep-teal);
     color: var(--color-white);
+    transform: var(--lift);
+    box-shadow: var(--shadow-lg);
   }
 
   .cta-button:focus-visible {
@@ -81,6 +99,9 @@ const {
   @media (prefers-reduced-motion: reduce) {
     .cta-button {
       transition: none;
+    }
+    .cta-button:hover {
+      transform: none;
     }
   }
 </style>

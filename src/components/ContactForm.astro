@@ -1,26 +1,36 @@
-<section class="contact-section">
+<section class="contact-section reveal">
   <div class="contact-inner">
-    <div class="booking">
-      <a href="https://calendar.app.google/hH5ewNekVCHFKrcc9" target="_blank" rel="noopener" class="booking-btn">
-        Book a discovery conversation
-      </a>
-      <p class="booking-note">Pick a time that works — 30 minutes, no pitch, no obligation.</p>
+    <div class="contact-card">
+      <div class="contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+      </div>
+      <div class="booking">
+        <a href="https://calendar.app.google/hH5ewNekVCHFKrcc9" target="_blank" rel="noopener" class="booking-btn">
+          Book a discovery conversation
+        </a>
+        <p class="booking-note">Pick a time that works: 30 minutes, no pitch, no obligation.</p>
+      </div>
     </div>
 
     <div class="divider">
       <span>or</span>
     </div>
 
-    <div class="direct-contact">
-      <a href="mailto:dan@standardmethodgroup.com" class="direct-email">dan@standardmethodgroup.com</a>
-      <p class="direct-hours">Monday–Friday, 8am–5pm</p>
+    <div class="contact-card">
+      <div class="contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+      </div>
+      <div class="direct-contact">
+        <a href="mailto:dan@standardmethodgroup.com" class="direct-email">dan@standardmethodgroup.com</a>
+        <p class="direct-hours">Monday–Friday, 8am–5pm</p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   .contact-section {
-    padding: 0 0 var(--space-8);
+    padding: var(--space-8) 0;
   }
 
   .contact-inner {
@@ -29,9 +39,38 @@
     padding: 0 var(--space-3);
   }
 
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    text-align: center;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5) var(--space-3);
+  }
+
+  .contact-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-deep-teal) 100%);
+    color: var(--color-white);
+    box-shadow: 0 6px 16px rgba(42, 125, 110, 0.3);
+  }
+
+  .contact-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
   .booking {
     text-align: center;
-    padding: var(--space-5) 0;
   }
 
   .booking-btn {
@@ -92,7 +131,6 @@
 
   .direct-contact {
     text-align: center;
-    padding: var(--space-3) 0;
   }
 
   .direct-email {

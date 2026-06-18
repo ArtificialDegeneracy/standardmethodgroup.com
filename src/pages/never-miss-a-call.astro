@@ -1,63 +1,89 @@
 ---
 import Base from '../layouts/Base.astro';
 import CTAStrip from '../components/CTAStrip.astro';
+import Hero from '../components/Hero.astro';
 
 const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
 ---
 
 <Base>
-  <section class="hero">
-    <div class="hero-inner">
-      <h1 class="hero-headline">Every call answered. Every lead captured. Even when you can't pick up.</h1>
-      <p class="hero-sub">Most small businesses lose more work to missed calls than to anything else &mdash; and they never see it happen. Standard Method Group sets up call coverage that answers on the first ring, handles the routine questions, books the meeting, and sends you a clean message for anything that needs you.</p>
-      <div class="hero-ctas">
-        <a href={bookingUrl} class="hero-cta">Book a 30-minute call</a>
-        <a href="/how-we-work" class="hero-cta-secondary">See how it works &rarr;</a>
-      </div>
+  <Hero>
+    <p class="hero-eyebrow">Call coverage</p>
+    <h1 class="hero-headline">Every call answered. Every lead captured. Even when you can't pick up.</h1>
+    <p class="hero-sub">Most small businesses lose more work to missed calls than to anything else, and they never see it happen. Standard Method Group sets up call coverage that answers on the first ring, handles the routine questions, books the meeting, and sends you a clean message for anything that needs you.</p>
+    <div class="hero-ctas">
+      <a href={bookingUrl} class="hero-cta">Book a 30-minute call</a>
+      <a href="/how-we-work" class="hero-cta-secondary">See how it works &rarr;</a>
     </div>
-  </section>
+  </Hero>
 
   <!-- What it is — honest disclosure, plain body copy near the top -->
-  <section class="disclosure">
+  <section class="disclosure reveal">
     <div class="disclosure-inner">
-      <p>It's not a person sitting by the phone &mdash; it's a voice system we set up and tune for your business. It answers the way you'd want it answered, handles the questions you get all day, and knows when to reach you. It works nights, weekends, and the moments you can't pick up.</p>
+      <p>It's not a person sitting by the phone. It's a voice system we set up and tune for your business. It answers the way you'd want it answered, handles the questions you get all day, and knows when to reach you. It works nights, weekends, and the moments you can't pick up.</p>
     </div>
   </section>
 
   <!-- What it does -->
-  <section class="capabilities">
+  <section class="capabilities reveal">
     <div class="capabilities-inner">
       <h2>What it does</h2>
       <ul class="capability-list">
-        <li>Answers every call &mdash; first ring, every time, including nights and weekends.</li>
-        <li>Handles the questions you answer fifty times a week &mdash; hours, location, what you do, whether you cover their area.</li>
-        <li>Books the meeting straight onto your calendar, so a good lead becomes an appointment instead of a callback you'll forget.</li>
-        <li>Captures the details &mdash; name, number, what they need &mdash; and sends them to you the moment the call ends.</li>
-        <li>Knows when to reach you. Anything urgent comes straight through; everything else waits in a tidy summary.</li>
+        <li class="capability-card">
+          <span class="capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span class="capability-text">Answers every call: first ring, every time, including nights and weekends.</span>
+        </li>
+        <li class="capability-card">
+          <span class="capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <span class="capability-text">Handles the questions you answer fifty times a week: hours, location, what you do, whether you cover their area.</span>
+        </li>
+        <li class="capability-card">
+          <span class="capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </span>
+          <span class="capability-text">Books the meeting straight onto your calendar, so a good lead becomes an appointment instead of a callback you'll forget.</span>
+        </li>
+        <li class="capability-card">
+          <span class="capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </span>
+          <span class="capability-text">Captures the details (name, number, what they need) and sends them to you the moment the call ends.</span>
+        </li>
+        <li class="capability-card">
+          <span class="capability-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </span>
+          <span class="capability-text">Knows when to reach you. Anything urgent comes straight through; everything else waits in a tidy summary.</span>
+        </li>
       </ul>
     </div>
   </section>
 
   <!-- Outbound -->
-  <section class="outbound">
+  <section class="outbound reveal">
     <div class="outbound-inner">
       <h2>And it works the other direction, too.</h2>
-      <p>When you've got leads sitting in a list going cold, the same setup can reach back out &mdash; following up on the people who already raised their hand, so the warm ones actually turn into conversations instead of going stale.</p>
+      <p>When you've got leads sitting in a list going cold, the same setup can reach back out, following up on the people who already raised their hand, so the warm ones actually turn into conversations instead of going stale.</p>
     </div>
   </section>
 
   <!-- Bridge to deeper work -->
-  <section class="bridge">
+  <section class="bridge reveal">
+    <div class="bridge-bg" aria-hidden="true"></div>
     <div class="bridge-inner">
       <h2>The phone is one piece.</h2>
-      <p>Once your calls are handled, the same gaps usually show up elsewhere &mdash; the intake that gets re-typed three times, the follow-up that depends on someone remembering, the report that takes a day to pull. Call coverage is one of the simplest places to start. Most of what we build for clients lives in the spaces around it.</p>
+      <p>Once your calls are handled, the same gaps usually show up elsewhere: the intake that gets re-typed three times, the follow-up that depends on someone remembering, the report that takes a day to pull. Call coverage is one of the simplest places to start. Most of what we build for clients lives in the spaces around it.</p>
     </div>
   </section>
 
   <!-- Proof -->
-  <section class="proof">
+  <section class="proof reveal">
     <div class="proof-inner">
-      <p>SMG client Edge Marine Construction had overdue invoices paid within the first month &mdash; not because someone chased them, but because the follow-up happened on its own. Call coverage is the same idea, applied to the conversations that start the work.</p>
+      <p>SMG client Edge Marine Construction had overdue invoices paid within the first month, not because someone chased them, but because the follow-up happened on its own. Call coverage is the same idea, applied to the conversations that start the work.</p>
     </div>
   </section>
 
@@ -69,43 +95,41 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
 </Base>
 
 <style>
-  /* Hero */
-  .hero {
-    background: var(--color-warm-white);
-    padding: var(--space-12) 0;
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-  }
-
-  .hero-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-3);
-    max-width: 60%;
+  /* Hero content (Hero.astro provides the navy backdrop + divider) */
+  .hero-eyebrow {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5FC9B5;
+    margin: 0 0 var(--space-2);
   }
 
   .hero-headline {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
-    font-size: 2.5rem;
-    color: var(--color-navy);
-    line-height: 1.2;
+    font-size: 2.75rem;
+    color: var(--color-white);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0;
   }
 
   .hero-sub {
     font-family: var(--font-body);
     font-size: 1.25rem;
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.78);
     line-height: 1.6;
-    margin-top: var(--space-2);
+    max-width: 640px;
+    margin-top: var(--space-3);
   }
 
   .hero-ctas {
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    margin-top: var(--space-3);
+    margin-top: var(--space-4);
     flex-wrap: wrap;
   }
 
@@ -119,16 +143,18 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
     padding: 14px 28px;
     border-radius: var(--radius);
     text-decoration: none;
-    transition: background 200ms ease;
+    box-shadow: var(--shadow-md);
+    transition: background 200ms var(--ease), transform 200ms var(--ease);
   }
 
   .hero-cta:hover {
     background: var(--color-deep-teal);
     color: var(--color-white);
+    transform: var(--lift);
   }
 
   .hero-cta:focus-visible {
-    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline: 3px solid rgba(95, 201, 181, 0.5);
     outline-offset: 2px;
   }
 
@@ -136,12 +162,13 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading-medium);
     font-size: 1rem;
-    color: var(--color-teal);
+    color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
+    transition: color 200ms var(--ease);
   }
 
   .hero-cta-secondary:hover {
-    color: var(--color-deep-teal);
+    color: var(--color-white);
     text-decoration: underline;
   }
 
@@ -166,6 +193,7 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
 
   /* Capabilities */
   .capabilities {
+    background: var(--color-warm-white);
     padding: var(--space-12) 0;
   }
 
@@ -187,33 +215,50 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2);
   }
 
-  .capability-list li {
-    font-family: var(--font-body);
-    font-size: 1.125rem;
-    color: var(--color-text);
-    line-height: 1.6;
-    padding-left: var(--space-3);
-    position: relative;
+  .capability-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-3);
+    transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
   }
 
-  .capability-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.75em;
-    width: 8px;
-    height: 2px;
-    background: var(--color-teal);
+  .capability-card:hover {
+    transform: var(--lift);
+    box-shadow: var(--shadow-md);
+  }
+
+  .capability-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius);
+    background: rgba(42, 125, 110, 0.1);
+    color: var(--color-teal);
+  }
+
+  .capability-text {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    color: var(--color-text);
+    line-height: 1.5;
   }
 
   /* Outbound */
   .outbound {
-    background: var(--color-warm-white);
+    background: var(--color-warm-white-alt);
     padding: var(--space-8) 0;
   }
 
@@ -238,12 +283,27 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
     line-height: 1.6;
   }
 
-  /* Bridge */
+  /* Bridge — stronger color block (deep teal + dot-grid texture) */
   .bridge {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--color-deep-teal);
     padding: var(--space-12) 0;
   }
 
+  .bridge-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 90% 80% at 75% 25%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 75% 25%, #000 30%, transparent 75%);
+  }
+
   .bridge-inner {
+    position: relative;
     max-width: var(--max-width-narrow);
     margin: 0 auto;
     padding: 0 var(--space-3);
@@ -253,50 +313,43 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
     font-size: 1.75rem;
-    color: var(--color-navy);
+    color: var(--color-white);
     margin-bottom: var(--space-2);
   }
 
   .bridge p {
     font-family: var(--font-body);
     font-size: 1.125rem;
-    color: var(--color-text);
+    color: rgba(255, 255, 255, 0.82);
     line-height: 1.6;
   }
 
-  /* Proof */
+  /* Proof — centered, larger, testimonial feel */
   .proof {
-    background: var(--color-warm-white-alt);
-    padding: var(--space-8) 0;
+    background: var(--color-warm-white);
+    padding: var(--space-12) 0;
   }
 
   .proof-inner {
     max-width: var(--max-width-narrow);
     margin: 0 auto;
     padding: 0 var(--space-3);
+    text-align: center;
   }
 
   .proof-inner p {
     font-family: var(--font-body);
     font-style: italic;
-    font-size: 1.125rem;
-    color: var(--color-text);
-    line-height: 1.6;
+    font-size: 1.5rem;
+    color: var(--color-navy);
+    line-height: 1.5;
+    margin: 0;
   }
 
   /* Mobile */
   @media (max-width: 768px) {
-    .hero {
-      min-height: auto;
-      padding: var(--space-8) 0;
-    }
-
-    .hero-inner {
-      max-width: 100%;
-    }
-
     .hero-headline {
-      font-size: 1.75rem;
+      font-size: 1.875rem;
     }
 
     .hero-sub {
@@ -308,7 +361,7 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
     .outbound,
     .bridge,
     .proof {
-      padding: var(--space-5) 0;
+      padding: var(--space-8) 0;
     }
 
     .disclosure-inner p {
@@ -327,17 +380,31 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
       font-size: 1.25rem;
     }
 
-    .capability-list li,
+    .capability-list {
+      grid-template-columns: 1fr;
+    }
+
+    .capability-text,
     .outbound p,
-    .bridge p,
-    .proof-inner p {
+    .bridge p {
       font-size: 1rem;
+    }
+
+    .proof-inner p {
+      font-size: 1.25rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-cta {
+    .hero-cta,
+    .hero-cta-secondary,
+    .capability-card {
       transition: none;
+    }
+
+    .hero-cta:hover,
+    .capability-card:hover {
+      transform: none;
     }
   }
 </style>

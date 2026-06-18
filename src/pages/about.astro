@@ -1,44 +1,54 @@
 ---
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 import CTAStrip from '../components/CTAStrip.astro';
 ---
 
 <Base>
-  <!-- Founder Section -->
-  <section class="founder">
-    <div class="founder-inner">
-      <div class="founder-text">
-        <h1>Built by someone who's seen how it's done at scale — and thinks your business deserves the same.</h1>
-        <p>Dan founded Standard Method Group after years of building enterprise systems and processes — the kind of work that Fortune 500 companies pay seven figures for. The problem: none of that discipline was reaching the businesses that needed it most. A 20-person contracting firm has the same operational problems as a Fortune 500 company. They just can't afford the same solution.</p>
-        <p>SMG exists to close that gap. Same rigor, same attention to failure recovery and audit trails, same expectation that the system works when nobody's watching — built for a small business budget and a small business reality.</p>
-      </div>
+  <!-- Founder Hero -->
+  <Hero>
+    <p class="founder-eyebrow">About</p>
+    <h1 class="founder-headline">Built by someone who's seen how it's done at scale, and thinks your business deserves the same.</h1>
+  </Hero>
+
+  <!-- Founder Bio -->
+  <section class="founder-bio reveal">
+    <div class="founder-bio-inner">
+      <p>Dan founded Standard Method Group after years of building enterprise systems and processes, the kind of work that Fortune 500 companies pay seven figures for. The problem: none of that discipline was reaching the businesses that needed it most. A 20-person contracting firm has the same operational problems as a Fortune 500 company. They just can't afford the same solution.</p>
+      <p>SMG exists to close that gap. Same rigor, same attention to failure recovery and audit trails, same expectation that the system works when nobody's watching. Built for a small business budget and a small business reality.</p>
       <!-- Portrait placeholder: add <img> here when headshot is available -->
     </div>
   </section>
 
   <!-- Competitive Positioning -->
-  <section class="positioning">
+  <section class="positioning reveal">
     <div class="positioning-inner">
-      <div class="position-item">
-        <strong>We're not an IT company.</strong>
-        <span>We don't sell hardware, networks, or software licenses. If you need that, we'll point you to someone who does it well.</span>
+      <div class="position-grid">
+        <div class="position-item">
+          <strong>We're not an IT company.</strong>
+          <span>We don't sell hardware, networks, or software licenses. If you need that, we'll point you to someone who does it well.</span>
+        </div>
+        <div class="position-item">
+          <strong>We're not a software vendor.</strong>
+          <span>There's no product to buy, no per-seat fee, no annual contract for a platform you'll stop using in six months.</span>
+        </div>
+        <div class="position-item">
+          <strong>We're not a freelancer.</strong>
+          <span>We don't build what you spec. We figure out what your business needs by understanding how it runs, then we build that.</span>
+        </div>
       </div>
-      <div class="position-item">
-        <strong>We're not a software vendor.</strong>
-        <span>There's no product to buy, no per-seat fee, no annual contract for a platform you'll stop using in six months.</span>
-      </div>
-      <div class="position-item">
-        <strong>We're not a freelancer.</strong>
-        <span>We don't build what you spec. We figure out what your business needs by understanding how it runs, then we build that.</span>
-      </div>
-      <p class="positioning-line">Think of us like your accountant or your attorney — a professional you keep on retainer because they know your business and they handle the things you shouldn't be spending your time on.</p>
+      <p class="positioning-line">Think of us like your accountant or your attorney, a professional you keep on retainer because they know your business and they handle the things you shouldn't be spending your time on.</p>
     </div>
   </section>
 
   <!-- Local Presence -->
-  <section class="local">
+  <section class="local reveal">
     <div class="local-inner">
-      <p>Based in Pinellas County, Florida. We work with businesses across Tampa Bay — in person, on the phone, or at your office.</p>
+      <svg class="local-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21s-6.5-5.5-6.5-10.5A6.5 6.5 0 0 1 12 4a6.5 6.5 0 0 1 6.5 6.5C18.5 15.5 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <circle cx="12" cy="10.5" r="2.4" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
+      <p>Based in Pinellas County, Florida. We work with businesses across Tampa Bay, in person, on the phone, or at your office.</p>
     </div>
   </section>
 
@@ -49,33 +59,40 @@ import CTAStrip from '../components/CTAStrip.astro';
 </Base>
 
 <style>
-  /* Founder */
-  .founder {
-    padding: var(--space-12) 0 var(--space-8);
+  /* Founder Hero (inside navy Hero backdrop) */
+  .founder-eyebrow {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5FC9B5;
+    margin-bottom: var(--space-2);
   }
 
-  .founder-inner {
-    max-width: var(--max-width-narrow);
-    margin: 0 auto;
-    padding: 0 var(--space-3);
-    display: flex;
-    gap: var(--space-3);
-  }
-
-  .founder-text {
-    flex: 1;
-  }
-
-  .founder-text h1 {
+  .founder-headline {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
-    font-size: 2.5rem;
-    color: var(--color-navy);
-    line-height: 1.2;
-    margin-bottom: var(--space-3);
+    font-size: 2.75rem;
+    color: var(--color-white);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0;
   }
 
-  .founder-text p {
+  /* Founder Bio (light section below hero) */
+  .founder-bio {
+    padding: var(--space-8) 0;
+    background: var(--color-warm-white);
+  }
+
+  .founder-bio-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .founder-bio p {
     font-family: var(--font-body);
     font-size: 1.125rem;
     color: var(--color-text);
@@ -83,7 +100,7 @@ import CTAStrip from '../components/CTAStrip.astro';
     margin-bottom: var(--space-3);
   }
 
-  .founder-text p:last-child {
+  .founder-bio p:last-child {
     margin-bottom: 0;
   }
 
@@ -94,16 +111,33 @@ import CTAStrip from '../components/CTAStrip.astro';
   }
 
   .positioning-inner {
-    max-width: var(--max-width-narrow);
+    max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-3);
-    display: flex;
-    flex-direction: column;
+  }
+
+  .position-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-3);
   }
 
   .position-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-3);
     line-height: 1.6;
+    transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+
+  .position-item:hover {
+    transform: var(--lift);
+    box-shadow: var(--shadow-md);
   }
 
   .position-item strong {
@@ -115,9 +149,8 @@ import CTAStrip from '../components/CTAStrip.astro';
 
   .position-item span {
     font-family: var(--font-body);
-    font-size: 1.125rem;
+    font-size: 1.0625rem;
     color: var(--color-text-secondary);
-    margin-left: 4px;
   }
 
   .positioning-line {
@@ -126,40 +159,93 @@ import CTAStrip from '../components/CTAStrip.astro';
     font-size: 1.25rem;
     color: var(--color-text);
     line-height: 1.6;
-    margin-top: var(--space-2);
+    text-align: center;
+    max-width: 680px;
+    margin: var(--space-5) auto 0;
   }
 
-  /* Local */
+  /* Local — dark color band */
   .local {
-    padding: var(--space-5) 0;
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-8) 0;
+    background: var(--color-deep-teal);
+    isolation: isolate;
+  }
+
+  .local::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 80% 90% at 30% 30%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 30% 30%, #000 30%, transparent 75%);
   }
 
   .local-inner {
     max-width: var(--max-width-narrow);
     margin: 0 auto;
     padding: 0 var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    justify-content: center;
+    text-align: center;
+  }
+
+  .local-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    color: #5FC9B5;
   }
 
   .local-inner p {
     font-family: var(--font-body);
     font-size: 1.125rem;
-    color: var(--color-text-secondary);
+    color: var(--color-warm-white);
     line-height: 1.6;
+    margin: 0;
   }
 
   @media (max-width: 768px) {
-    .founder {
-      padding: var(--space-8) 0 var(--space-5);
+    .founder-headline {
+      font-size: 1.875rem;
     }
 
-    .founder-text h1 {
-      font-size: 1.75rem;
+    .founder-bio {
+      padding: var(--space-5) 0;
     }
 
-    .founder-text p,
+    .founder-bio p,
     .position-item strong,
     .position-item span {
       font-size: 1rem;
+    }
+
+    .position-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .positioning-line {
+      font-size: 1.125rem;
+    }
+
+    .local-inner {
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .position-item {
+      transition: none;
+    }
+
+    .position-item:hover {
+      transform: none;
     }
   }
 </style>

@@ -1,0 +1,98 @@
+---
+// Shared navy hero with layered abstract backdrop (dot-grid + drifting teal glow)
+// and a curved divider that transitions into the light section below.
+// Use directly for page heroes, or via PageHeader for simple headline/subheadline pages.
+interface Props {
+  compact?: boolean; // tighter vertical padding for simple header pages
+}
+const { compact = false } = Astro.props;
+---
+
+<section class:list={["hero", { "hero-compact": compact }]}>
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <slot />
+  </div>
+  <div class="section-divider section-divider-light" aria-hidden="true"></div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: calc(var(--space-12) + var(--space-5)) 0 calc(var(--space-12) + var(--space-8));
+    background: var(--color-navy);
+    isolation: isolate;
+  }
+
+  .hero-compact {
+    padding: calc(var(--space-8) + var(--space-3)) 0 calc(var(--space-8) + var(--space-8));
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 90% 80% at 70% 20%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 70% 20%, #000 30%, transparent 75%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    max-width: 760px;
+    max-height: 760px;
+    z-index: -1;
+    background: radial-gradient(circle, rgba(42, 125, 110, 0.55) 0%, rgba(42, 125, 110, 0) 65%);
+    animation: hero-glow-drift 20s ease-in-out infinite;
+  }
+
+  @keyframes hero-glow-drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(-6%, 8%) scale(1.12); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .section-divider {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .section-divider-light {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 56' preserveAspectRatio='none'%3E%3Cpath d='M0 56h1440V28c-240 24-480 24-720 12C480 28 240 4 0 28z' fill='%23F7F5F2'/%3E%3C/svg%3E");
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-8) 0 calc(var(--space-8) + var(--space-5));
+    }
+    .hero-compact {
+      padding: var(--space-8) 0 calc(var(--space-8) + var(--space-5));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-glow {
+      animation: none;
+    }
+  }
+</style>

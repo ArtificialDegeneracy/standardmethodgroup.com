@@ -5,6 +5,7 @@ import seoData from '../data/seo.json';
 import schemaData from '../data/schema.json';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import FloatingContact from '../components/FloatingContact.astro';
 
 interface Props {
   title?: string;
@@ -48,6 +49,7 @@ const { title = seo.title, description = seo.description } = Astro.props;
     <main id="main-content">
       <slot />
     </main>
+    <FloatingContact />
     <Footer />
   </body>
 </html>

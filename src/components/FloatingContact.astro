@@ -1,0 +1,66 @@
+---
+// Sticky contact tab pinned to the right edge of the viewport, sitewide.
+---
+
+<a href="/contact" class="floating-contact" aria-label="Contact Standard Method Group">
+  <svg class="floating-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+  <span class="floating-contact-label">Contact</span>
+</a>
+
+<style>
+  .floating-contact {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 12px 16px;
+    background: var(--color-teal);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    border-radius: var(--radius) 0 0 var(--radius);
+    box-shadow: var(--shadow-lg);
+    transition: background 200ms var(--ease), padding-right 200ms var(--ease);
+  }
+
+  .floating-contact:hover {
+    background: var(--color-deep-teal);
+    color: var(--color-white);
+    padding-right: 22px;
+  }
+
+  .floating-contact:focus-visible {
+    outline: 3px solid var(--color-white);
+    outline-offset: -3px;
+  }
+
+  .floating-contact-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 768px) {
+    .floating-contact {
+      top: auto;
+      bottom: var(--space-3);
+      right: var(--space-3);
+      transform: none;
+      border-radius: var(--radius);
+      padding: 12px 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .floating-contact {
+      transition: none;
+    }
+  }
+</style>

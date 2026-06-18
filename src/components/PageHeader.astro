@@ -1,59 +1,56 @@
 ---
+import Hero from './Hero.astro';
 interface Props {
   headline: string;
   subheadline?: string;
+  eyebrow?: string;
 }
-
-const { headline, subheadline } = Astro.props;
+const { headline, subheadline, eyebrow } = Astro.props;
 ---
 
-<section class="page-header">
-  <div class="page-header-inner">
-    <h1 class="page-header-headline">{headline}</h1>
-    {subheadline && (
-      <p class="page-header-sub">{subheadline}</p>
-    )}
-  </div>
-</section>
+<Hero compact>
+  {eyebrow && <span class="page-header-eyebrow">{eyebrow}</span>}
+  <h1 class="page-header-headline">{headline}</h1>
+  {subheadline && (
+    <p class="page-header-sub">{subheadline}</p>
+  )}
+</Hero>
 
 <style>
-  .page-header {
-    padding: var(--space-12) 0 var(--space-8);
-  }
-
-  .page-header-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-3);
+  .page-header-eyebrow {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5FC9B5;
+    margin-bottom: var(--space-2);
   }
 
   .page-header-headline {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
-    font-size: 2.5rem;
-    color: var(--color-navy);
-    line-height: 1.2;
+    font-size: 2.75rem;
+    color: var(--color-white);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
   }
 
   .page-header-sub {
     font-family: var(--font-body);
     font-weight: var(--font-weight-body);
     font-size: 1.25rem;
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.78);
     line-height: 1.6;
-    margin-top: var(--space-2);
-    max-width: 720px;
+    margin-top: var(--space-3);
+    max-width: 680px;
   }
 
   @media (max-width: 768px) {
-    .page-header {
-      padding: var(--space-8) 0 var(--space-5);
-    }
-
     .page-header-headline {
-      font-size: 1.75rem;
+      font-size: 1.875rem;
     }
-
     .page-header-sub {
       font-size: 1.125rem;
     }

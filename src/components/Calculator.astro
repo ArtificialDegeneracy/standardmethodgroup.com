@@ -1,6 +1,7 @@
-<section class="calc-section">
+<section class="calc-section reveal">
   <div class="calc-inner">
     <div class="calc-inputs">
+      <span class="calc-card-label">Your situation</span>
       <div class="input-group">
         <label for="hours">Hours per week spent on paperwork, status updates, and chasing information</label>
         <p class="input-hint">Think: filing, reporting, following up, re-entering data, compiling numbers someone already has</p>
@@ -12,7 +13,7 @@
 
       <div class="input-group">
         <label for="rate">What that time costs per hour</label>
-        <p class="input-hint">The hourly rate of the person doing this work — you, your office manager, or whoever it falls to</p>
+        <p class="input-hint">The hourly rate of the person doing this work: you, your office manager, or whoever it falls to</p>
         <div class="rate-presets">
           <button class="rate-btn" data-rate="20">$20</button>
           <button class="rate-btn active" data-rate="25">$25</button>
@@ -31,34 +32,35 @@
     </div>
 
     <div class="calc-results">
-      <h3>What that adds up to</h3>
+      <span class="calc-card-label calc-card-label-light">What that adds up to</span>
 
-      <div class="result-row">
-        <span class="result-label">Monthly hours on admin</span>
-        <span class="result-number" id="monthly-hours">43</span>
+      <div class="result-headline">
+        <span class="result-headline-label">Annual cost</span>
+        <span class="result-headline-number" id="annual-cost">$116,100</span>
+        <span class="result-headline-sub">in time spent on work a system could handle</span>
       </div>
 
-      <div class="result-row">
-        <span class="result-label">Monthly cost</span>
-        <span class="result-number" id="monthly-cost">$9,675</span>
+      <div class="result-grid">
+        <div class="result-stat">
+          <span class="result-number" id="monthly-hours">43</span>
+          <span class="result-label">Monthly hours on admin</span>
+        </div>
+        <div class="result-stat">
+          <span class="result-number" id="monthly-cost">$9,675</span>
+          <span class="result-label">Monthly cost</span>
+        </div>
       </div>
-
-      <div class="result-row">
-        <span class="result-label">Annual cost</span>
-        <span class="result-number" id="annual-cost">$116,100</span>
-      </div>
-
-      <div class="result-divider"></div>
 
       <div class="result-recovery">
         <h3>What typically changes</h3>
-        <p class="recovery-text">Businesses like yours typically recover <strong id="recovery-low">26</strong> to <strong id="recovery-high">32</strong> hours per month — roughly <strong id="savings-low">$1,290</strong> to <strong id="savings-high">$1,613</strong> back in your pocket.</p>
+        <p class="recovery-text">Businesses like yours typically recover <strong id="recovery-low">26</strong> to <strong id="recovery-high">32</strong> hours per month, roughly <strong id="savings-low">$1,290</strong> to <strong id="savings-high">$1,613</strong> back in your pocket.</p>
         <p class="recovery-annual">That's <strong id="annual-low">$15,480</strong> to <strong id="annual-high">$19,350</strong> per year in time your team gets back.</p>
       </div>
     </div>
   </div>
 
   <div class="calc-lead">
+    <div class="calc-lead-texture" aria-hidden="true"></div>
     <div class="calc-lead-inner">
       <h3>Want to talk through these numbers?</h3>
       <p>Book a 30-minute conversation and we'll walk through what's realistic for your business.</p>
@@ -135,7 +137,7 @@
 
 <style>
   .calc-section {
-    padding: 0 0 var(--space-8);
+    padding: var(--space-8) 0;
   }
 
   .calc-inner {
@@ -144,8 +146,23 @@
     padding: 0 var(--space-3);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
-    align-items: start;
+    gap: var(--space-3);
+    align-items: stretch;
+  }
+
+  .calc-card-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+    margin-bottom: var(--space-3);
+  }
+
+  .calc-card-label-light {
+    color: #5FC9B5;
   }
 
   /* Inputs */
@@ -153,6 +170,11 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-5);
   }
 
   .input-group label {
@@ -191,23 +213,28 @@
   .slider-row input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 24px;
-    height: 24px;
-    background: var(--color-teal);
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-deep-teal) 100%);
     border-radius: 50%;
     cursor: pointer;
     border: 3px solid var(--color-white);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(42, 125, 110, 0.4);
+    transition: transform 150ms var(--ease);
+  }
+
+  .slider-row input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.12);
   }
 
   .slider-row input[type="range"]::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    background: var(--color-teal);
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-deep-teal) 100%);
     border-radius: 50%;
     cursor: pointer;
     border: 3px solid var(--color-white);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(42, 125, 110, 0.4);
   }
 
   .slider-row input[type="range"]:focus-visible::-webkit-slider-thumb {
@@ -250,9 +277,10 @@
   }
 
   .rate-btn.active {
-    background: var(--color-teal);
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-deep-teal) 100%);
     color: var(--color-white);
-    border-color: var(--color-teal);
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(42, 125, 110, 0.3);
   }
 
   .rate-custom {
@@ -294,80 +322,158 @@
     box-shadow: 0 0 0 3px rgba(42, 125, 110, 0.15);
   }
 
-  /* Results */
+  /* Results — elevated navy card, the focal point of the tool */
   .calc-results {
-    background: var(--color-warm-white-alt);
-    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    background: var(--color-navy);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
     padding: var(--space-5);
+    isolation: isolate;
   }
 
-  .calc-results h3 {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: 1.125rem;
-    color: var(--color-navy);
+  .calc-results::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
+    mask-image: radial-gradient(ellipse 80% 70% at 80% 15%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 80% 15%, #000 30%, transparent 75%);
+  }
+
+  /* Headline figure: annual cost */
+  .result-headline {
+    text-align: center;
+    padding: var(--space-3) 0 var(--space-5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     margin-bottom: var(--space-3);
   }
 
-  .result-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: var(--space-2) 0;
-    border-bottom: 1px solid var(--color-border);
+  .result-headline-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--space-1);
+  }
+
+  .result-headline-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 3.25rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-white);
+  }
+
+  .result-headline-sub {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+    margin-top: var(--space-2);
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Secondary stats */
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+  }
+
+  .result-stat {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    text-align: center;
+  }
+
+  .result-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.75rem;
+    color: var(--color-white);
+    margin-bottom: 4px;
   }
 
   .result-label {
     font-family: var(--font-body);
-    font-size: 1rem;
-    color: var(--color-text-secondary);
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.4;
   }
 
-  .result-number {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: 1.5rem;
-    color: var(--color-navy);
-  }
-
-  .result-divider {
-    height: 1px;
-    background: var(--color-border);
-    margin: var(--space-3) 0;
+  /* Recovery callout — the positive turn, tinted teal */
+  .result-recovery {
+    background: rgba(42, 125, 110, 0.18);
+    border: 1px solid rgba(95, 201, 181, 0.25);
+    border-radius: var(--radius);
+    padding: var(--space-3);
   }
 
   .result-recovery h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    color: #5FC9B5;
     margin-bottom: var(--space-2);
   }
 
   .recovery-text {
     font-family: var(--font-body);
-    font-size: 1.0625rem;
-    color: var(--color-text);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.88);
     line-height: 1.6;
     margin-bottom: var(--space-2);
   }
 
   .recovery-text strong,
   .recovery-annual strong {
-    color: var(--color-teal);
+    color: var(--color-white);
     font-weight: var(--font-weight-body-semibold);
   }
 
   .recovery-annual {
     font-family: var(--font-body);
-    font-size: 1.0625rem;
-    color: var(--color-text);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.88);
     line-height: 1.6;
   }
 
   /* Lead capture */
   .calc-lead {
+    position: relative;
+    overflow: hidden;
     background: var(--color-navy);
-    padding: var(--space-8) 0;
+    padding: var(--space-12) 0;
+    margin-top: var(--space-8);
+    isolation: isolate;
+  }
+
+  .calc-lead-texture {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, #000 25%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, #000 25%, transparent 72%);
   }
 
   .calc-lead-inner {
+    position: relative;
     max-width: 640px;
     margin: 0 auto;
     padding: 0 var(--space-3);
@@ -399,12 +505,15 @@
     padding: 16px 36px;
     border-radius: var(--radius);
     text-decoration: none;
-    transition: background 200ms ease;
+    box-shadow: var(--shadow-md);
+    transition: background 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
   }
 
   .lead-book:hover {
     background: var(--color-deep-teal);
     color: var(--color-white);
+    transform: var(--lift);
+    box-shadow: var(--shadow-lg);
   }
 
   .lead-book:focus-visible {
@@ -431,22 +540,26 @@
   @media (max-width: 768px) {
     .calc-inner {
       grid-template-columns: 1fr;
-      gap: var(--space-5);
-    }
-
-    .lead-fields {
-      grid-template-columns: 1fr;
+      gap: var(--space-3);
     }
 
     .rate-presets {
       flex-wrap: wrap;
     }
+
+    .result-headline-number {
+      font-size: 2.75rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .rate-btn,
-    .lead-submit {
+    .lead-book,
+    .slider-row input[type="range"]::-webkit-slider-thumb {
       transition: none;
+    }
+    .lead-book:hover {
+      transform: none;
     }
   }
 </style>

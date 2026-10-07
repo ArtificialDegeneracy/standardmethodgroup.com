@@ -157,6 +157,23 @@ const faqs = [
   <CTAStrip />
 </Base>
 
+<script>
+  import { animate } from 'motion/mini'; // WAAPI build, ~2KB
+  import { inView } from 'motion';
+
+  // Runs on every page-load (ClientRouter). Homepage only: this script ships with index.astro.
+  document.addEventListener('astro:page-load', () => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Sections: replace the CSS scroll-driven reveal with a one-shot reveal.
+    const sections = document.querySelectorAll<HTMLElement>('.reveal');
+    sections.forEach((el) => { el.style.animation = 'none'; el.style.opacity = '0'; });
+    inView(sections, (el) => {
+      animate(el, { opacity: [0, 1], transform: ['translateY(16px)', 'none'] }, { duration: 0.6, ease: 'easeOut' });
+    }, { amount: 0.12 });
+  });
+</script>
+
 <style>
   /* Hero — navy with layered abstract backdrop */
   .hero {
@@ -223,6 +240,19 @@ const faqs = [
     color: var(--color-white);
     line-height: 1.08;
     letter-spacing: -0.015em;
+  }
+
+  /* Entrance: pure CSS so it starts at first paint (JS-driven hiding delays LCP). */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-headline, .hero-sub {
+      animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .hero-sub { animation-delay: 0.08s; }
+  }
+
+  @keyframes hero-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
   }
 
   .hero-sub {

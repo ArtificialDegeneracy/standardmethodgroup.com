@@ -71,68 +71,72 @@
 </section>
 
 <script>
-  const hoursSlider = document.getElementById('hours') as HTMLInputElement;
-  const rateInput = document.getElementById('rate') as HTMLInputElement;
-  const rateBtns = document.querySelectorAll('.rate-btn');
+  // Re-run on every page: ClientRouter swaps the DOM without reloading scripts.
+  document.addEventListener('astro:page-load', () => {
+    const hoursSlider = document.getElementById('hours') as HTMLInputElement;
+    const rateInput = document.getElementById('rate') as HTMLInputElement;
+    const rateBtns = document.querySelectorAll('.rate-btn');
+    if (!hoursSlider) return; // script persists after navigating away from the calculator
 
-  function formatCurrency(n: number): string {
-    return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
-  }
+    function formatCurrency(n: number): string {
+      return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    }
 
-  function calculate() {
-    const hours = parseFloat(hoursSlider.value);
-    const rate = parseFloat(rateInput.value) || 25;
+    function calculate() {
+      const hours = parseFloat(hoursSlider.value);
+      const rate = parseFloat(rateInput.value) || 25;
 
-    const monthlyHours = Math.round(hours * 4.33);
-    const monthlyCost = monthlyHours * rate;
-    const annualCost = monthlyCost * 12;
+      const monthlyHours = Math.round(hours * 4.33);
+      const monthlyCost = monthlyHours * rate;
+      const annualCost = monthlyCost * 12;
 
-    const recoveryLowPct = 0.40;
-    const recoveryHighPct = 0.50;
+      const recoveryLowPct = 0.40;
+      const recoveryHighPct = 0.50;
 
-    const recoveryHoursLow = Math.round(monthlyHours * recoveryLowPct);
-    const recoveryHoursHigh = Math.round(monthlyHours * recoveryHighPct);
-    const savingsLow = Math.round(monthlyCost * recoveryLowPct);
-    const savingsHigh = Math.round(monthlyCost * recoveryHighPct);
-    const annualLow = savingsLow * 12;
-    const annualHigh = savingsHigh * 12;
+      const recoveryHoursLow = Math.round(monthlyHours * recoveryLowPct);
+      const recoveryHoursHigh = Math.round(monthlyHours * recoveryHighPct);
+      const savingsLow = Math.round(monthlyCost * recoveryLowPct);
+      const savingsHigh = Math.round(monthlyCost * recoveryHighPct);
+      const annualLow = savingsLow * 12;
+      const annualHigh = savingsHigh * 12;
 
-    // Update display
-    (document.getElementById('hours-value') as HTMLElement).textContent = hours + ' hrs';
-    (document.getElementById('monthly-hours') as HTMLElement).textContent = monthlyHours.toString();
-    (document.getElementById('monthly-cost') as HTMLElement).textContent = formatCurrency(monthlyCost);
-    (document.getElementById('annual-cost') as HTMLElement).textContent = formatCurrency(annualCost);
-    (document.getElementById('recovery-low') as HTMLElement).textContent = recoveryHoursLow.toString();
-    (document.getElementById('recovery-high') as HTMLElement).textContent = recoveryHoursHigh.toString();
-    (document.getElementById('savings-low') as HTMLElement).textContent = formatCurrency(savingsLow);
-    (document.getElementById('savings-high') as HTMLElement).textContent = formatCurrency(savingsHigh);
-    (document.getElementById('annual-low') as HTMLElement).textContent = formatCurrency(annualLow);
-    (document.getElementById('annual-high') as HTMLElement).textContent = formatCurrency(annualHigh);
+      // Update display
+      (document.getElementById('hours-value') as HTMLElement).textContent = hours + ' hrs';
+      (document.getElementById('monthly-hours') as HTMLElement).textContent = monthlyHours.toString();
+      (document.getElementById('monthly-cost') as HTMLElement).textContent = formatCurrency(monthlyCost);
+      (document.getElementById('annual-cost') as HTMLElement).textContent = formatCurrency(annualCost);
+      (document.getElementById('recovery-low') as HTMLElement).textContent = recoveryHoursLow.toString();
+      (document.getElementById('recovery-high') as HTMLElement).textContent = recoveryHoursHigh.toString();
+      (document.getElementById('savings-low') as HTMLElement).textContent = formatCurrency(savingsLow);
+      (document.getElementById('savings-high') as HTMLElement).textContent = formatCurrency(savingsHigh);
+      (document.getElementById('annual-low') as HTMLElement).textContent = formatCurrency(annualLow);
+      (document.getElementById('annual-high') as HTMLElement).textContent = formatCurrency(annualHigh);
 
-  }
+    }
 
-  hoursSlider.addEventListener('input', calculate);
-  rateInput.addEventListener('input', calculate);
+    hoursSlider.addEventListener('input', calculate);
+    rateInput.addEventListener('input', calculate);
 
-  rateBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      rateBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      rateInput.value = (btn as HTMLElement).dataset.rate || '25';
-      calculate();
-    });
-  });
-
-  // Sync: if user types a custom rate, deselect preset buttons
-  rateInput.addEventListener('input', () => {
-    const val = rateInput.value;
     rateBtns.forEach(btn => {
-      btn.classList.toggle('active', (btn as HTMLElement).dataset.rate === val);
+      btn.addEventListener('click', () => {
+        rateBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        rateInput.value = (btn as HTMLElement).dataset.rate || '25';
+        calculate();
+      });
     });
-  });
 
-  // Initial calculation
-  calculate();
+    // Sync: if user types a custom rate, deselect preset buttons
+    rateInput.addEventListener('input', () => {
+      const val = rateInput.value;
+      rateBtns.forEach(btn => {
+        btn.classList.toggle('active', (btn as HTMLElement).dataset.rate === val);
+      });
+    });
+
+    // Initial calculation
+    calculate();
+  });
 </script>
 
 <style>

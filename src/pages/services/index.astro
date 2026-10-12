@@ -4,6 +4,13 @@ import ServiceHero from '../../components/ServiceHero.astro';
 import ImprovementDiagram from '../../components/ImprovementDiagram.astro';
 import CTAStrip from '../../components/CTAStrip.astro';
 
+const expect = [
+  { title: "We get to the bottom of it.", body: "A clear picture of the problem or opportunity, before anyone proposes a solution." },
+  { title: "We agree what success looks like.", body: "What we are aiming for, and how we will know we got there." },
+  { title: "We put it in place.", body: "A redesigned process, connected software, a custom tool, or call coverage where it fits." },
+  { title: "We review and adjust.", body: "A monthly look at progress against what we agreed, and changes as the business changes." },
+];
+
 const situations = [
   {
     title: "Work gets dropped or runs late",
@@ -32,9 +39,10 @@ const situations = [
   <ServiceHero
     eyebrow="Services"
     headline="Start with the problem. The right fix follows."
-    sub="Most businesses come to us because something costs them time, money, or growth, or because there is something they want to build and no time to start. We work out which, then recommend one of three ways to work together."
-    primaryText="Discuss your business challenge"
+    sub="Standard Method Group helps service businesses improve how they operate, put practical solutions in place, and pursue what comes next. Most of our work is process and systems improvement. Some owners want an ongoing AI partner, and some need a website that brings in the right work."
+    primaryText="Book a 30-minute call"
     primaryHref="/contact"
+    note="30 minutes. No pitch, no obligation."
   />
 
   <!-- Situations: editorial numbered list -->
@@ -56,7 +64,6 @@ const situations = [
             </li>
           ))}
         </ol>
-        <p class="situations-close">Different problems call for different solutions. We help you figure out what actually makes sense.</p>
       </div>
     </div>
   </section>
@@ -68,11 +75,17 @@ const situations = [
       <div class="featured-copy">
         <p class="featured-kicker">Our primary service</p>
         <h2 id="primary-title">Business systems and process improvement</h2>
-        <p class="featured-lead">We find the operational problem, design the fix, and put it to work in your business. This is the work SMG is built around.</p>
-        <p>The fix might be a redesigned process, software doing the repetitive steps, systems connected so information is entered once, a purpose-built tool, or call coverage where a client's needs justify it. The problem decides which.</p>
-        <p class="featured-note">We agree the measures first, record where you start, and report against them each month. We do not guarantee revenue or outcomes that depend on things outside our control.</p>
+        <p class="featured-lead">Bring us a problem or an opportunity. We work out what is going on, then build the fix with you.</p>
+        <ol class="expect">
+          {expect.map((e, i) => (
+            <li>
+              <span class="expect-num" aria-hidden="true">{i + 1}</span>
+              <p><strong>{e.title}</strong> {e.body}</p>
+            </li>
+          ))}
+        </ol>
         <div class="featured-actions">
-          <a href="/contact" class="sx-btn">Discuss your business challenge</a>
+          <a href="/contact" class="sx-btn">Book a 30-minute call</a>
           <a href="/how-we-work" class="featured-link">How an engagement runs &rarr;</a>
         </div>
       </div>
@@ -108,6 +121,7 @@ const situations = [
     headline="Not sure which one fits? Describe what is going on and we will tell you."
     buttonText="Book a 30-minute call"
     buttonHref="/contact"
+    note="30 minutes. No pitch, no obligation."
   />
 </Base>
 
@@ -153,15 +167,6 @@ const situations = [
   }
 
   .situations-list p { font-size: 1.125rem; line-height: 1.55; max-width: 54ch; text-wrap: pretty; }
-
-  .situations-close {
-    margin-top: var(--space-5);
-    font-size: 1.0625rem;
-    line-height: 1.55;
-    color: var(--color-text-secondary);
-    max-width: 56ch;
-    text-wrap: pretty;
-  }
 
   /* Featured primary */
   .featured {
@@ -209,9 +214,26 @@ const situations = [
     max-width: 16ch;
   }
 
-  .featured-copy p { color: var(--color-ink-on-dark); margin-top: var(--space-2); max-width: 54ch; }
-  .featured-copy .featured-lead { font-size: var(--text-lead); color: var(--color-white); margin-top: var(--space-3); }
-  .featured-copy .featured-note { font-size: 0.9375rem; color: rgba(255, 255, 255, 0.62); }
+  .featured-copy .featured-lead {
+    font-size: var(--text-lead);
+    color: var(--color-white);
+    margin-top: var(--space-3);
+    max-width: 40ch;
+  }
+
+  .expect { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: var(--space-2); max-width: 52ch; }
+  .expect li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--space-1); }
+
+  .expect-num {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    color: var(--color-teal-light);
+    padding-top: 2px;
+  }
+
+  .expect p { color: var(--color-ink-on-dark); font-size: 1.0625rem; line-height: 1.55; }
+  .expect strong { color: var(--color-white); font-weight: var(--font-weight-body-semibold); }
 
   .featured-actions {
     display: flex;
@@ -319,6 +341,7 @@ const situations = [
   @media (max-width: 960px) {
     .situations-grid, .featured-grid, .support-grid { grid-template-columns: 1fr; gap: var(--space-5); }
     .situations-head .sx-title { max-width: 24ch; }
+    .featured-visual { max-width: 460px; }
     .web { border-left: none; border-top: 1px solid var(--color-border); padding: var(--space-3) 0 0; }
   }
 

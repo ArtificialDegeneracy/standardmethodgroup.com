@@ -52,6 +52,15 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+/* Dark surfaces: the standard teal ring is under 3:1 against navy, so use the light teal */
+.nav a:focus-visible,
+.mobile-menu a:focus-visible,
+.footer a:focus-visible,
+.featured a:focus-visible,
+.cta-strip a:focus-visible {
+  outline-color: var(--color-teal-light);
+}
+
 /* Skip link */
 .skip-link {
   position: absolute;

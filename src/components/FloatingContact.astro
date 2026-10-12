@@ -1,6 +1,6 @@
 ---
 // Sticky contact tab pinned to the bottom-right of the viewport, sitewide.
-// Hidden on /contact (redundant) and, on mobile, until the visitor has scrolled past the hero.
+// Hidden on /contact (redundant) and on mobile.
 const onContact = new URL(Astro.request.url).pathname.replace(/\/$/, '') === '/contact';
 ---
 
@@ -48,28 +48,11 @@ const onContact = new URL(Astro.request.url).pathname.replace(/\/$/, '') === '/c
     height: 18px;
   }
 
+  /* On mobile it would sit over content, and every page has inline booking CTAs plus the menu button. */
   @media (max-width: 768px) {
     .floating-contact {
-      right: var(--space-3);
-      border-radius: var(--radius);
-      padding: 12px 18px;
+      display: none;
     }
-
-    @supports (animation-timeline: scroll()) {
-      @media (prefers-reduced-motion: no-preference) {
-        .floating-contact {
-          opacity: 0;
-          pointer-events: none;
-          animation: floating-in linear both;
-          animation-timeline: scroll(root);
-          animation-range: 480px 640px;
-        }
-      }
-    }
-  }
-
-  @keyframes floating-in {
-    to { opacity: 1; pointer-events: auto; }
   }
 
   @media (prefers-reduced-motion: reduce) {

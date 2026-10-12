@@ -4,22 +4,42 @@ import ServiceHero from '../../components/ServiceHero.astro';
 import CycleDiagram from '../../components/CycleDiagram.astro';
 import CTAStrip from '../../components/CTAStrip.astro';
 
-const included = [
-  { title: "A readiness assessment", body: "A look at your business, goals, existing tools, and where AI or automation could realistically help." },
-  { title: "A 90-day roadmap", body: "Opportunities identified and prioritized, so you know what to do first and what to leave alone." },
-  { title: "Two working sessions a month", body: "Two 45-minute sessions where we work through priorities and build or fix things together." },
-  { title: "Questions between sessions", body: "Unlimited reasonable questions through a designated messaging channel. First reply within two business days." },
-  { title: "Roadmap management", body: "We keep the roadmap current as priorities change, so the plan does not go stale." },
-  { title: "A monthly progress report", body: "What was completed, what is underway, results where they can be measured, and the next steps." },
-  { title: "Hands-on help with the tools", body: "Practical guidance and assistance with AI tools, Claude Skills, ChatGPT, automation, forms, documents, custom applications, software integrations, and process improvements." },
-  { title: "Small improvements as we go", body: "Smaller fixes and setups are completed during working sessions, or as agreed." },
+// Four reasons to buy. The full list of deliverables sits in the scope section below.
+const benefits = [
+  {
+    title: "Know where to start",
+    body: "We assess your business, identify practical opportunities for AI and automation, and build a prioritized 90-day roadmap.",
+  },
+  {
+    title: "Make real progress",
+    body: "Two 45-minute working sessions each month, with practical guidance and hands-on help putting improvements in place.",
+  },
+  {
+    title: "Have someone to ask",
+    body: "A designated messaging channel for questions, ideas, and guidance between sessions. Initial response within two business days.",
+  },
+  {
+    title: "Know what's improving",
+    body: "We keep the roadmap current, review progress, track measurable improvements where possible, and set the next priorities.",
+  },
 ];
 
 const phases = [
-  { title: "Assess", body: "We look at the business, your goals, the tools you already have, and where the opportunities are." },
-  { title: "Build a roadmap", body: "A prioritized 90-day plan, with the first moves chosen for how much they will help and how hard they are." },
+  { title: "Assess", body: "The business, your goals, the tools you already have, and where the opportunities are." },
+  { title: "Build a roadmap", body: "A prioritized 90-day plan, with the first moves chosen for how much they help and how hard they are." },
   { title: "Work together", body: "Monthly working sessions and ongoing advisory support, with the roadmap adjusted as we learn." },
   { title: "Evaluate", body: "We review progress, document results, and set the next priorities." },
+];
+
+const everything = [
+  "Business and AI readiness assessment",
+  "Personalized, prioritized 90-day roadmap",
+  "Two 45-minute working sessions per month",
+  "Unlimited reasonable questions through a designated messaging channel, first response within two business days",
+  "Ongoing roadmap management and prioritization",
+  "Monthly progress report: completed work, current initiatives, results where measurable, next steps",
+  "Practical guidance and hands-on help with AI tools, Claude Skills, ChatGPT, automation, forms, documents, custom applications, software integrations, and process improvements",
+  "Small improvements completed during working sessions or as agreed",
 ];
 
 const scopedSeparately = [
@@ -49,62 +69,72 @@ const faqs = [
     secondaryHref="#ninety"
   />
 
-  <section class="sx-section reveal">
-    <div class="sx-wrap">
-      <p class="sx-kicker">The situation</p>
-      <h2 class="sx-title">You know it could help. You do not have time to work out where.</h2>
-      <p class="sx-lead">The tools change every month, and every vendor says theirs will save you hours. Someone still has to decide what is worth doing first, set it up properly, and check that it worked. That is the job here.</p>
-      <p class="sx-lead">It is a practical, ongoing relationship focused on measurable progress. It is not a generic AI coaching subscription.</p>
+  <!-- The situation: one large statement, supporting text beside it -->
+  <section class="sx-section situation reveal">
+    <div class="sx-wrap situation-grid">
+      <h2 class="statement">You know it could help. You do not have time to work out where.</h2>
+      <div class="situation-text">
+        <p>The tools change every month, and every vendor says theirs will save you hours. Someone still has to decide what is worth doing first, set it up properly, and check that it worked. That is the job here.</p>
+        <p>It is a practical, ongoing relationship focused on measurable progress. It is not a generic AI coaching subscription.</p>
+      </div>
     </div>
   </section>
 
-  <section class="sx-section sx-section-alt reveal">
-    <div class="sx-wrap">
-      <p class="sx-kicker">What you get</p>
-      <h2 class="sx-title">An assessment, a roadmap, and a partner who stays on it.</h2>
-      <ul class="included">
-        {included.map((i) => (
-          <li class="sx-card">
-            <h3>{i.title}</h3>
-            <p>{i.body}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  <section class="sx-section reveal" id="ninety">
-    <div class="sx-wrap">
-      <p class="sx-kicker">How it works</p>
-      <h2 class="sx-title">The first 90 days, and then the next.</h2>
-      <ol class="phases">
-        {phases.map((p, i) => (
+  <!-- Four reasons: a connected sequence -->
+  <section class="sx-section sx-section-alt benefits reveal">
+    <div class="sx-wrap benefits-grid">
+      <div class="benefits-head">
+        <p class="sx-kicker">What you get</p>
+        <h2 class="sx-title">An assessment, a roadmap, and a partner who stays on it.</h2>
+        <p class="sx-lead">Four reasons owners bring us in.</p>
+      </div>
+      <ol class="chain">
+        {benefits.map((b, i) => (
           <li>
-            <span class="phase-num" aria-hidden="true">{i + 1}</span>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
+            <span class="chain-node" aria-hidden="true">{i + 1}</span>
+            <h3>{b.title}</h3>
+            <p>{b.body}</p>
           </li>
         ))}
       </ol>
-      <div class="diagram"><CycleDiagram /></div>
     </div>
   </section>
 
-  <section class="sx-section sx-section-alt reveal">
+  <!-- 90 days: steps beside the diagram -->
+  <section class="sx-section ninety reveal" id="ninety">
+    <div class="sx-wrap">
+      <p class="sx-kicker">How it works</p>
+      <h2 class="sx-title">The first 90 days, and then the next.</h2>
+      <div class="ninety-grid">
+        <ol class="phases">
+          {phases.map((p, i) => (
+            <li>
+              <span class="phase-num" aria-hidden="true">{i + 1}</span>
+              <div>
+                <h3>{p.title}</h3>
+                <p>{p.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div class="diagram"><CycleDiagram /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scope: everything included, and what is scoped separately -->
+  <section class="sx-section sx-section-alt scope reveal">
     <div class="sx-wrap">
       <p class="sx-kicker">What is and is not included</p>
       <h2 class="sx-title">Expertise and guidance, not unlimited development.</h2>
-      <div class="scope">
-        <div class="sx-card scope-in">
-          <h3>Included in the monthly relationship</h3>
+      <div class="scope-grid">
+        <div class="scope-in">
+          <h3>Everything in the monthly relationship</h3>
           <ul>
-            <li>Advice, prioritization, and roadmap management</li>
-            <li>Hands-on help with AI tools, Claude Skills, ChatGPT, automation, forms, documents, and software integrations</li>
-            <li>Small improvements completed during working sessions or as agreed</li>
-            <li>A monthly progress report</li>
+            {everything.map((t) => <li>{t}</li>)}
           </ul>
         </div>
-        <div class="sx-card scope-out">
+        <div class="scope-out">
           <h3>Scoped and approved separately</h3>
           <ul>
             {scopedSeparately.map((t) => <li>{t}</li>)}
@@ -116,16 +146,19 @@ const faqs = [
     </div>
   </section>
 
-  <section class="sx-section reveal">
-    <div class="sx-wrap-narrow">
-      <p class="sx-kicker">Progress you can check</p>
-      <h2 class="sx-title">Each month ends with a written report.</h2>
-      <p class="sx-lead">It covers completed work, current initiatives, results where they can be measured, and next steps. Where practical we record a starting point first, so the result can be checked. We report honestly on what did not move, and we do not promise outcomes that depend on things outside our control.</p>
+  <!-- Progress: a distinct band -->
+  <section class="progress reveal">
+    <div class="sx-wrap progress-grid">
+      <div>
+        <p class="progress-kicker">Progress you can check</p>
+        <h2>Each month ends with a written report.</h2>
+      </div>
+      <p>It covers completed work, current initiatives, results where they can be measured, and next steps. Where practical we record a starting point first, so the result can be checked. We report honestly on what did not move, and we do not promise outcomes that depend on things outside our control.</p>
     </div>
   </section>
 
-  <section class="sx-section sx-section-alt reveal">
-    <div class="sx-wrap-narrow">
+  <section class="sx-section reveal">
+    <div class="sx-wrap faq-grid">
       <h2 class="sx-title">Questions owners ask</h2>
       <div class="faq">
         {faqs.map((f) => (
@@ -146,60 +179,146 @@ const faqs = [
 </Base>
 
 <style>
-  .included {
-    list-style: none;
-    margin-top: var(--space-5);
+  /* Situation */
+  .situation { padding: calc(var(--space-12) + var(--space-3)) 0; }
+
+  .situation-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-3);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-8);
+    align-items: start;
   }
 
-  .phases {
-    list-style: none;
-    margin-top: var(--space-5);
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-3);
+  .statement {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.5rem);
+    line-height: 1.06;
+    letter-spacing: var(--tracking-display);
+    color: var(--color-navy);
+    max-width: 16ch;
   }
 
-  .phases li { border-top: 1px solid var(--color-border); padding-top: var(--space-2); }
+  .situation-text { padding-top: var(--space-1); }
+  .situation-text p { font-size: var(--text-lead); color: var(--color-text-secondary); margin-bottom: var(--space-3); }
+
+  /* Benefits as a connected chain */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .chain {
+    list-style: none;
+    position: relative;
+    padding-left: 72px;
+  }
+
+  .chain li { position: relative; padding-bottom: var(--space-5); }
+  .chain li:last-child { padding-bottom: 0; }
+
+  /* Connector from each node down to the next */
+  .chain li:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: -51px;
+    top: 44px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(var(--color-teal), var(--color-teal-light));
+    opacity: 0.55;
+  }
+
+  .chain-node {
+    position: absolute;
+    left: -72px;
+    top: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-navy);
+    color: var(--color-teal-light);
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    box-shadow: 0 0 0 6px var(--color-warm-white-alt);
+  }
+
+  .chain h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.625rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+    line-height: 1.2;
+    padding-top: 6px;
+    margin-bottom: var(--space-1);
+  }
+
+  .chain p { font-size: 1.1875rem; line-height: 1.55; max-width: 46ch; }
+
+  /* 90 days */
+  .ninety-grid {
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .phases { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+  .phases li { display: flex; gap: var(--space-2); }
 
   .phase-num {
-    display: block;
+    flex-shrink: 0;
+    width: 28px;
     font-weight: 600;
-    font-size: 2.5rem;
-    line-height: 1;
+    font-size: 1.5rem;
+    line-height: 1.1;
     color: var(--color-teal);
-    margin-bottom: var(--space-1);
   }
 
   .phases h3 {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
+    font-size: 1.0625rem;
+    color: var(--color-navy);
+    margin-bottom: 2px;
+  }
+
+  .phases p { font-size: 1rem; line-height: 1.5; }
+
+  /* Scope */
+  .scope-grid {
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-5);
+  }
+
+  .scope h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
     font-size: 1.125rem;
     color: var(--color-navy);
+    padding-bottom: var(--space-1);
+    border-bottom: 3px solid var(--color-teal);
     margin-bottom: var(--space-1);
   }
 
-  .phases p { font-size: 1rem; line-height: 1.55; }
-
-  .diagram { margin: var(--space-8) auto 0; max-width: 760px; }
-
-  .scope {
-    margin-top: var(--space-5);
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-3);
-  }
-
-  .scope-in { border-top: 3px solid var(--color-teal); }
-  .scope-out { border-top: 3px solid var(--color-navy); }
+  .scope-out h3 { border-bottom-color: var(--color-navy); }
   .scope ul { list-style: none; }
 
   .scope li {
     padding: var(--space-1) 0;
     border-bottom: 1px solid var(--color-border);
     font-size: 1.0625rem;
+    line-height: 1.5;
   }
 
   .scope li:last-child { border-bottom: none; }
@@ -207,12 +326,55 @@ const faqs = [
 
   .scope-note {
     margin-top: var(--space-5);
-    font-size: 1.25rem;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 1.375rem;
+    line-height: 1.35;
+    letter-spacing: var(--tracking-heading);
     color: var(--color-navy);
-    max-width: 52ch;
+    max-width: 38ch;
   }
 
-  .faq { margin-top: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); }
+  /* Progress band */
+  .progress { background: var(--color-deep-teal); padding: var(--space-12) 0; }
+
+  .progress-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .progress-kicker {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: #BFE9E0;
+    margin-bottom: var(--space-2);
+  }
+
+  .progress h2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: var(--text-h2);
+    letter-spacing: var(--tracking-heading);
+    line-height: 1.15;
+    color: var(--color-white);
+  }
+
+  .progress-grid > p { font-size: var(--text-lead); color: rgba(255, 255, 255, 0.9); max-width: 52ch; }
+
+  /* FAQ */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); }
 
   .faq-item {
     background: var(--color-white);
@@ -246,11 +408,22 @@ const faqs = [
   .faq-item[open] .faq-icon::after { transform: rotate(90deg); opacity: 0; }
 
   @media (max-width: 960px) {
-    .included, .phases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .situation-grid, .benefits-grid, .ninety-grid, .scope-grid, .progress-grid, .faq-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+
+    .situation { padding: var(--space-8) 0; }
+    .progress { padding: var(--space-8) 0; }
+    .statement { max-width: 18ch; }
   }
 
-  @media (max-width: 640px) {
-    .included, .phases, .scope { grid-template-columns: 1fr; }
+  @media (max-width: 480px) {
+    .chain { padding-left: 60px; }
+    .chain-node { left: -60px; width: 40px; height: 40px; }
+    .chain li:not(:last-child)::before { left: -41px; top: 40px; }
+    .chain h3 { font-size: 1.375rem; }
+    .chain p { font-size: 1.0625rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {

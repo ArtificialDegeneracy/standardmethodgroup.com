@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ServiceHero from '../../components/ServiceHero.astro';
+import ImprovementDiagram from '../../components/ImprovementDiagram.astro';
 import CTAStrip from '../../components/CTAStrip.astro';
 
 const situations = [
@@ -31,13 +32,6 @@ const situations = [
     start: { label: "AI Concierge", href: "/services/ai-concierge" },
   },
 ];
-
-const steps = [
-  "We talk for 30 minutes about how the business runs and where it is costing you.",
-  "We write down the problem, the measures, and where you are today, then show you a working example.",
-  "We build it, inside tools you already use where we can.",
-  "We stay on it and report each month against what we agreed.",
-];
 ---
 
 <Base>
@@ -45,21 +39,26 @@ const steps = [
     eyebrow="Services"
     headline="Start with the problem. The right fix follows."
     sub="Most businesses come to us because something costs them time, money, or growth, or because there is something they want to build and no time to start. We work out which, then recommend one of three ways to work together."
-    primaryText="Book a 30-minute call"
+    primaryText="Discuss your business challenge"
     primaryHref="/contact"
   />
 
-  <section class="sx-section reveal">
-    <div class="sx-wrap">
-      <p class="sx-kicker">What we are usually called about</p>
-      <h2 class="sx-title">Five situations, and where each one usually starts.</h2>
-      <ul class="situations">
+  <!-- Situations: editorial list, not cards -->
+  <section class="sx-section situations reveal">
+    <div class="sx-wrap situations-grid">
+      <div class="situations-head">
+        <p class="sx-kicker">What we are usually called about</p>
+        <h2 class="sx-title">Five situations, and where each one usually starts.</h2>
+      </div>
+      <ul class="situations-list">
         {situations.map((s) => (
-          <li class="sx-card situation">
-            <h3>{s.title}</h3>
-            <p class="situation-cost">{s.cost}</p>
-            <p class="situation-start">
-              Usually starts with <a class="sx-link" href={s.start.href}>{s.start.label}</a>{s.also && <>, <a class="sx-link" href={s.also.href}>{s.also.label}</a></>}.
+          <li>
+            <div>
+              <h3>{s.title}</h3>
+              <p>{s.cost}</p>
+            </div>
+            <p class="starts">
+              Starts with <a class="sx-link" href={s.start.href}>{s.start.label}</a>{s.also && <>, <a class="sx-link" href={s.also.href}>{s.also.label}</a></>}
             </p>
           </li>
         ))}
@@ -67,36 +66,40 @@ const steps = [
     </div>
   </section>
 
-  <section class="sx-section sx-section-alt reveal" id="offerings">
-    <div class="sx-wrap">
-      <p class="sx-kicker">Three ways we work</p>
-      <h2 class="sx-title">The problem decides which one you need.</h2>
-
-      <article class="primary" id="business-systems">
-        <div class="primary-copy">
-          <p class="tag">Our primary service</p>
-          <h3>Business systems and process improvement</h3>
-          <p>We identify the operational problem, design the solution, and implement it. The fix might be a redesigned process, software doing the repetitive steps, systems connected so information is entered once, a purpose-built tool, call coverage, or a combination. We recommend call coverage when a client's needs justify it, and not otherwise.</p>
-          <p>We agree the measures first, record where you start, and report against them each month. We do not guarantee revenue or outcomes that depend on things outside our control.</p>
-          <p><a href="/contact" class="sx-btn">Book a 30-minute call</a></p>
+  <!-- Featured primary service -->
+  <section class="featured reveal" id="business-systems" aria-labelledby="primary-title">
+    <div class="featured-texture" aria-hidden="true"></div>
+    <div class="sx-wrap featured-grid">
+      <div class="featured-copy">
+        <p class="featured-kicker">Our primary service</p>
+        <h2 id="primary-title">Business systems and process improvement</h2>
+        <p class="featured-lead">We find the operational problem, design the fix, and put it to work in your business. This is the work SMG is built around.</p>
+        <p>The fix might be a redesigned process, software doing the repetitive steps, systems connected so information is entered once, a purpose-built tool, or call coverage where a client's needs justify it. The problem decides which.</p>
+        <p class="featured-note">We agree the measures first, record where you start, and report against them each month. We do not guarantee revenue or outcomes that depend on things outside our control.</p>
+        <div class="featured-actions">
+          <a href="/contact" class="sx-btn">Discuss your business challenge</a>
+          <a href="/how-we-work" class="featured-link">How an engagement runs &rarr;</a>
         </div>
-        <ol class="primary-steps">
-          {steps.map((t, i) => (
-            <li><span aria-hidden="true">{i + 1}</span>{t}</li>
-          ))}
-        </ol>
-      </article>
+      </div>
+      <div class="featured-visual">
+        <ImprovementDiagram />
+      </div>
+    </div>
+  </section>
 
-      <div class="pair">
+  <!-- Supporting offerings -->
+  <section class="sx-section sx-section-alt support reveal">
+    <div class="sx-wrap">
+      <h2 class="support-title">Two other ways to work with us</h2>
+      <div class="support-grid">
         <article class="concierge">
-          <p class="tag tag-light">Ongoing advisory</p>
+          <p class="tag">Ongoing advisory</p>
           <h3>AI Concierge</h3>
           <p class="concierge-line">Your AI partner. Without the full-time hire.</p>
           <p>An ongoing relationship for business owners who want to adopt AI and automation and make measurable progress, without the time or expertise to work it all out alone. An assessment, a 90-day roadmap, two working sessions a month, and questions answered between them.</p>
           <a href="/services/ai-concierge" class="concierge-link">See AI Concierge &rarr;</a>
         </article>
-
-        <article class="sx-card web">
+        <article class="web">
           <p class="tag">Secondary service</p>
           <h3>Website development</h3>
           <p>A website that helps the right customers find you and captures their enquiry properly, designed around what happens after someone gets in touch.</p>
@@ -106,38 +109,129 @@ const steps = [
     </div>
   </section>
 
-  <section class="sx-section reveal">
-    <div class="sx-wrap-narrow">
-      <p class="sx-kicker">Not sure which one</p>
-      <h2 class="sx-title">Describe what is going on and we will tell you.</h2>
-      <p class="sx-lead">The first conversation is free, takes 30 minutes, and ends with an honest recommendation, including when the answer is that you do not need us.</p>
-      <p class="cta-row"><a href="/contact" class="sx-btn">Book a 30-minute call</a></p>
-    </div>
-  </section>
-
   <CTAStrip
-    headline="30 minutes. No pitch. Just a conversation about how your business runs."
+    headline="Not sure which one fits? Describe what is going on and we will tell you."
     buttonText="Book a 30-minute call"
     buttonHref="/contact"
   />
 </Base>
 
 <style>
-  .situations {
-    list-style: none;
-    margin-top: var(--space-5);
+  /* Situations */
+  .situations-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: var(--space-3);
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--space-8);
+    align-items: start;
   }
 
-  .situation { grid-column: span 2; }
-  .situation:nth-child(n + 4) { grid-column: span 3; }
+  .situations-head .sx-title { max-width: 16ch; }
 
-  .situation { display: flex; flex-direction: column; gap: var(--space-1); }
-  .situation h3 { margin-bottom: 0; }
-  .situation-cost { color: var(--color-text); }
-  .situation-start { margin-top: auto; padding-top: var(--space-1); font-size: 0.9375rem; color: var(--color-text-secondary); }
+  .situations-list { list-style: none; border-bottom: 1px solid var(--color-border); }
+
+  .situations-list li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 220px);
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .situations-list h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+    margin-bottom: 4px;
+  }
+
+  .situations-list p { font-size: 1.0625rem; line-height: 1.5; }
+
+  .starts { font-family: var(--font-heading); font-size: 0.875rem; color: var(--color-text-secondary); }
+  .starts .sx-link { font-size: 0.875rem; }
+
+  /* Featured primary */
+  .featured {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--color-navy);
+    padding: calc(var(--space-12) + var(--space-3)) 0;
+  }
+
+  .featured-texture {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 80% 90% at 70% 40%, #000 25%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 70% 40%, #000 25%, transparent 75%);
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .featured-kicker {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-teal-light);
+    margin-bottom: var(--space-2);
+  }
+
+  .featured h2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: var(--tracking-display);
+    color: var(--color-white);
+    max-width: 16ch;
+  }
+
+  .featured-copy p { color: var(--color-ink-on-dark); margin-top: var(--space-2); max-width: 54ch; }
+  .featured-copy .featured-lead { font-size: var(--text-lead); color: var(--color-white); margin-top: var(--space-3); }
+  .featured-copy .featured-note { font-size: 0.9375rem; color: rgba(255, 255, 255, 0.62); }
+
+  .featured-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .featured-link {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .featured-link:hover { color: var(--color-white); text-decoration: underline; }
+
+  /* Supporting */
+  .support-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+  }
+
+  .support-grid {
+    margin-top: var(--space-3);
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-3);
+  }
 
   .tag {
     font-family: var(--font-heading);
@@ -149,86 +243,80 @@ const steps = [
     margin-bottom: var(--space-1);
   }
 
-  .tag-light { color: var(--color-teal-light); }
-
-  .primary {
-    margin-top: var(--space-5);
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-    gap: var(--space-5);
-    padding: var(--space-5);
+  .concierge {
     background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-top: 4px solid var(--color-teal);
+    border: 1px solid rgba(42, 125, 110, 0.45);
+    border-left: 4px solid var(--color-teal);
     border-radius: var(--radius-lg);
+    padding: var(--space-5);
     box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
   }
 
-  .primary h3,
-  .concierge h3,
-  .web h3 {
+  .concierge h3 {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
+    font-size: 1.5rem;
     letter-spacing: var(--tracking-heading);
     color: var(--color-navy);
   }
 
-  .primary h3 { font-size: 1.75rem; margin-bottom: var(--space-2); }
-  .primary-copy p { margin-bottom: var(--space-2); max-width: 60ch; }
-
-  .primary-steps { list-style: none; border-left: 2px solid var(--color-border); padding-left: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); align-self: start; }
-  .primary-steps li { position: relative; font-size: 1rem; line-height: 1.5; }
-  .primary-steps span {
-    display: inline-block;
+  .concierge-line {
     font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    color: var(--color-teal);
-    margin-right: var(--space-1);
+    font-weight: var(--font-weight-heading-medium);
+    color: var(--color-deep-teal);
+    margin: var(--space-1) 0 var(--space-2);
   }
 
-  .pair {
-    margin-top: var(--space-3);
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: var(--space-3);
-  }
-
-  .concierge {
-    background: var(--color-navy);
-    color: var(--color-ink-on-dark);
-    border-radius: var(--radius-lg);
-    padding: var(--space-5);
-    box-shadow: var(--shadow-md);
-  }
-
-  .concierge h3 { color: var(--color-white); font-size: 1.5rem; }
-  .concierge-line { font-family: var(--font-heading); font-weight: var(--font-weight-heading-medium); color: var(--color-teal-light); margin: var(--space-1) 0 var(--space-2); }
   .concierge p:not(.tag):not(.concierge-line) { margin-bottom: var(--space-3); }
 
   .concierge-link {
+    align-self: flex-start;
+    margin-top: auto;
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
-    color: var(--color-white);
-    border-bottom: 1px solid var(--color-teal-light);
+    font-size: 0.9375rem;
+    color: var(--color-deep-teal);
+    border: 1px solid var(--color-teal);
+    border-radius: var(--radius);
+    padding: 10px 18px;
   }
 
-  .concierge-link:hover { color: var(--color-teal-light); }
+  .concierge-link:hover { background: var(--color-teal); color: var(--color-white); }
 
-  .web { padding: var(--space-5); display: flex; flex-direction: column; }
-  .web h3 { font-size: 1.25rem; margin-bottom: var(--space-1); }
+  .web {
+    padding: var(--space-5) var(--space-3);
+    border-left: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .web h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
   .web p:not(.tag) { margin-bottom: var(--space-2); }
   .web .sx-link { margin-top: auto; }
 
-  .cta-row { margin-top: var(--space-3); }
-
   @media (max-width: 960px) {
-    .situations { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .situation, .situation:nth-child(n + 4) { grid-column: auto; }
-    .primary, .pair { grid-template-columns: 1fr; }
+    .situations-grid, .featured-grid, .support-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+    .situations-head .sx-title { max-width: 24ch; }
+    .web { border-left: none; border-top: 1px solid var(--color-border); padding: var(--space-3) 0 0; }
   }
 
   @media (max-width: 640px) {
-    .situations { grid-template-columns: 1fr; }
-    .primary, .concierge, .web { padding: var(--space-3); }
+    .situations-list li { grid-template-columns: 1fr; gap: var(--space-1); }
+    .featured { padding: var(--space-8) 0; }
+    .concierge { padding: var(--space-3); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .concierge-link { transition: none; }
   }
 </style>

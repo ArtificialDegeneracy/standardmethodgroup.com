@@ -2,6 +2,10 @@
 import Base from '../layouts/Base.astro';
 import CTAStrip from '../components/CTAStrip.astro';
 import Hero from '../components/Hero.astro';
+import resultsData from '../data/results.json';
+
+// Client names appear only once approved (src/data/results.json).
+const edgeMarine = resultsData.find((r) => r.id === 'edge-marine-invoices' && r.approved);
 
 const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
 ---
@@ -13,7 +17,7 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
     <p class="hero-sub">Most small businesses lose more work to missed calls than to anything else, and they never see it happen. Standard Method Group sets up call coverage that answers on the first ring, handles the routine questions, books the meeting, and sends you a clean message for anything that needs you.</p>
     <div class="hero-ctas">
       <a href={bookingUrl} class="hero-cta">Book a 30-minute call</a>
-      <a href="/how-we-work" class="hero-cta-secondary">See how it works &rarr;</a>
+      <a href="/how-we-work" class="hero-cta-secondary">See how we work &rarr;</a>
     </div>
   </Hero>
 
@@ -80,12 +84,14 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
     </div>
   </section>
 
-  <!-- Proof -->
-  <section class="proof reveal">
-    <div class="proof-inner">
-      <p>SMG client Edge Marine Construction had overdue invoices paid within the first month, not because someone chased them, but because the follow-up happened on its own. Call coverage is the same idea, applied to the conversations that start the work.</p>
-    </div>
-  </section>
+  <!-- Proof: renders only when the client result is approved -->
+  {edgeMarine && (
+    <section class="proof reveal">
+      <div class="proof-inner">
+        <p>SMG client Edge Marine Construction had overdue invoices paid within the first month, not because someone chased them, but because the follow-up happened on its own. Call coverage is the same idea, applied to the conversations that start the work.</p>
+      </div>
+    </section>
+  )}
 
   <CTAStrip
     headline="Want to hear what this would sound like for your business?"
@@ -129,7 +135,7 @@ const bookingUrl = 'https://calendar.app.google/hH5ewNekVCHFKrcc9';
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    margin-top: var(--space-4);
+    margin-top: var(--space-5);
     flex-wrap: wrap;
   }
 

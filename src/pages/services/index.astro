@@ -7,29 +7,23 @@ import CTAStrip from '../../components/CTAStrip.astro';
 const situations = [
   {
     title: "Work gets dropped or runs late",
-    cost: "Hours every week, rework, and deadlines that slip.",
-    start: { label: "Business systems", href: "#business-systems" },
+    body: "Hours every week, rework, and deadlines that slip.",
   },
   {
     title: "Money is leaking",
-    cost: "Slow-paid invoices, undocumented change orders, and work that never gets billed.",
-    start: { label: "Business systems", href: "#business-systems" },
+    body: "Slow-paid invoices, undocumented change orders, and work that never gets billed.",
   },
   {
     title: "Customers and enquiries slip away",
-    cost: "Jobs won by whoever answered first, and leads that go cold.",
-    start: { label: "Business systems", href: "#business-systems" },
-    also: { label: "or Website development, if the problem is how people find or reach you", href: "/services/websites" },
+    body: "Jobs won by whoever answered first, and leads that go cold.",
   },
   {
     title: "The business depends on one person",
-    cost: "A ceiling on growth, and a problem the day that person is out.",
-    start: { label: "Business systems", href: "#business-systems" },
+    body: "A ceiling on growth, and a problem the day that person is out.",
   },
   {
-    title: "You want to use AI and don't know where to start",
-    cost: "Time spent experimenting, tools nobody uses, and opportunities left sitting.",
-    start: { label: "AI Concierge", href: "/services/ai-concierge" },
+    title: "You want to do something new",
+    body: "A new service, a better way of working, or an idea you've been meaning to pursue, but no clear place to start.",
   },
 ];
 ---
@@ -43,26 +37,27 @@ const situations = [
     primaryHref="/contact"
   />
 
-  <!-- Situations: editorial list, not cards -->
+  <!-- Situations: editorial numbered list -->
   <section class="sx-section situations reveal">
     <div class="sx-wrap situations-grid">
       <div class="situations-head">
         <p class="sx-kicker">What we are usually called about</p>
-        <h2 class="sx-title">Five situations, and where each one usually starts.</h2>
+        <h2 class="sx-title">What's getting in the way of your business?</h2>
       </div>
-      <ul class="situations-list">
-        {situations.map((s) => (
-          <li>
-            <div>
-              <h3>{s.title}</h3>
-              <p>{s.cost}</p>
-            </div>
-            <p class="starts">
-              Starts with <a class="sx-link" href={s.start.href}>{s.start.label}</a>{s.also && <>, <a class="sx-link" href={s.also.href}>{s.also.label}</a></>}
-            </p>
-          </li>
-        ))}
-      </ul>
+      <div class="situations-body">
+        <ol class="situations-list">
+          {situations.map((s, i) => (
+            <li>
+              <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p class="situations-close">Different problems call for different solutions. We help you figure out what actually makes sense.</p>
+      </div>
     </div>
   </section>
 
@@ -131,25 +126,42 @@ const situations = [
 
   .situations-list li {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 220px);
-    gap: var(--space-3);
-    padding: var(--space-3) 0;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: var(--space-2);
+    padding: 32px 0;
     border-top: 1px solid var(--color-border);
+  }
+
+  .num {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-teal);
+    padding-top: 5px;
   }
 
   .situations-list h3 {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
-    font-size: 1.25rem;
+    font-size: 1.375rem;
+    line-height: 1.25;
     letter-spacing: var(--tracking-heading);
     color: var(--color-navy);
-    margin-bottom: 4px;
+    margin-bottom: var(--space-1);
   }
 
-  .situations-list p { font-size: 1.0625rem; line-height: 1.5; }
+  .situations-list p { font-size: 1.125rem; line-height: 1.55; max-width: 54ch; text-wrap: pretty; }
 
-  .starts { font-family: var(--font-heading); font-size: 0.875rem; color: var(--color-text-secondary); }
-  .starts .sx-link { font-size: 0.875rem; }
+  .situations-close {
+    margin-top: var(--space-5);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    max-width: 56ch;
+    text-wrap: pretty;
+  }
 
   /* Featured primary */
   .featured {
@@ -311,7 +323,9 @@ const situations = [
   }
 
   @media (max-width: 640px) {
-    .situations-list li { grid-template-columns: 1fr; gap: var(--space-1); }
+    .situations-list li { grid-template-columns: 40px minmax(0, 1fr); gap: var(--space-1); padding: var(--space-3) 0; }
+    .situations-list h3 { font-size: 1.1875rem; }
+    .situations-list p { font-size: 1.0625rem; }
     .featured { padding: var(--space-8) 0; }
     .concierge { padding: var(--space-3); }
   }

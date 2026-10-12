@@ -102,7 +102,7 @@ const p = idPrefix;
             {i < 2 && <path class="chevron" d={`M${s.x + 112} 208 L${s.x + 116} 212 L${s.x + 112} 216`} />}
           </>
         ))}
-        <text class="panel-sub" x="200" y="256" text-anchor="middle">Measures agreed first. Results reported.</text>
+        <text class="panel-sub" x="200" y="256" text-anchor="middle">Find the right fix. Measure what matters.</text>
       </g>
 
       {wideOutcomes.map((n) => (
@@ -155,7 +155,7 @@ const p = idPrefix;
             {i < 2 && <path class="chevron" d={`M${s.x + 91} 228 L${s.x + 95} 232 L${s.x + 91} 236`} />}
           </>
         ))}
-        <text class="panel-sub" x="150" y="278" text-anchor="middle">Measures agreed first. Results reported.</text>
+        <text class="panel-sub" x="150" y="278" text-anchor="middle">Find the right fix. Measure what matters.</text>
       </g>
 
       {narrowOutcomes.map((n) => (
@@ -180,6 +180,10 @@ const p = idPrefix;
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: var(--radius-lg);
     background: rgba(255, 255, 255, 0.035);
+  }
+
+  @media (max-width: 480px) {
+    .method { padding: var(--space-2); }
   }
 
   .method-art { container-type: inline-size; }

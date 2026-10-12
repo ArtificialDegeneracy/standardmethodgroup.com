@@ -28,13 +28,32 @@ const steps = [
   { title: "We stay on it", body: "A monthly report against the measures we agreed, including the ones that did not move, and what we are doing about them." },
 ];
 
-const solutions = [
-  { name: "Process redesign", body: "Changing who does what, and in what order, so the work stops depending on one person's memory." },
-  { name: "Automation", body: "Software doing the repetitive steps: reminders, routing, status updates, reports, follow-up." },
-  { name: "Software integration", body: "Connecting the tools you already pay for, so information is entered once and shows up where it is needed." },
-  { name: "Custom tools", body: "A small, purpose-built tool when nothing off the shelf fits the way you work." },
-  { name: "Call coverage", body: "Calls answered, details captured, and meetings booked when you cannot pick up.", href: "/never-miss-a-call" },
-  { name: "Websites", body: "A site built to produce enquiries and hand them off properly, when that is where the problem sits." },
+const offerings = [
+  {
+    key: "systems",
+    tag: "Our primary service",
+    name: "Business systems and process improvement",
+    body: "We identify the operational problem, design the solution, and implement it. That might be a redesigned process, automation, connected software, a custom tool, or call coverage where a client's needs justify it.",
+    href: "/services",
+    cta: "See how this works",
+  },
+  {
+    key: "concierge",
+    tag: "Ongoing advisory",
+    name: "AI Concierge",
+    lead: "Your AI partner. Without the full-time hire.",
+    body: "For owners who want to adopt AI and automation and make measurable progress without the time to work it all out alone.",
+    href: "/services/ai-concierge",
+    cta: "See AI Concierge",
+  },
+  {
+    key: "web",
+    tag: "Secondary service",
+    name: "Website development",
+    body: "A website that helps the right customers find you and captures their enquiry properly.",
+    href: "/services/websites",
+    cta: "See website development",
+  },
 ];
 
 const faqs = [
@@ -53,6 +72,10 @@ const faqs = [
   {
     q: "Do you guarantee results?",
     a: "No. We agree the problem, the measures, and what success looks like in writing before we build, record where you are today, and report against those measures. We are accountable for delivering what we agreed and for telling you honestly what happened. We don't promise revenue or any outcome that depends on things outside our control.",
+  },
+  {
+    q: "Can you help us start using AI?",
+    a: "Yes. If you want to adopt AI but do not have the time to work out where it helps, AI Concierge is an ongoing advisory relationship: an assessment, a 90-day roadmap, two working sessions a month, and questions answered in between. Many of the businesses we work with start with a specific problem instead, and we recommend whichever fits.",
   },
   {
     q: "Do you build websites?",
@@ -176,18 +199,20 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 6. Solution types -->
+  <!-- 6. Ways we work -->
   <section class="solutions reveal">
     <div class="wrap">
-      <p class="kicker">What the fix might involve</p>
+      <p class="kicker">Three ways we work</p>
       <h2 class="section-title">The problem decides the solution.</h2>
-      <p class="section-lead">We do not start with a tool. Depending on what we find, the answer is one of these or a mix.</p>
-      <ul class="solutions-grid">
-        {solutions.map((s) => (
-          <li class="solution">
-            <h3>{s.name}</h3>
-            <p>{s.body}</p>
-            {s.href && <a href={s.href} class="text-link">Read more &rarr;</a>}
+      <p class="section-lead">We do not start with a tool. Depending on what we find, we work with you in one of three ways.</p>
+      <ul class="offerings">
+        {offerings.map((o) => (
+          <li class={`offering offering-${o.key}`}>
+            <p class="offering-tag">{o.tag}</p>
+            <h3>{o.name}</h3>
+            {o.lead && <p class="offering-lead">{o.lead}</p>}
+            <p>{o.body}</p>
+            <a href={o.href} class="offering-link">{o.cta} &rarr;</a>
           </li>
         ))}
       </ul>
@@ -632,18 +657,20 @@ const faqs = [
 
   .accountable p { max-width: 62ch; font-size: 1.0625rem; margin-bottom: var(--space-2); }
 
-  /* 6. Solutions */
+  /* 6. Ways we work */
   .solutions { background: var(--color-warm-white-alt); }
 
-  .solutions-grid {
+  .offerings {
     list-style: none;
     margin-top: var(--space-5);
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--space-3);
   }
 
-  .solution {
+  .offering {
+    display: flex;
+    flex-direction: column;
     background: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
@@ -651,15 +678,57 @@ const faqs = [
     box-shadow: var(--shadow-sm);
   }
 
-  .solution h3 {
+  .offering-systems { border-top: 4px solid var(--color-teal); box-shadow: var(--shadow-md); }
+
+  .offering-concierge {
+    background: var(--color-navy);
+    border-color: var(--color-navy);
+    color: var(--color-ink-on-dark);
+  }
+
+  .offering-tag {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    margin-bottom: var(--space-1);
+  }
+
+  .offering-concierge .offering-tag { color: var(--color-teal-light); }
+
+  .offering h3 {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
-    font-size: 1.125rem;
+    font-size: 1.25rem;
+    letter-spacing: var(--tracking-heading);
     color: var(--color-navy);
     margin-bottom: var(--space-1);
   }
 
-  .solution p { font-size: 1rem; line-height: 1.55; color: var(--color-text); margin-bottom: var(--space-1); }
+  .offering-concierge h3 { color: var(--color-white); }
+
+  .offering-lead {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    color: var(--color-teal-light);
+    margin-bottom: var(--space-1);
+  }
+
+  .offering p:not(.offering-tag):not(.offering-lead) { font-size: 1rem; line-height: 1.55; margin-bottom: var(--space-2); }
+
+  .offering-link {
+    margin-top: auto;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    color: var(--color-deep-teal);
+  }
+
+  .offering-link:hover { text-decoration: underline; }
+  .offering-concierge .offering-link { color: var(--color-white); }
+  .offering-concierge .offering-link:hover { color: var(--color-teal-light); }
 
   /* 7. Industries */
   .industries { background: var(--color-warm-white); padding: var(--space-8) 0; }
@@ -809,7 +878,7 @@ const faqs = [
     .hero-visual { max-width: 460px; }
 
     .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .solutions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .offerings { grid-template-columns: 1fr; }
     .cost-grid { grid-template-columns: 1fr; gap: var(--space-3); }
   }
 
@@ -828,7 +897,7 @@ const faqs = [
 
     .hero-cta { width: 100%; text-align: center; }
 
-    .steps, .solutions-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
 
     .accountable { padding: var(--space-3); grid-template-columns: 1fr; gap: var(--space-3); }
   }

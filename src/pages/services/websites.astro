@@ -1,0 +1,150 @@
+---
+import Base from '../../layouts/Base.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import CTAStrip from '../../components/CTAStrip.astro';
+
+const problems = [
+  "Visitors cannot tell what you do or whether you cover their area.",
+  "On a phone, the number is hard to find and the form is hard to use.",
+  "An enquiry arrives and sits, because nobody owns the first reply.",
+  "The site looks fine and tells you nothing about which enquiries turn into work.",
+];
+
+const included = [
+  { title: "Design and build", body: "A custom site, built to load quickly and work properly on a phone first." },
+  { title: "Clear service and area pages", body: "Pages that say what you do, who it is for, and where you work, in plain language." },
+  { title: "Lead capture that gets handled", body: "Forms, call buttons, and booking links wired to a first reply and a follow-up, not to an inbox." },
+  { title: "Search basics done properly", body: "Page structure, titles, and local business information set up correctly. No ranking promises." },
+  { title: "Redesigns", body: "A rebuild of an existing site, keeping what already works and fixing what does not." },
+  { title: "Ongoing support", body: "Updates and changes after launch, as agreed." },
+];
+
+const steps = [
+  { title: "Listen", body: "What you do, who you want more of, and what happens today when someone gets in touch." },
+  { title: "Plan", body: "The pages, the message, and the path from a visitor to a conversation." },
+  { title: "Build", body: "Design and development, with a working version for you to react to before launch." },
+  { title: "Launch and support", body: "Go live, check that enquiries arrive and get answered, and keep it working." },
+];
+---
+
+<Base>
+  <ServiceHero
+    eyebrow="Website development"
+    headline="A website that attracts the right customers and handles what comes in."
+    sub="For businesses that need their site to bring in work and capture enquiries properly. We design it around what happens after someone gets in touch, not only how it looks."
+    primaryText="Book a 30-minute call"
+    primaryHref="/contact"
+  />
+
+  <section class="sx-section reveal">
+    <div class="sx-wrap">
+      <p class="sx-kicker">The situation</p>
+      <h2 class="sx-title">A site can look right and still cost you work.</h2>
+      <ul class="problems">
+        {problems.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sx-section sx-section-alt reveal">
+    <div class="sx-wrap">
+      <p class="sx-kicker">What is included</p>
+      <h2 class="sx-title">Built for the way service businesses win work.</h2>
+      <ul class="included">
+        {included.map((i) => (
+          <li class="sx-card">
+            <h3>{i.title}</h3>
+            <p>{i.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sx-section reveal">
+    <div class="sx-wrap">
+      <p class="sx-kicker">How it works</p>
+      <h2 class="sx-title">Four steps, with something to look at before launch.</h2>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li>
+            <span class="step-num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sx-section sx-section-alt reveal">
+    <div class="sx-wrap-narrow">
+      <p class="sx-kicker">Connected to the rest of the business</p>
+      <h2 class="sx-title">The site is the front door. We care what happens behind it.</h2>
+      <p class="sx-lead">If enquiries need a faster first reply, a follow-up that does not depend on memory, or a way to see what turned into work, that is the part of the business we are best at. Many website projects lead to a look at <a class="sx-link" href="/services">how the business runs</a>, and some do not need one.</p>
+      <p class="sx-lead">If you would rather start by getting more from the way you use AI day to day, see <a class="sx-link" href="/services/ai-concierge">AI Concierge</a>.</p>
+    </div>
+  </section>
+
+  <CTAStrip
+    headline="Want to talk through what your website should be doing?"
+    buttonText="Book a 30-minute call"
+    buttonHref="/contact"
+  />
+</Base>
+
+<style>
+  .problems {
+    list-style: none;
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--space-5);
+  }
+
+  .problems li {
+    font-size: 1.125rem;
+    line-height: 1.55;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .included {
+    list-style: none;
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .steps {
+    list-style: none;
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .steps li { border-top: 1px solid var(--color-border); padding-top: var(--space-2); }
+
+  .step-num { display: block; font-weight: 600; font-size: 2.5rem; line-height: 1; color: var(--color-teal); margin-bottom: var(--space-1); }
+
+  .steps h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .steps p { font-size: 1rem; line-height: 1.55; }
+
+  @media (max-width: 960px) {
+    .included { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 640px) {
+    .problems, .included, .steps { grid-template-columns: 1fr; }
+  }
+</style>

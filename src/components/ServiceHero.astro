@@ -1,0 +1,95 @@
+---
+// Navy hero for service pages. Wraps the shared Hero backdrop and divider.
+import Hero from './Hero.astro';
+interface Props {
+  eyebrow: string;
+  headline: string;
+  sub: string;
+  primaryText?: string;
+  primaryHref?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
+}
+const { eyebrow, headline, sub, primaryText, primaryHref = '/contact', secondaryText, secondaryHref } = Astro.props;
+---
+
+<Hero compact wide>
+  <p class="sh-eyebrow">{eyebrow}</p>
+  <h1 class="sh-headline">{headline}</h1>
+  <p class="sh-sub">{sub}</p>
+  {primaryText && (
+    <div class="sh-ctas">
+      <a href={primaryHref} class="sh-cta">{primaryText}</a>
+      {secondaryText && secondaryHref && <a href={secondaryHref} class="sh-cta-2">{secondaryText}</a>}
+    </div>
+  )}
+</Hero>
+
+<style>
+  .sh-eyebrow {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-teal-light);
+    margin-bottom: var(--space-2);
+  }
+
+  .sh-headline {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+    line-height: 1.08;
+    letter-spacing: var(--tracking-display);
+    color: var(--color-white);
+    max-width: 20ch;
+  }
+
+  .sh-sub {
+    font-size: var(--text-lead);
+    color: var(--color-ink-on-dark);
+    line-height: 1.6;
+    margin-top: var(--space-3);
+    max-width: 40em;
+  }
+
+  .sh-ctas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .sh-cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: 15px 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    transition: background 200ms var(--ease), transform 200ms var(--ease);
+  }
+
+  .sh-cta:hover { background: var(--color-deep-teal); color: var(--color-white); transform: var(--lift); }
+  .sh-cta:focus-visible, .sh-cta-2:focus-visible { outline: 3px solid var(--color-teal-light); outline-offset: 3px; }
+
+  .sh-cta-2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .sh-cta-2:hover { color: var(--color-white); text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .sh-cta { width: 100%; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sh-cta { transition: none; }
+  }
+</style>

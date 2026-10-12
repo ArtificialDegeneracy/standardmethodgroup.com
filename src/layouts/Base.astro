@@ -14,15 +14,19 @@ import { ClientRouter } from 'astro:transitions';
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
+  canonical?: string;
 }
 
 const pathname = new URL(Astro.request.url).pathname;
 const slug = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
-// Canonical uses the trailing-slash form GitHub Pages actually serves and the sitemap lists.
-const canonicalUrl = `https://standardmethodgroup.com${slug === '/' ? '/' : slug + '/'}`;
 const seo = seoData[slug as keyof typeof seoData] || seoData['/'];
 
-const { title = seo.title, description = seo.description } = Astro.props;
+const { title = seo.title, description = seo.description, noindex = false, canonical } = Astro.props;
+
+// Canonical uses the trailing-slash form GitHub Pages actually serves and the sitemap lists.
+// A page may override it (the call-coverage transition page points to /services/).
+const canonicalUrl = canonical ?? `https://standardmethodgroup.com${slug === '/' ? '/' : slug + '/'}`;
 ---
 
 <!doctype html>
@@ -33,6 +37,7 @@ const { title = seo.title, description = seo.description } = Astro.props;
     <title>{title}</title>
     <ClientRouter />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="google-site-verification" content="OH-azt8fLg0sVENJiaPNK2-s89K1ZcXwdpfcgQdOJKQ" />
     <link rel="canonical" href={canonicalUrl} />
 

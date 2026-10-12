@@ -1,13 +1,14 @@
 ---
 const currentPath = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
 
+// "Work" joins this list once there is approved case-study content to show.
 const navLinks = [
+  { label: 'Services', href: '/services' },
   { label: 'How We Work', href: '/how-we-work' },
-  { label: 'Who We Help', href: '/who-we-help' },
-  { label: 'Never Miss a Call', href: '/never-miss-a-call' },
+  { label: 'Industries', href: '/who-we-help' },
   { label: 'About', href: '/about' },
-  { label: 'Calculator', href: '/calculator' },
 ];
+const isActive = (href: string) => currentPath === href || currentPath.startsWith(href + '/');
 ---
 
 <header class="nav">
@@ -21,7 +22,7 @@ const navLinks = [
       {navLinks.map(link => (
         <a
           href={link.href}
-          class:list={['nav-link', { active: currentPath === link.href }]}
+          class:list={['nav-link', { active: isActive(link.href) }]}
         >
           {link.label}
         </a>
@@ -41,7 +42,7 @@ const navLinks = [
       {navLinks.map(link => (
         <a
           href={link.href}
-          class:list={['mobile-link', { active: currentPath === link.href }]}
+          class:list={['mobile-link', { active: isActive(link.href) }]}
         >
           {link.label}
         </a>

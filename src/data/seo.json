@@ -24,7 +24,19 @@
     "description": "See how much time and money your business spends on repetitive admin work, and what you could get back. Free calculator from Standard Method Group."
   },
   "/never-miss-a-call": {
-    "title": "Never Miss a Call | Call Coverage for Small Business | Standard Method Group",
-    "description": "Every call answered, every lead captured, every meeting booked, even when you can't pick up. Call coverage for Tampa Bay small businesses. Free 30-minute call."
+    "title": "Call Coverage | Standard Method Group",
+    "description": "Call coverage is one operational solution we may recommend. See how we start with the problem and choose the fix."
+  },
+  "/services": {
+    "title": "Services | Standard Method Group",
+    "description": "Business systems and process improvement, AI Concierge advisory, and website development for service businesses in Pinellas County. Start with the problem."
+  },
+  "/services/ai-concierge": {
+    "title": "AI Concierge for Business Owners | Standard Method Group",
+    "description": "Ongoing AI and automation advisory for business owners: an assessment, a 90-day roadmap, two working sessions a month, and hands-on help. Book a consultation."
+  },
+  "/services/websites": {
+    "title": "Website Development for Service Businesses | Standard Method Group",
+    "description": "Websites for local service businesses that attract the right customers and capture enquiries properly. Designed around what happens after someone gets in touch."
   }
 }

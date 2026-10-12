@@ -1,0 +1,234 @@
+---
+import Base from '../../layouts/Base.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import CTAStrip from '../../components/CTAStrip.astro';
+
+const situations = [
+  {
+    title: "Work gets dropped or runs late",
+    cost: "Hours every week, rework, and deadlines that slip.",
+    start: { label: "Business systems", href: "#business-systems" },
+  },
+  {
+    title: "Money is leaking",
+    cost: "Slow-paid invoices, undocumented change orders, and work that never gets billed.",
+    start: { label: "Business systems", href: "#business-systems" },
+  },
+  {
+    title: "Customers and enquiries slip away",
+    cost: "Jobs won by whoever answered first, and leads that go cold.",
+    start: { label: "Business systems", href: "#business-systems" },
+    also: { label: "or Website development, if the problem is how people find or reach you", href: "/services/websites" },
+  },
+  {
+    title: "The business depends on one person",
+    cost: "A ceiling on growth, and a problem the day that person is out.",
+    start: { label: "Business systems", href: "#business-systems" },
+  },
+  {
+    title: "You want to use AI and don't know where to start",
+    cost: "Time spent experimenting, tools nobody uses, and opportunities left sitting.",
+    start: { label: "AI Concierge", href: "/services/ai-concierge" },
+  },
+];
+
+const steps = [
+  "We talk for 30 minutes about how the business runs and where it is costing you.",
+  "We write down the problem, the measures, and where you are today, then show you a working example.",
+  "We build it, inside tools you already use where we can.",
+  "We stay on it and report each month against what we agreed.",
+];
+---
+
+<Base>
+  <ServiceHero
+    eyebrow="Services"
+    headline="Start with the problem. The right fix follows."
+    sub="Most businesses come to us because something costs them time, money, or growth, or because there is something they want to build and no time to start. We work out which, then recommend one of three ways to work together."
+    primaryText="Book a 30-minute call"
+    primaryHref="/contact"
+  />
+
+  <section class="sx-section reveal">
+    <div class="sx-wrap">
+      <p class="sx-kicker">What we are usually called about</p>
+      <h2 class="sx-title">Five situations, and where each one usually starts.</h2>
+      <ul class="situations">
+        {situations.map((s) => (
+          <li class="sx-card situation">
+            <h3>{s.title}</h3>
+            <p class="situation-cost">{s.cost}</p>
+            <p class="situation-start">
+              Usually starts with <a class="sx-link" href={s.start.href}>{s.start.label}</a>{s.also && <>, <a class="sx-link" href={s.also.href}>{s.also.label}</a></>}.
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sx-section sx-section-alt reveal" id="offerings">
+    <div class="sx-wrap">
+      <p class="sx-kicker">Three ways we work</p>
+      <h2 class="sx-title">The problem decides which one you need.</h2>
+
+      <article class="primary" id="business-systems">
+        <div class="primary-copy">
+          <p class="tag">Our primary service</p>
+          <h3>Business systems and process improvement</h3>
+          <p>We identify the operational problem, design the solution, and implement it. The fix might be a redesigned process, software doing the repetitive steps, systems connected so information is entered once, a purpose-built tool, call coverage, or a combination. We recommend call coverage when a client's needs justify it, and not otherwise.</p>
+          <p>We agree the measures first, record where you start, and report against them each month. We do not guarantee revenue or outcomes that depend on things outside our control.</p>
+          <p><a href="/contact" class="sx-btn">Book a 30-minute call</a></p>
+        </div>
+        <ol class="primary-steps">
+          {steps.map((t, i) => (
+            <li><span aria-hidden="true">{i + 1}</span>{t}</li>
+          ))}
+        </ol>
+      </article>
+
+      <div class="pair">
+        <article class="concierge">
+          <p class="tag tag-light">Ongoing advisory</p>
+          <h3>AI Concierge</h3>
+          <p class="concierge-line">Your AI partner. Without the full-time hire.</p>
+          <p>An ongoing relationship for business owners who want to adopt AI and automation and make measurable progress, without the time or expertise to work it all out alone. An assessment, a 90-day roadmap, two working sessions a month, and questions answered between them.</p>
+          <a href="/services/ai-concierge" class="concierge-link">See AI Concierge &rarr;</a>
+        </article>
+
+        <article class="sx-card web">
+          <p class="tag">Secondary service</p>
+          <h3>Website development</h3>
+          <p>A website that helps the right customers find you and captures their enquiry properly, designed around what happens after someone gets in touch.</p>
+          <a href="/services/websites" class="sx-link">See website development &rarr;</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sx-section reveal">
+    <div class="sx-wrap-narrow">
+      <p class="sx-kicker">Not sure which one</p>
+      <h2 class="sx-title">Describe what is going on and we will tell you.</h2>
+      <p class="sx-lead">The first conversation is free, takes 30 minutes, and ends with an honest recommendation, including when the answer is that you do not need us.</p>
+      <p class="cta-row"><a href="/contact" class="sx-btn">Book a 30-minute call</a></p>
+    </div>
+  </section>
+
+  <CTAStrip
+    headline="30 minutes. No pitch. Just a conversation about how your business runs."
+    buttonText="Book a 30-minute call"
+    buttonHref="/contact"
+  />
+</Base>
+
+<style>
+  .situations {
+    list-style: none;
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .situation { grid-column: span 2; }
+  .situation:nth-child(n + 4) { grid-column: span 3; }
+
+  .situation { display: flex; flex-direction: column; gap: var(--space-1); }
+  .situation h3 { margin-bottom: 0; }
+  .situation-cost { color: var(--color-text); }
+  .situation-start { margin-top: auto; padding-top: var(--space-1); font-size: 0.9375rem; color: var(--color-text-secondary); }
+
+  .tag {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    margin-bottom: var(--space-1);
+  }
+
+  .tag-light { color: var(--color-teal-light); }
+
+  .primary {
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: var(--space-5);
+    padding: var(--space-5);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-top: 4px solid var(--color-teal);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .primary h3,
+  .concierge h3,
+  .web h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+  }
+
+  .primary h3 { font-size: 1.75rem; margin-bottom: var(--space-2); }
+  .primary-copy p { margin-bottom: var(--space-2); max-width: 60ch; }
+
+  .primary-steps { list-style: none; border-left: 2px solid var(--color-border); padding-left: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); align-self: start; }
+  .primary-steps li { position: relative; font-size: 1rem; line-height: 1.5; }
+  .primary-steps span {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    color: var(--color-teal);
+    margin-right: var(--space-1);
+  }
+
+  .pair {
+    margin-top: var(--space-3);
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .concierge {
+    background: var(--color-navy);
+    color: var(--color-ink-on-dark);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-md);
+  }
+
+  .concierge h3 { color: var(--color-white); font-size: 1.5rem; }
+  .concierge-line { font-family: var(--font-heading); font-weight: var(--font-weight-heading-medium); color: var(--color-teal-light); margin: var(--space-1) 0 var(--space-2); }
+  .concierge p:not(.tag):not(.concierge-line) { margin-bottom: var(--space-3); }
+
+  .concierge-link {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    color: var(--color-white);
+    border-bottom: 1px solid var(--color-teal-light);
+  }
+
+  .concierge-link:hover { color: var(--color-teal-light); }
+
+  .web { padding: var(--space-5); display: flex; flex-direction: column; }
+  .web h3 { font-size: 1.25rem; margin-bottom: var(--space-1); }
+  .web p:not(.tag) { margin-bottom: var(--space-2); }
+  .web .sx-link { margin-top: auto; }
+
+  .cta-row { margin-top: var(--space-3); }
+
+  @media (max-width: 960px) {
+    .situations { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .situation, .situation:nth-child(n + 4) { grid-column: auto; }
+    .primary, .pair { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .situations { grid-template-columns: 1fr; }
+    .primary, .concierge, .web { padding: var(--space-3); }
+  }
+</style>

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "edge-marine-invoices",
+    "client": "Edge Marine Construction",
+    "location": "St. Petersburg, FL",
+    "type": "operations",
+    "result": "Overdue invoices that had been sitting for weeks were paid within the first month, because the follow-up went out on its own instead of waiting for someone to remember.",
+    "measure": null,
+    "evaluated_on": null,
+    "approved": false,
+    "approved_on": null
+  }
+]

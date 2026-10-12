@@ -1,4 +1,7 @@
 ---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/source-serif-4';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
 import seoData from '../data/seo.json';
@@ -15,6 +18,8 @@ interface Props {
 
 const pathname = new URL(Astro.request.url).pathname;
 const slug = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+// Canonical uses the trailing-slash form GitHub Pages actually serves and the sitemap lists.
+const canonicalUrl = `https://standardmethodgroup.com${slug === '/' ? '/' : slug + '/'}`;
 const seo = seoData[slug as keyof typeof seoData] || seoData['/'];
 
 const { title = seo.title, description = seo.description } = Astro.props;
@@ -29,12 +34,12 @@ const { title = seo.title, description = seo.description } = Astro.props;
     <ClientRouter />
     <meta name="description" content={description} />
     <meta name="google-site-verification" content="OH-azt8fLg0sVENJiaPNK2-s89K1ZcXwdpfcgQdOJKQ" />
-    <link rel="canonical" href={`https://standardmethodgroup.com${slug === '/' ? '' : slug}`} />
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={`https://standardmethodgroup.com${slug === '/' ? '' : slug}`} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://standardmethodgroup.com/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />

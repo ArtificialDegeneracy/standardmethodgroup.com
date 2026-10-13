@@ -4,46 +4,54 @@ import ServiceHero from '../../components/ServiceHero.astro';
 import CycleDiagram from '../../components/CycleDiagram.astro';
 import CTAStrip from '../../components/CTAStrip.astro';
 
-// Four reasons to buy. The full list of deliverables sits in the scope section below.
+// Four reasons to buy, each with the specifics underneath.
 const benefits = [
   {
     title: "Know where to start",
-    body: "We assess your business, identify practical opportunities for AI and automation, and build a prioritized 90-day roadmap.",
+    body: "A required assessment looks at your business, your goals, and the tools you already use. It ends with a personalized 90-day roadmap: the opportunities worth pursuing, in the order that makes sense.",
+    details: [
+      "Business and AI opportunity assessment",
+      "A personalized roadmap that is yours to keep",
+    ],
   },
   {
     title: "Make real progress",
-    body: "Two 45-minute working sessions each month, with practical guidance and hands-on help putting improvements in place.",
+    body: "Two 45-minute working sessions every month. We review priorities, work through the next challenge together, make practical progress where we can, and agree what happens next.",
+    details: [
+      "Six working sessions in your first 90 days",
+      "Small improvements alongside you, such as refining AI workflows, improving prompts, and configuring straightforward tools",
+    ],
   },
   {
     title: "Have someone to ask",
-    body: "A designated messaging channel for questions, ideas, and guidance between sessions. Initial response within two business days.",
+    body: "Ongoing advisory access between sessions. Reach out through your dedicated communication channel and receive an initial substantive response within two business days.",
+    details: [
+      "Guidance on the tools you use or are weighing, including ChatGPT, Claude, and Claude Skills",
+    ],
   },
   {
-    title: "Know what's improving",
-    body: "We keep the roadmap current, review progress, track measurable improvements where possible, and set the next priorities.",
+    title: "Know what's improving. Know what's next.",
+    body: "We keep the roadmap current as priorities change, and each month you get a short written summary: what was done, what is underway, what has measurably improved, and what comes next.",
+    details: [
+      "Where practical, we record a starting point so you can see the change",
+    ],
   },
 ];
 
-const phases = [
-  { title: "Assess", body: "The business, your goals, the tools you already have, and where the opportunities are." },
-  { title: "Build a roadmap", body: "A prioritized 90-day plan, with the first moves chosen for how much they help and how hard they are." },
-  { title: "Work together", body: "Monthly working sessions and ongoing advisory support, with the roadmap adjusted as we learn." },
-  { title: "Evaluate", body: "We review progress, document results, and set the next priorities." },
+const months = [
+  { title: "Month 1: assess and plan", body: "The assessment, your priorities, and your personalized 90-day roadmap, followed by the first practical work." },
+  { title: "Month 2: make progress", body: "We work through the priorities together and make practical progress on them." },
+  { title: "Month 3: review and look ahead", body: "We continue the work, review what has improved, and establish the next priorities." },
+  { title: "Then the next 90 days", body: "The roadmap is updated and the relationship continues month to month." },
 ];
 
-const everything = [
-  "Business and AI readiness assessment",
-  "Personalized, prioritized 90-day roadmap",
-  "Two 45-minute working sessions per month",
-  "Unlimited reasonable questions through a designated messaging channel, first response within two business days",
-  "Ongoing roadmap management and prioritization",
-  "Monthly progress report: completed work, current initiatives, results where measurable, next steps",
-  "Practical guidance and hands-on help with AI tools, Claude Skills, ChatGPT, automation, forms, documents, custom applications, software integrations, and process improvements",
-  "Small improvements completed during working sessions or as agreed",
+const included = [
+  "Practical guidance on AI tools, automation, forms, documents, custom applications, and software integrations: what to use, how to approach it, and what is worth doing.",
+  "Limited-scope improvements made with you, such as refining AI workflows, improving prompts, configuring straightforward tools, reviewing automation logic, and troubleshooting existing processes.",
 ];
 
 const scopedSeparately = [
-  "Larger applications",
+  "Larger development projects and custom applications",
   "Production integrations",
   "Substantial automation builds",
   "Ongoing technical maintenance",
@@ -51,10 +59,11 @@ const scopedSeparately = [
 
 const faqs = [
   { q: "Do I need to know anything technical?", a: "No. You need to know your business. We bring the tools and the judgment about what is worth doing." },
-  { q: "Is this just lessons in how to use ChatGPT?", a: "No. Tool guidance is part of it, but the point is a prioritized roadmap and measurable progress against your business goals, with a report each month." },
-  { q: "What if I need something built?", a: "Small improvements can be done in working sessions or as agreed. Anything larger is scoped separately, and you approve the scope before any work starts." },
-  { q: "How fast will you reply?", a: "An initial response within two business days, through a messaging channel we set up together." },
-  { q: "What does it cost?", a: "We discuss fit and pricing on the consultation call, once we understand what you need." },
+  { q: "How is this different from using ChatGPT or Claude myself?", a: "ChatGPT and Claude are good tools, and we use them. What the relationship adds is someone who knows your business, helps decide what is worth doing first, sets it up around how you work, and checks back to see that it stuck." },
+  { q: "What happens in a working session?", a: "We review your priorities, work through the next challenge together, make practical progress where we can, and agree what happens next." },
+  { q: "What if I need something built?", a: "Small improvements happen in your sessions. Larger solutions are scoped separately. We design and implement them directly, with specialist support where it helps, and you approve the scope before work starts." },
+  { q: "Do I have to commit to 90 days?", a: "No. You can start month to month with a one-time assessment fee. The 90-day start includes the assessment at no additional charge. The ongoing service is the same either way." },
+  { q: "What does it cost?", a: "Pricing depends on how you start. It is shared on your call and confirmed in writing before anything begins." },
 ];
 ---
 
@@ -62,11 +71,12 @@ const faqs = [
   <ServiceHero
     eyebrow="AI Concierge"
     headline="Your AI partner. Without the full-time hire."
-    sub="An ongoing advisory relationship for business owners who want to adopt AI, improve how the business runs, and build practical solutions, but do not have the time or expertise to work it all out alone."
-    primaryText="Book a consultation"
+    sub="An ongoing partnership to help you find where AI and automation make sense, turn opportunities into practical improvements, and keep moving forward. Built for business owners who want to make better use of technology without having to figure out every step themselves."
+    primaryText="Book a 30-minute call"
     primaryHref="/contact"
-    secondaryText="See the first 90 days &darr;"
+    secondaryText="See how the first 90 days work &darr;"
     secondaryHref="#ninety"
+    note="30 minutes. No pitch, no obligation."
   />
 
   <!-- The situation: one large statement, supporting text beside it -->
@@ -74,8 +84,8 @@ const faqs = [
     <div class="sx-wrap situation-grid">
       <h2 class="statement">You know it could help. You do not have time to work out where.</h2>
       <div class="situation-text">
-        <p>The tools change every month, and every vendor says theirs will save you hours. Someone still has to decide what is worth doing first, set it up properly, and check that it worked. That is the job here.</p>
-        <p>It is a practical, ongoing relationship focused on measurable progress. It is not a generic AI coaching subscription.</p>
+        <p>The tools change every month, and every vendor says theirs will save you hours. Someone still has to decide what is worth doing first, set it up properly, and check that it worked.</p>
+        <p>Maybe you have already tried ChatGPT or an automation tool and it never became part of how the business runs. That is rarely a software problem. It is a question of what to do first, and who follows through.</p>
       </div>
     </div>
   </section>
@@ -86,7 +96,6 @@ const faqs = [
       <div class="benefits-head">
         <p class="sx-kicker">What you get</p>
         <h2 class="sx-title">An assessment, a roadmap, and a partner who stays on it.</h2>
-        <p class="sx-lead">Four reasons owners bring us in.</p>
       </div>
       <ol class="chain">
         {benefits.map((b, i) => (
@@ -94,25 +103,28 @@ const faqs = [
             <span class="chain-node" aria-hidden="true">{i + 1}</span>
             <h3>{b.title}</h3>
             <p>{b.body}</p>
+            <ul class="details">
+              {b.details.map((d) => <li>{d}</li>)}
+            </ul>
           </li>
         ))}
       </ol>
     </div>
   </section>
 
-  <!-- 90 days: steps beside the diagram -->
+  <!-- 90 days: months beside the diagram -->
   <section class="sx-section ninety reveal" id="ninety">
     <div class="sx-wrap">
       <p class="sx-kicker">How it works</p>
       <h2 class="sx-title">The first 90 days, and then the next.</h2>
       <div class="ninety-grid">
         <ol class="phases">
-          {phases.map((p, i) => (
+          {months.map((m, i) => (
             <li>
               <span class="phase-num" aria-hidden="true">{i + 1}</span>
               <div>
-                <h3>{p.title}</h3>
-                <p>{p.body}</p>
+                <h3>{m.title}</h3>
+                <p>{m.body}</p>
               </div>
             </li>
           ))}
@@ -122,16 +134,49 @@ const faqs = [
     </div>
   </section>
 
-  <!-- Scope: everything included, and what is scoped separately -->
-  <section class="sx-section sx-section-alt scope reveal">
+  <!-- Two ways to begin -->
+  <section class="sx-section sx-section-alt begin reveal">
     <div class="sx-wrap">
-      <p class="sx-kicker">What is and is not included</p>
-      <h2 class="sx-title">Expertise and guidance, not unlimited development.</h2>
+      <p class="sx-kicker">How to begin</p>
+      <h2 class="sx-title">Two ways to begin. The same relationship either way.</h2>
+      <p class="sx-lead">Every engagement starts with an assessment, because the roadmap needs it. How you start is up to you.</p>
+
+      <div class="begin-grid">
+        <article class="option option-a">
+          <p class="option-tag">Recommended starting point</p>
+          <h3>Start with 90 days</h3>
+          <p>The assessment is included at no additional charge, in your first month. You commit to three monthly billing periods, the length of your first roadmap, then continue month to month. The commitment is set out in a written agreement.</p>
+        </article>
+        <article class="option option-b">
+          <p class="option-tag option-tag-quiet">Flexible</p>
+          <h3>Month to month</h3>
+          <p>You pay a one-time assessment fee, then continue month to month from the start, with no initial commitment.</p>
+        </article>
+      </div>
+
+      <div class="either">
+        <p class="either-label">Either way you receive</p>
+        <ul>
+          <li>Two 45-minute working sessions each month</li>
+          <li>Ongoing advisory access between sessions</li>
+          <li>Monthly progress reporting</li>
+          <li>Your assessment and roadmap, yours to keep</li>
+        </ul>
+        <p class="either-note">Pricing is shared on your call and confirmed in writing before you begin.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scope -->
+  <section class="sx-section scope reveal">
+    <div class="sx-wrap">
+      <p class="sx-kicker">Scope</p>
+      <h2 class="sx-title">Practical help every month. Clear scope when you need more.</h2>
       <div class="scope-grid">
         <div class="scope-in">
-          <h3>Everything in the monthly relationship</h3>
+          <h3>Practical help, included</h3>
           <ul>
-            {everything.map((t) => <li>{t}</li>)}
+            {included.map((t) => <li>{t}</li>)}
           </ul>
         </div>
         <div class="scope-out">
@@ -139,25 +184,13 @@ const faqs = [
           <ul>
             {scopedSeparately.map((t) => <li>{t}</li>)}
           </ul>
-          <p>When something needs a larger build, we scope it, price it, and you approve it before any work starts.</p>
+          <p>We can design and implement these directly, with specialist support where it helps. Each gets its own scope, price, and approval before any work starts.</p>
         </div>
       </div>
-      <p class="scope-note">You are buying ongoing expertise, guidance, prioritization, and practical assistance. You are not buying unlimited development capacity.</p>
     </div>
   </section>
 
-  <!-- Progress: a distinct band -->
-  <section class="progress reveal">
-    <div class="sx-wrap progress-grid">
-      <div>
-        <p class="progress-kicker">Progress you can check</p>
-        <h2>Each month ends with a written report.</h2>
-      </div>
-      <p>It covers completed work, current initiatives, results where they can be measured, and next steps. Where practical we record a starting point first, so the result can be checked. We report honestly on what did not move, and we do not promise outcomes that depend on things outside our control.</p>
-    </div>
-  </section>
-
-  <section class="sx-section reveal">
+  <section class="sx-section sx-section-alt reveal">
     <div class="sx-wrap faq-grid">
       <h2 class="sx-title">Questions owners ask</h2>
       <div class="faq">
@@ -172,9 +205,12 @@ const faqs = [
   </section>
 
   <CTAStrip
-    headline="Start with a conversation about where AI could help your business."
-    buttonText="Book a consultation"
+    headline="Start with a 30-minute conversation about where AI could help your business."
+    sub="We will talk through how the business runs, where the opportunities might be, and how the engagement works. It is an introduction, not the assessment."
+    steps={["A free 30-minute call", "You choose how to begin", "Your assessment and 90-day roadmap"]}
+    buttonText="Book a 30-minute call"
     buttonHref="/contact"
+    note="30 minutes. No pitch, no obligation."
   />
 </Base>
 
@@ -200,7 +236,7 @@ const faqs = [
   }
 
   .situation-text { padding-top: var(--space-1); }
-  .situation-text p { font-size: var(--text-lead); color: var(--color-text-secondary); margin-bottom: var(--space-3); }
+  .situation-text p { font-size: var(--text-lead); color: var(--color-text-secondary); margin-bottom: var(--space-3); text-wrap: pretty; }
 
   /* Benefits as a connected chain */
   .benefits-grid {
@@ -210,17 +246,11 @@ const faqs = [
     align-items: start;
   }
 
-  .chain {
-    list-style: none;
-    position: relative;
-    padding-left: 72px;
-  }
-
+  .chain { list-style: none; position: relative; padding-left: 72px; }
   .chain li { position: relative; padding-bottom: var(--space-5); }
-  .chain li:last-child { padding-bottom: 0; }
+  .chain > li:last-child { padding-bottom: 0; }
 
-  /* Connector from each node down to the next */
-  .chain li:not(:last-child)::before {
+  .chain > li:not(:last-child)::before {
     content: '';
     position: absolute;
     left: -51px;
@@ -260,7 +290,32 @@ const faqs = [
     margin-bottom: var(--space-1);
   }
 
-  .chain p { font-size: 1.1875rem; line-height: 1.55; max-width: 46ch; }
+  .chain > li > p { font-size: 1.1875rem; line-height: 1.55; max-width: 48ch; text-wrap: pretty; }
+
+  .details {
+    list-style: none;
+    margin-top: var(--space-2);
+    max-width: 48ch;
+  }
+
+  .details li {
+    position: relative;
+    padding: 0 0 0 var(--space-3);
+    margin-bottom: 6px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+  }
+
+  .details li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 10px;
+    height: 2px;
+    background: var(--color-teal);
+  }
 
   /* 90 days */
   .ninety-grid {
@@ -293,12 +348,101 @@ const faqs = [
 
   .phases p { font-size: 1rem; line-height: 1.5; }
 
+  /* Two ways to begin */
+  .begin-grid {
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: stretch;
+  }
+
+  .option {
+    padding: 32px 32px;
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-navy);
+    border-radius: var(--radius-lg);
+    background: transparent;
+  }
+
+  .option-a {
+    background: var(--color-white);
+    border-color: rgba(42, 125, 110, 0.4);
+    border-top: 5px solid var(--color-teal);
+    box-shadow: var(--shadow-md);
+    padding: calc(var(--space-5)) var(--space-5);
+  }
+
+  .option h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.375rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .option-a h3 { font-size: 1.625rem; }
+  .option p:not(.option-tag) { font-size: 1.0625rem; line-height: 1.55; }
+
+  .option-tag {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    margin-bottom: var(--space-1);
+  }
+
+  .option-tag-quiet { color: var(--color-text-secondary); }
+
+  .either {
+    margin-top: var(--space-5);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .either-label {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 0.9375rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .either ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-1) 32px;
+    max-width: 760px;
+  }
+
+  .either li {
+    position: relative;
+    padding-left: var(--space-3);
+    font-size: 1.0625rem;
+  }
+
+  .either li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 10px;
+    height: 2px;
+    background: var(--color-teal);
+  }
+
+  .either-note { margin-top: var(--space-2); color: var(--color-text-secondary); font-size: 1rem; }
+
   /* Scope */
   .scope-grid {
     margin-top: var(--space-5);
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: var(--space-5);
+    gap: var(--space-8);
   }
 
   .scope h3 {
@@ -315,56 +459,15 @@ const faqs = [
   .scope ul { list-style: none; }
 
   .scope li {
-    padding: var(--space-1) 0;
+    padding: var(--space-2) 0;
     border-bottom: 1px solid var(--color-border);
-    font-size: 1.0625rem;
-    line-height: 1.5;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    text-wrap: pretty;
   }
 
   .scope li:last-child { border-bottom: none; }
   .scope-out p { margin-top: var(--space-2); color: var(--color-text-secondary); }
-
-  .scope-note {
-    margin-top: var(--space-5);
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading-medium);
-    font-size: 1.375rem;
-    line-height: 1.35;
-    letter-spacing: var(--tracking-heading);
-    color: var(--color-navy);
-    max-width: 38ch;
-  }
-
-  /* Progress band */
-  .progress { background: var(--color-deep-teal); padding: var(--space-12) 0; }
-
-  .progress-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: var(--space-8);
-    align-items: start;
-  }
-
-  .progress-kicker {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading-medium);
-    font-size: var(--text-eyebrow);
-    letter-spacing: var(--tracking-eyebrow);
-    text-transform: uppercase;
-    color: #BFE9E0;
-    margin-bottom: var(--space-2);
-  }
-
-  .progress h2 {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: var(--text-h2);
-    letter-spacing: var(--tracking-heading);
-    line-height: 1.15;
-    color: var(--color-white);
-  }
-
-  .progress-grid > p { font-size: var(--text-lead); color: rgba(255, 255, 255, 0.9); max-width: 52ch; }
 
   /* FAQ */
   .faq-grid {
@@ -408,22 +511,23 @@ const faqs = [
   .faq-item[open] .faq-icon::after { transform: rotate(90deg); opacity: 0; }
 
   @media (max-width: 960px) {
-    .situation-grid, .benefits-grid, .ninety-grid, .scope-grid, .progress-grid, .faq-grid {
+    .situation-grid, .benefits-grid, .ninety-grid, .begin-grid, .scope-grid, .faq-grid {
       grid-template-columns: 1fr;
       gap: var(--space-5);
     }
 
     .situation { padding: var(--space-8) 0; }
-    .progress { padding: var(--space-8) 0; }
     .statement { max-width: 18ch; }
+    .option, .option-a { padding: var(--space-3); }
+    .either ul { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
     .chain { padding-left: 60px; }
     .chain-node { left: -60px; width: 40px; height: 40px; }
-    .chain li:not(:last-child)::before { left: -41px; top: 40px; }
+    .chain > li:not(:last-child)::before { left: -41px; top: 40px; }
     .chain h3 { font-size: 1.375rem; }
-    .chain p { font-size: 1.0625rem; }
+    .chain > li > p { font-size: 1.0625rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {

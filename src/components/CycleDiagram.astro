@@ -7,7 +7,7 @@ interface Props {
   idPrefix?: string;
 }
 const {
-  caption = 'Every 90 days: assess, prioritize, work together, evaluate, then set the next priorities.',
+  caption = 'Your assessment and roadmap come together in month one. Every 90 days: review progress, update the roadmap, and set the next priorities.',
   idPrefix = 'cycle',
 } = Astro.props;
 const p = idPrefix;
@@ -59,7 +59,7 @@ const narrowMonths = [0, 94, 188];
 
       <g class="fade" style="--d:1.2s">
         <rect class="band" x="132" y="272" width="428" height="32" rx="6" />
-        <text class="t-band" x="346" y="288" text-anchor="middle" dominant-baseline="central">Between sessions: questions answered within two business days</text>
+        <text class="t-band" x="346" y="288" text-anchor="middle" dominant-baseline="central">Between sessions: initial substantive response within two business days</text>
       </g>
     </svg>
 
@@ -107,8 +107,8 @@ const narrowMonths = [0, 94, 188];
       </g>
       <g class="fade" style="--d:1.2s">
         <rect class="band" x="0" y="312" width="270" height="48" rx="6" />
-        <text class="t-band" x="135" y="329" text-anchor="middle" dominant-baseline="central">Between sessions, questions answered</text>
-        <text class="t-band" x="135" y="347" text-anchor="middle" dominant-baseline="central">within two business days</text>
+        <text class="t-band" x="135" y="329" text-anchor="middle" dominant-baseline="central">Between sessions, an initial substantive</text>
+        <text class="t-band" x="135" y="347" text-anchor="middle" dominant-baseline="central">response within two business days</text>
       </g>
     </svg>
   </div>
@@ -150,9 +150,9 @@ const narrowMonths = [0, 94, 188];
   .focus { stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
 
   .t-main { font-family: var(--font-heading); font-weight: 600; font-size: 14px; fill: var(--color-white); }
-  .t-sub { font-family: var(--font-heading); font-size: 11.5px; fill: rgba(255, 255, 255, 0.72); }
+  .t-sub { font-family: var(--font-heading); font-size: 11px; fill: rgba(255, 255, 255, 0.72); }
   .t-on-focus { fill: var(--color-white); }
-  .t-band { font-family: var(--font-heading); font-size: 12px; fill: rgba(255, 255, 255, 0.88); }
+  .t-band { font-family: var(--font-heading); font-size: 11.5px; fill: rgba(255, 255, 255, 0.88); }
   .t-loop { font-family: var(--font-heading); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; fill: rgba(255, 255, 255, 0.56); }
   .t-c { font-size: 13px; }
 

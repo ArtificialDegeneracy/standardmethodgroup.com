@@ -4,6 +4,8 @@ interface Props {
   buttonText?: string;
   buttonHref?: string;
   note?: string;
+  sub?: string;
+  steps?: string[];
 }
 
 const {
@@ -11,6 +13,8 @@ const {
   buttonText = 'Book a discovery call',
   buttonHref = '/contact',
   note,
+  sub,
+  steps,
 } = Astro.props;
 ---
 
@@ -18,6 +22,12 @@ const {
   <div class="cta-texture" aria-hidden="true"></div>
   <div class="cta-inner">
     <h2 class="cta-headline">{headline}</h2>
+    {sub && <p class="cta-sub">{sub}</p>}
+    {steps && (
+      <ol class="cta-steps">
+        {steps.map((t, i) => <li><span aria-hidden="true">{i + 1}</span>{t}</li>)}
+      </ol>
+    )}
     <a href={buttonHref} class="cta-button">{buttonText}</a>
     {note && <p class="cta-note">{note}</p>}
   </div>
@@ -87,6 +97,33 @@ const {
   .cta-button:focus-visible {
     outline: 3px solid var(--color-teal-light);
     outline-offset: 2px;
+  }
+
+  .cta-sub {
+    font-size: 1.0625rem;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 52ch;
+    margin-top: calc(var(--space-1) * -1);
+  }
+
+  .cta-steps {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-1) 32px;
+  }
+
+  .cta-steps li {
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.86);
+  }
+
+  .cta-steps span {
+    color: var(--color-teal-light);
+    font-weight: var(--font-weight-heading);
+    margin-right: 8px;
   }
 
   .cta-note {

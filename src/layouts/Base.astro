@@ -2,6 +2,8 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/source-serif-4';
 import '@fontsource-variable/source-serif-4/wght-italic.css';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import serifLatin from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url';
 import '../styles/tokens.css';
 import '../styles/global.css';
 import seoData from '../data/seo.json';
@@ -35,6 +37,8 @@ const canonicalUrl = canonical ?? `https://standardmethodgroup.com${slug === '/'
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <link rel="preload" as="font" type="font/woff2" href={interLatin} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={serifLatin} crossorigin />
     <ClientRouter />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, follow" />}

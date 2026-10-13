@@ -1,0 +1,94 @@
+---
+// Desktop + phone composition of real site screenshots. No browser chrome.
+// Images live in src/assets/work/ and are referenced by file name (without extension).
+import { Image } from 'astro:assets';
+
+interface Props {
+  desktop: string;
+  mobile: string;
+  desktopAlt: string;
+  mobileAlt: string;
+  priority?: boolean;
+  dark?: boolean;
+}
+
+const { desktop, mobile, desktopAlt, mobileAlt, priority = false, dark = true } = Astro.props;
+const files = import.meta.glob('../assets/work/*.webp', { eager: true }) as Record<string, { default: ImageMetadata }>;
+const get = (name: string) => {
+  const hit = files[`../assets/work/${name}.webp`];
+  if (!hit) throw new Error(`Missing image: src/assets/work/${name}.webp`);
+  return hit.default;
+};
+---
+
+<div class:list={['comp', { 'comp-dark': dark }]}>
+  <div class="screen">
+    <Image
+      src={get(desktop)}
+      alt={desktopAlt}
+      widths={[560, 800, 1120, 1400]}
+      sizes="(max-width: 960px) 92vw, 680px"
+      format="webp"
+      quality={82}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : 'auto'}
+      decoding={priority ? 'sync' : 'async'}
+    />
+  </div>
+  <div class="phone">
+    <Image
+      src={get(mobile)}
+      alt={mobileAlt}
+      widths={[160, 240, 320]}
+      sizes="(max-width: 600px) 34vw, 170px"
+      format="webp"
+      quality={82}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding={priority ? 'sync' : 'async'}
+    />
+  </div>
+</div>
+
+<style>
+  .comp {
+    position: relative;
+    padding-bottom: 56px;
+    padding-right: 11%;
+  }
+
+  .screen,
+  .phone {
+    overflow: hidden;
+    background: var(--color-white);
+    border: 1px solid rgba(27, 42, 74, 0.14);
+    box-shadow: 0 24px 48px rgba(27, 42, 74, 0.18), 0 4px 10px rgba(27, 42, 74, 0.1);
+  }
+
+  .comp-dark .screen,
+  .comp-dark .phone {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 6px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  .screen { border-radius: 12px; }
+  .screen :global(img) { display: block; width: 100%; height: auto; }
+
+  .phone {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 26%;
+    max-width: 200px;
+    border-radius: 22px;
+    border-width: 4px;
+    border-color: var(--color-navy);
+  }
+
+  .comp-dark .phone { border-color: #0f1a30; }
+  .phone :global(img) { display: block; width: 100%; height: auto; }
+
+  @media (max-width: 600px) {
+    .comp { padding-right: 20px; padding-bottom: 40px; }
+    .phone { width: 34%; border-radius: 18px; border-width: 3px; }
+  }
+</style>

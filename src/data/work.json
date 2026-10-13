@@ -1,0 +1,22 @@
+[
+  {
+    "id": "smg-site",
+    "status": "Our own site",
+    "approved": true,
+    "title": "Standard Method Group",
+    "summary": "Our own website: the design system, typography, and diagrams this page is built with.",
+    "facts": [
+      "Built as a static site, with fonts hosted on the same domain",
+      "Designed to work from small phones to wide desktop screens",
+      "Respects reduced-motion preferences"
+    ],
+    "desktop": [
+      { "image": "desktop-home-hero", "caption": "Home page: the opening screen and the method diagram" },
+      { "image": "desktop-services-primary", "caption": "Services: a featured section with a purpose-built diagram" }
+    ],
+    "mobile": [
+      { "image": "mobile-ai-benefits", "caption": "A connected sequence on a phone" },
+      { "image": "mobile-home-hero", "caption": "The same design system at 390 px" }
+    ]
+  }
+]

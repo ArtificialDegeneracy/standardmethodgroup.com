@@ -3,9 +3,14 @@ import Base from '../layouts/Base.astro';
 import CTAStrip from '../components/CTAStrip.astro';
 import MethodDiagram from '../components/MethodDiagram.astro';
 import resultsData from '../data/results.json';
+import { getCollection } from 'astro:content';
 
 // Only entries with approved: true render. See src/data/results.json.
 const results = resultsData.filter((r) => r.approved);
+
+// Latest published Operations Note; the preview section renders nothing when there are none.
+const latestNote = (await getCollection('insights', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())[0];
 
 const goingWrong = [
   "Your office runs on texts, emails, and one person who knows where everything is.",
@@ -250,6 +255,23 @@ const faqs = [
       </div>
     </div>
   </section>
+
+  <!-- 9. Operations Notes preview -->
+  {latestNote && (
+    <section class="notes" aria-labelledby="notes-title">
+      <div class="notes-inner">
+        <div class="notes-label">
+          <h2 id="notes-title">Operations Notes</h2>
+          <a href="/insights/" class="notes-all">All notes &rarr;</a>
+        </div>
+        <div class="notes-item">
+          <h3><a href={`/insights/${latestNote.id}/`}>{latestNote.data.title}</a></h3>
+          <p>{latestNote.data.dek}</p>
+          <a href={`/insights/${latestNote.id}/`} class="notes-read">Read the note<span class="sr-only">: {latestNote.data.title}</span> &rarr;</a>
+        </div>
+      </div>
+    </section>
+  )}
 
   <CTAStrip
     headline="30 minutes. No pitch. Just a conversation about how your business runs."
@@ -756,6 +778,50 @@ const faqs = [
   }
 
   .industry-list a:hover { border-bottom-color: var(--color-deep-teal); }
+
+  /* 9. Operations Notes preview */
+  .notes { background: var(--color-warm-white); padding: var(--space-8) 0; }
+
+  .notes-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+    gap: var(--space-5);
+    border-top: 3px solid var(--color-navy);
+    padding-top: var(--space-3);
+  }
+
+  .notes-label h2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .notes-all,
+  .notes-read {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 1rem;
+    color: var(--color-deep-teal);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .notes-item h3 { font-size: 1.5rem; letter-spacing: var(--tracking-heading); line-height: 1.25; margin: 0 0 var(--space-1); }
+  .notes-item h3 a { color: var(--color-navy); }
+  .notes-item h3 a:hover { color: var(--color-deep-teal); text-decoration: underline; }
+  .notes-item p { font-size: 1.125rem; line-height: 1.55; color: var(--color-text-secondary); margin: 0 0 var(--space-2); max-width: 46ch; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (max-width: 768px) {
+    .notes { padding: var(--space-5) 0; }
+    .notes-inner { grid-template-columns: 1fr; gap: var(--space-2); }
+  }
 
   /* 8. FAQ */
   .faq {

@@ -18,13 +18,24 @@ interface Props {
   description?: string;
   noindex?: boolean;
   canonical?: string;
+  ogType?: string;
+  ogImage?: string;
+  jsonLd?: object[];
 }
 
 const pathname = new URL(Astro.request.url).pathname;
 const slug = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
 const seo = seoData[slug as keyof typeof seoData] || seoData['/'];
 
-const { title = seo.title, description = seo.description, noindex = false, canonical } = Astro.props;
+const {
+  title = seo.title,
+  description = seo.description,
+  noindex = false,
+  canonical,
+  ogType = 'website',
+  ogImage = 'https://standardmethodgroup.com/og-image.png',
+  jsonLd = [],
+} = Astro.props;
 
 // Canonical uses the trailing-slash form GitHub Pages actually serves and the sitemap lists.
 // A page may override it (the call-coverage transition page points to /services/).
@@ -49,12 +60,14 @@ const canonicalUrl = canonical ?? `https://standardmethodgroup.com${slug === '/'
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://standardmethodgroup.com/og-image.png" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+    {jsonLd.map((block) => <script type="application/ld+json" set:html={JSON.stringify(block)} />)}
+    <slot name="head" />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

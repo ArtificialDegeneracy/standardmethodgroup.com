@@ -38,5 +38,9 @@
   "/services/websites": {
     "title": "Custom Websites for Service Businesses | Standard Method Group",
     "description": "Custom websites for service businesses: fast, professional, and easy to contact. Build and hand off, or let SMG take care of it after launch."
+  },
+  "/insights": {
+    "title": "Operations Notes | Standard Method Group",
+    "description": "Practical writing for service-business owners on how work gets done, where it gets stuck, and when technology actually helps. From Standard Method Group."
   }
 }

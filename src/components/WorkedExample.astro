@@ -1,0 +1,108 @@
+---
+// Illustrative arithmetic only. Always labelled as made-up numbers, never as a client result.
+interface Props {
+  jobs: number;
+  before: number; // minutes per job today
+  after: number; // minutes per job after the fix
+}
+const { jobs, before, after } = Astro.props;
+const hoursBefore = (jobs * before) / 60;
+const hoursAfter = (jobs * after) / 60;
+const saved = hoursBefore - hoursAfter;
+const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
+---
+
+<figure class="example">
+  <figcaption class="example-label">Illustrative example. Made-up numbers, not a client result.</figcaption>
+  <dl class="example-calc">
+    <div class="cell">
+      <dt>jobs per month</dt>
+      <dd>{jobs}</dd>
+    </div>
+    <div class="cell">
+      <dt>at {before} minutes per job</dt>
+      <dd>{fmt(hoursBefore)} hours</dd>
+    </div>
+    <div class="cell cell-saved">
+      <dt>saved at {after} minutes per job</dt>
+      <dd>about {Math.round(saved)} hours</dd>
+    </div>
+  </dl>
+  <p class="example-math">
+    {jobs} jobs × {before} minutes = {fmt(hoursBefore)} hours. {jobs} jobs × {after} minutes ≈ {fmt(Math.round(hoursAfter * 10) / 10)} hours. The difference is about {Math.round(saved)} hours a month.
+  </p>
+</figure>
+
+<style>
+  .example {
+    margin: var(--space-5) 0;
+    border-top: 3px solid var(--color-navy);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-3) 0;
+  }
+
+  .example-label {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+  }
+
+  .example-calc {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  .cell {
+    display: flex;
+    flex-direction: column-reverse; /* figure first, label beneath; the source order stays label then value */
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  .cell dd {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.75rem;
+    letter-spacing: var(--tracking-heading);
+    line-height: 1.15;
+    color: var(--color-navy);
+  }
+
+  .cell dt {
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.35;
+  }
+
+  .cell-saved dd { color: var(--color-deep-teal); }
+
+  /* Two classes so the article's `.note-body p` margin does not override this. */
+  .example .example-math {
+    margin: var(--space-3) 0 0;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .example-calc { grid-template-columns: 1fr; gap: var(--space-2); }
+    .cell {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-2);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--space-2);
+    }
+    .cell:last-child { border-bottom: none; padding-bottom: 0; }
+    .cell dd { font-size: 1.5rem; white-space: nowrap; }
+  }
+</style>

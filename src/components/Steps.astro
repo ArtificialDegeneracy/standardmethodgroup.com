@@ -1,0 +1,14 @@
+---
+// Numbered framework for Operations Notes articles. Children are <Step> items.
+---
+
+<ol class="steps"><slot /></ol>
+
+<style>
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    margin: var(--space-5) 0;
+    padding: 0;
+  }
+</style>

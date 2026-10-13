@@ -1,0 +1,177 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const SITE = 'https://standardmethodgroup.com';
+
+const notes = (await getCollection('insights', ({ data }) => import.meta.env.DEV || !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const [lead, ...rest] = notes;
+
+const dateLabel = (d: Date) => d.toLocaleDateString('en-US', { dateStyle: 'long', timeZone: 'UTC' });
+
+const collection = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Operations Notes',
+  url: `${SITE}/insights/`,
+  isPartOf: { '@type': 'WebSite', name: 'Standard Method Group', url: SITE },
+};
+const breadcrumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: 'Operations Notes', item: `${SITE}/insights/` },
+  ],
+};
+---
+
+<Base jsonLd={[collection, breadcrumbs]}>
+  <header class="masthead">
+    <div class="wrap">
+      <p class="kicker">Operations Notes</p>
+      <h1>How service businesses actually run.</h1>
+      <p class="sub">Practical writing on where work gets stuck, what to fix first, and when technology helps. From Dan Rockhold at Standard Method Group.</p>
+    </div>
+  </header>
+
+  <section class="list">
+    <div class="wrap">
+      {lead && (
+        <article class="lead">
+          <p class="meta"><time datetime={lead.data.publishedAt.toISOString().slice(0, 10)}>{dateLabel(lead.data.publishedAt)}</time></p>
+          <h2><a href={`/insights/${lead.id}/`}>{lead.data.title}</a></h2>
+          <p class="dek">{lead.data.dek}</p>
+          <a class="read" href={`/insights/${lead.id}/`}>Read the note<span class="sr-only">: {lead.data.title}</span> &rarr;</a>
+        </article>
+      )}
+
+      {rest.length > 0 && (
+        <ul class="more">
+          {rest.map((n) => (
+            <li>
+              <time datetime={n.data.publishedAt.toISOString().slice(0, 10)}>{dateLabel(n.data.publishedAt)}</time>
+              <a href={`/insights/${n.id}/`}>{n.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .wrap {
+    max-width: calc(48rem + 2 * var(--space-3));
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .masthead { padding: var(--space-8) 0 var(--space-5); }
+
+  .kicker {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    margin: 0 0 var(--space-2);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 1.5rem + 2.4vw, 3.25rem);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.1;
+    color: var(--color-navy);
+    margin: 0;
+  }
+
+  .sub {
+    font-size: var(--text-lead);
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    max-width: 38rem;
+    margin: var(--space-3) 0 0;
+  }
+
+  .list { padding-bottom: var(--space-12); }
+
+  .lead {
+    border-top: 3px solid var(--color-navy);
+    padding-top: var(--space-3);
+  }
+
+  .meta, time {
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+  }
+
+  .meta { margin: 0 0 var(--space-1); }
+
+  .lead h2 {
+    font-size: clamp(1.5rem, 1.25rem + 1.2vw, 2.125rem);
+    letter-spacing: var(--tracking-heading);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .lead h2 a { color: var(--color-navy); }
+  .lead h2 a:hover { color: var(--color-deep-teal); text-decoration: underline; }
+
+  .dek {
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    color: var(--color-text);
+    max-width: 38rem;
+    margin: var(--space-2) 0 var(--space-2);
+  }
+
+  .read {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    color: var(--color-deep-teal);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .more {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-8) 0 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .more li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .more time { flex: 0 0 9.5rem; }
+
+  .more a {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    color: var(--color-navy);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .masthead { padding: var(--space-5) 0 var(--space-3); }
+    .more li { flex-direction: column; gap: 4px; }
+    .more time { flex: none; }
+  }
+</style>

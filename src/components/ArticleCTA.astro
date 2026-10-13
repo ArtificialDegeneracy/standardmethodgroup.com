@@ -1,0 +1,101 @@
+---
+// Closing call to action for Operations Notes articles. Sits outside the article body on a navy band.
+---
+
+<section class="note-cta" aria-labelledby="note-cta-title">
+  <div class="note-cta-inner">
+    <h2 id="note-cta-title">Know something in your business could work better?</h2>
+    <p>
+      Standard Method Group helps businesses find operational problems and put practical improvements in place.
+      That starts with a conversation about where work gets stuck.
+    </p>
+    <div class="note-cta-actions">
+      <a href="/contact/" class="note-cta-primary">Book a 30-minute call</a>
+      <a href="/services/" class="note-cta-secondary">Explore our services</a>
+    </div>
+    <p class="note-cta-more">
+      Related: <a href="/services/#business-systems">business systems and process improvement</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .note-cta {
+    background: var(--color-navy);
+    padding: var(--space-8) 0;
+    margin-top: var(--space-12);
+  }
+
+  .note-cta-inner {
+    max-width: calc(40rem + 2 * var(--space-3));
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-white);
+    margin: 0 0 var(--space-2);
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-ink-on-dark);
+    margin: 0;
+  }
+
+  .note-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: var(--space-3) 0;
+  }
+
+  a {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+  }
+
+  a:focus-visible {
+    outline: 3px solid var(--color-teal-light);
+    outline-offset: 2px;
+  }
+
+  .note-cta-primary {
+    background: var(--color-teal);
+    color: var(--color-white);
+    padding: 15px 28px;
+  }
+
+  .note-cta-primary:hover { background: var(--color-deep-teal); color: var(--color-white); }
+
+  .note-cta-secondary {
+    color: var(--color-white);
+    padding: 13px 26px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .note-cta-secondary:hover { border-color: var(--color-white); color: var(--color-white); }
+
+  .note-cta-more { font-size: 1rem; }
+
+  .note-cta-more a {
+    color: var(--color-teal-light);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .note-cta-more a:hover { color: var(--color-white); }
+
+  @media (max-width: 768px) {
+    .note-cta { padding: var(--space-5) 0; margin-top: var(--space-8); }
+    h2 { font-size: 1.5rem; }
+    .note-cta-actions { flex-direction: column; }
+    .note-cta-primary, .note-cta-secondary { text-align: center; }
+  }
+</style>

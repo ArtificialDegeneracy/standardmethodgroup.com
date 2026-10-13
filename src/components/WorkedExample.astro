@@ -13,7 +13,7 @@ const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
 ---
 
 <figure class="example">
-  <figcaption class="example-label">Illustrative example. Made-up numbers, not a client result.</figcaption>
+  <figcaption class="example-label">Illustrative example based on hypothetical figures.</figcaption>
   <dl class="example-calc">
     <div class="cell">
       <dt>jobs per month</dt>
@@ -93,16 +93,12 @@ const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
   }
 
   @media (max-width: 600px) {
-    .example-calc { grid-template-columns: 1fr; gap: var(--space-2); }
+    .example-calc { grid-template-columns: 1fr; gap: 0; }
     .cell {
-      flex-direction: row-reverse;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: var(--space-2);
       border-bottom: 1px solid var(--color-border);
-      padding-bottom: var(--space-2);
+      padding: var(--space-2) 0;
     }
+    .cell:first-child { padding-top: 0; }
     .cell:last-child { border-bottom: none; padding-bottom: 0; }
-    .cell dd { font-size: 1.5rem; white-space: nowrap; }
   }
 </style>

@@ -1,13 +1,14 @@
 ---
 const currentPath = new URL(Astro.request.url).pathname.replace(/\/$/, '') || '/';
 
+// "Work" joins this list once there is approved case-study content to show.
 const navLinks = [
+  { label: 'Services', href: '/services' },
   { label: 'How We Work', href: '/how-we-work' },
-  { label: 'Who We Help', href: '/who-we-help' },
-  { label: 'Never Miss a Call', href: '/never-miss-a-call' },
+  { label: 'Industries', href: '/who-we-help' },
   { label: 'About', href: '/about' },
-  { label: 'Calculator', href: '/calculator' },
 ];
+const isActive = (href: string) => currentPath === href || currentPath.startsWith(href + '/');
 ---
 
 <header class="nav">
@@ -21,12 +22,12 @@ const navLinks = [
       {navLinks.map(link => (
         <a
           href={link.href}
-          class:list={['nav-link', { active: currentPath === link.href }]}
+          class:list={['nav-link', { active: isActive(link.href) }]}
         >
           {link.label}
         </a>
       ))}
-      <a href="/contact" class="nav-cta">Let's Talk</a>
+      <a href="/contact" class="nav-cta">Book a call</a>
     </nav>
 
     <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
@@ -41,12 +42,12 @@ const navLinks = [
       {navLinks.map(link => (
         <a
           href={link.href}
-          class:list={['mobile-link', { active: currentPath === link.href }]}
+          class:list={['mobile-link', { active: isActive(link.href) }]}
         >
           {link.label}
         </a>
       ))}
-      <a href="/contact" class="mobile-cta">Let's Talk</a>
+      <a href="/contact" class="mobile-cta">Book a call</a>
     </nav>
   </div>
 </header>
@@ -184,7 +185,7 @@ const navLinks = [
   }
 
   .nav-cta:focus-visible {
-    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline: 3px solid var(--color-teal-light);
     outline-offset: 2px;
   }
 
@@ -200,7 +201,7 @@ const navLinks = [
   }
 
   .nav-hamburger:focus-visible {
-    outline: 3px solid rgba(42, 125, 110, 0.4);
+    outline: 3px solid var(--color-teal-light);
     outline-offset: 2px;
     border-radius: var(--radius);
   }

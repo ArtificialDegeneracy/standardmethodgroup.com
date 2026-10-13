@@ -1,0 +1,555 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import SiteComposition from '../../components/SiteComposition.astro';
+import WorkShowcase from '../../components/WorkShowcase.astro';
+import LifecycleDiagram from '../../components/LifecycleDiagram.astro';
+import CTAStrip from '../../components/CTAStrip.astro';
+
+const standards = [
+  { title: "Custom design", body: "Designed for your business, not dropped into a template." },
+  { title: "Mobile responsiveness", body: "Designed phone first, and checked at common screen sizes." },
+  { title: "Clear contact paths", body: "Ways to call, message, or ask, in reach on every page." },
+  { title: "Performance optimization", body: "Images and code prepared so pages load quickly." },
+  { title: "Technical SEO foundations", body: "Page titles, headings, a sitemap, and structured business information, as the project calls for." },
+  { title: "Launch support", body: "Domain, HTTPS, and redirects set up and checked, where applicable." },
+  { title: "Functional testing", body: "Forms, links, and layouts tested before the site goes live." },
+];
+
+const byScope = [
+  "How many pages, and which ones",
+  "Location and service-area pages",
+  "Copywriting",
+  "Photography",
+  "Online booking and payments",
+  "Integrations with other software",
+  "Analytics and tracking",
+  "Larger content migrations",
+];
+
+const covers = [
+  { title: "Hosting", body: "Your site served reliably, with HTTPS kept current." },
+  { title: "Monitoring", body: "Watching for outages and problems so they are caught early." },
+  { title: "Technical maintenance", body: "Software kept up to date and secure." },
+  { title: "Troubleshooting", body: "When something breaks or looks wrong, we fix it." },
+  { title: "Routine content updates", body: "New services, updated photos, and seasonal changes, handled for you." },
+  { title: "Agreed improvements", body: "Planned changes that keep the site growing with the business." },
+];
+
+const steps = [
+  { title: "Talk", body: "What your business does, who you want more of, and what the site needs to do." },
+  { title: "Design", body: "A direction you can react to before anything is built." },
+  { title: "Build", body: "A working version to review, tested before launch." },
+  { title: "Launch", body: "Go live, then hand off or continue with management." },
+];
+
+const faqs = [
+  { q: "Who owns the website?", a: "You retain ownership of the agreed deliverables, your domain, your content, and your accounts, subject to applicable third-party licenses." },
+  { q: "Do I have to use your management service?", a: "No. Build + Handoff is a complete option. We provide the agreed access and documentation so you or your chosen provider can manage the site." },
+  { q: "Can I update it myself?", a: "That depends on how your project is built. We agree how updates will work at the start, and a visual editing interface is included only when the project calls for one." },
+  { q: "Do you guarantee search rankings?", a: "No. We build the technical foundations search engines look for. Rankings depend on factors nobody controls." },
+  { q: "What does it cost?", a: "It depends on scope. We share pricing on your call and confirm it in writing before work starts." },
+];
+---
+
+<Base>
+  <!-- 1. Hero -->
+  <Hero compact wide>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Website development</p>
+        <h1><span class="h1-line">A better website.</span> <span class="h1-line">A better first impression.</span></h1>
+        <p class="sub">Custom websites for service businesses that need more than an online brochure. We build fast, professional sites that make your business look its best, help customers find what they need, and make it easy to get in touch. And when it's live, we can take care of it for you.</p>
+        <div class="ctas">
+          <a href="/contact" class="cta">Book a 30-minute call</a>
+          <a href="#included" class="cta-2">See what's included</a>
+        </div>
+        <p class="note">30 minutes. No pitch, no obligation.</p>
+      </div>
+      <div class="hero-visual">
+        <SiteComposition
+          desktop="desktop-home-problems"
+          mobile="mobile-ai-benefits"
+          desktopAlt="A page from the Standard Method Group website on a desktop screen: a navigation bar, a navy header curving into a light section with a two-column list."
+          mobileAlt="A page from the Standard Method Group website on a phone: a numbered sequence connected by a thin line."
+          priority
+        />
+      </div>
+    </div>
+  </Hero>
+
+  <!-- 2. Selected work -->
+  <section class="sx-section work-section reveal" id="work">
+    <div class="sx-wrap">
+      <p class="sx-kicker">Selected work</p>
+      <h2 class="sx-title">How we design and build.</h2>
+      <p class="sx-lead">We start with our own site, because it is the work we can show you completely.</p>
+      <div class="work-wrap"><WorkShowcase /></div>
+    </div>
+  </section>
+
+  <!-- 3. What every website includes -->
+  <section class="sx-section sx-section-alt included reveal" id="included">
+    <div class="sx-wrap">
+      <p class="sx-kicker">What's included</p>
+      <h2 class="sx-title">Everything your website needs to make a strong impression.</h2>
+      <div class="included-grid">
+        <div class="standards">
+          <h3>In every build</h3>
+          <ul>
+            {standards.map((s) => (
+              <li><strong>{s.title}.</strong> {s.body}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="by-scope">
+          <h3>Set by your project</h3>
+          <ul>
+            {byScope.map((t) => <li>{t}</li>)}
+          </ul>
+          <p>We agree these up front, so you know what you are getting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 + 5. Ongoing management and engagement options -->
+  <section class="after reveal" id="after-launch">
+    <div class="after-texture" aria-hidden="true"></div>
+    <div class="sx-wrap">
+      <p class="after-kicker">After launch</p>
+      <h2 class="after-title">We build it. We launch it. We can take care of the rest.</h2>
+      <p class="after-lead">Your business changes, and your website should keep up. New services, updated photos, seasonal promotions, and improvements shouldn't require you to figure out how your website works. With ongoing management from SMG, you have someone who knows your site, keeps it running properly, and helps it evolve alongside your business.</p>
+
+      <div class="after-grid">
+        <div class="after-diagram"><LifecycleDiagram /></div>
+        <div class="after-covers">
+          <h3>What management covers</h3>
+          <ul>
+            {covers.map((c) => (
+              <li><strong>{c.title}</strong><span>{c.body}</span></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <p class="after-note">The exact scope is defined in each customer's agreement. Management is month to month, with an agreed scope and clear transition terms. Larger redesigns, custom integrations, ongoing SEO campaigns, and advertising are separately scoped unless expressly included.</p>
+
+      <div class="choice">
+        <h3 class="choice-title">Your website. Your choice.</h3>
+        <div class="choice-grid">
+          <article class="opt opt-a">
+            <p class="opt-tag">Recommended</p>
+            <h4>Build + Manage</h4>
+            <p>We design, build, and launch your website, then handle hosting, maintenance, and agreed updates through an ongoing monthly relationship.</p>
+          </article>
+          <article class="opt opt-b">
+            <p class="opt-tag opt-tag-quiet">Your own way</p>
+            <h4>Build + Handoff</h4>
+            <p>We design, build, and launch your website, then provide the agreed access and documentation so you or your chosen provider can manage it.</p>
+          </article>
+        </div>
+        <p class="ownership">You retain ownership of the agreed deliverables, your domain, content, and accounts, subject to applicable third-party licenses.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. How a build works -->
+  <section class="sx-section process reveal">
+    <div class="sx-wrap">
+      <p class="sx-kicker">How a build works</p>
+      <h2 class="sx-title">From first call to launch, in four steps.</h2>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li>
+            <span class="step-num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section class="sx-section sx-section-alt reveal">
+    <div class="sx-wrap faq-grid">
+      <h2 class="sx-title">Common questions about website development</h2>
+      <div class="faq">
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary><span>{f.q}</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CTA -->
+  <CTAStrip
+    headline="Tell us about your business and what your website needs to do."
+    buttonText="Book a 30-minute call"
+    buttonHref="/contact"
+    note="30 minutes. No pitch, no obligation."
+  />
+</Base>
+
+<style>
+  /* Hero */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .eyebrow {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-teal-light);
+    margin-bottom: var(--space-2);
+  }
+
+  h1 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: clamp(2.125rem, 1.4rem + 2.6vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: var(--tracking-display);
+    color: var(--color-white);
+  }
+
+  .h1-line { display: block; }
+
+  .sub {
+    font-size: var(--text-lead);
+    color: var(--color-ink-on-dark);
+    line-height: 1.6;
+    margin-top: var(--space-3);
+    max-width: 34em;
+  }
+
+  .ctas { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+
+  .cta {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    color: var(--color-white);
+    background: var(--color-teal);
+    padding: 15px 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    transition: background 200ms var(--ease), transform 200ms var(--ease);
+  }
+
+  .cta:hover { background: var(--color-deep-teal); color: var(--color-white); transform: var(--lift); }
+  .cta:focus-visible, .cta-2:focus-visible { outline: 3px solid var(--color-teal-light); outline-offset: 3px; }
+
+  .cta-2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .cta-2:hover { color: var(--color-white); text-decoration: underline; }
+
+  .note {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.64);
+    margin-top: var(--space-2);
+  }
+
+  .hero-visual { padding-bottom: var(--space-2); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-visual { animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; }
+  }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  /* Selected work */
+  .work-wrap { margin-top: var(--space-5); }
+
+  /* What's included */
+  .included-grid {
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-8);
+  }
+
+  .included h3,
+  .covers-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-navy);
+    padding-bottom: var(--space-1);
+    border-bottom: 3px solid var(--color-teal);
+    margin-bottom: var(--space-1);
+  }
+
+  .by-scope h3 { border-bottom-color: var(--color-navy); }
+  .included ul { list-style: none; }
+
+  .included li {
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1.125rem;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .included li:last-child { border-bottom: none; }
+  .included strong { font-family: var(--font-heading); font-weight: var(--font-weight-heading); color: var(--color-navy); }
+  .by-scope p { margin-top: var(--space-2); color: var(--color-text-secondary); }
+
+  /* After launch: one navy experience */
+  .after {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--color-navy);
+    padding: calc(var(--space-12) + var(--space-3)) 0;
+  }
+
+  .after-texture {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 25%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 25%, transparent 75%);
+  }
+
+  .after-kicker {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-teal-light);
+    margin-bottom: var(--space-2);
+  }
+
+  .after-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: clamp(2rem, 1.3rem + 2.4vw, 3.25rem);
+    line-height: 1.08;
+    letter-spacing: var(--tracking-display);
+    color: var(--color-white);
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+
+  .after-lead {
+    font-size: var(--text-lead);
+    color: var(--color-ink-on-dark);
+    margin-top: var(--space-3);
+    max-width: 52em;
+    text-wrap: pretty;
+  }
+
+  .after-grid {
+    margin-top: var(--space-5);
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .after-diagram { max-width: 780px; }
+
+  .after-covers h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-white);
+    padding-bottom: var(--space-1);
+    border-bottom: 3px solid var(--color-teal-light);
+    margin-bottom: var(--space-3);
+  }
+
+  .after-covers ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3) var(--space-5);
+  }
+
+  .after-covers li {
+    padding-top: var(--space-2);
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    display: grid;
+    gap: 4px;
+    align-content: start;
+  }
+
+  .after-covers strong { font-family: var(--font-heading); font-weight: var(--font-weight-heading); color: var(--color-white); }
+  .after-covers span { color: var(--color-ink-on-dark); font-size: 1.0625rem; line-height: 1.5; text-wrap: pretty; }
+
+  .after-note {
+    margin-top: var(--space-5);
+    max-width: 62ch;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    text-wrap: pretty;
+  }
+
+  .choice {
+    margin-top: var(--space-8);
+    padding-top: var(--space-5);
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .choice-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: clamp(1.625rem, 1.2rem + 1.4vw, 2.25rem);
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-white);
+  }
+
+  .choice-grid {
+    margin-top: var(--space-3);
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: stretch;
+  }
+
+  .opt {
+    padding: var(--space-5);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-top: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .opt-a {
+    background: rgba(95, 201, 181, 0.1);
+    border-color: rgba(95, 201, 181, 0.55);
+    border-top: 5px solid var(--color-teal-light);
+  }
+
+  .opt h4 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.375rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-white);
+    margin-bottom: var(--space-1);
+  }
+
+  .opt-a h4 { font-size: 1.625rem; }
+  .opt p:not(.opt-tag) { color: var(--color-ink-on-dark); font-size: 1.0625rem; line-height: 1.55; }
+
+  .opt-tag {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-teal-light);
+    margin-bottom: var(--space-1);
+  }
+
+  .opt-tag-quiet { color: rgba(255, 255, 255, 0.6); }
+
+  .ownership {
+    margin-top: var(--space-3);
+    max-width: 62ch;
+    color: var(--color-ink-on-dark);
+    font-size: 1.0625rem;
+    text-wrap: pretty;
+  }
+
+  /* Process */
+  .steps {
+    list-style: none;
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .steps li { border-top: 1px solid var(--color-border); padding-top: var(--space-2); }
+  .step-num { display: block; font-weight: 600; font-size: 2.5rem; line-height: 1; color: var(--color-teal); margin-bottom: var(--space-1); }
+
+  .steps h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .steps p { font-size: 1rem; line-height: 1.55; }
+
+  /* FAQ */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); }
+
+  .faq-item {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 1.0625rem;
+    color: var(--color-navy);
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary:focus-visible { outline: 3px solid var(--color-teal); outline-offset: -3px; }
+  .faq-item p { padding: 0 var(--space-3) var(--space-3); font-size: 1.0625rem; }
+
+  .faq-icon { position: relative; flex-shrink: 0; width: 18px; height: 18px; }
+  .faq-icon::before, .faq-icon::after { content: ''; position: absolute; background: var(--color-teal); transition: transform 200ms var(--ease), opacity 200ms var(--ease); }
+  .faq-icon::before { top: 8px; left: 0; width: 18px; height: 2px; }
+  .faq-icon::after { top: 0; left: 8px; width: 2px; height: 18px; }
+  .faq-item[open] .faq-icon::after { transform: rotate(90deg); opacity: 0; }
+
+  @media (max-width: 960px) {
+    .hero-grid, .included-grid, .choice-grid, .faq-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .after-covers ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .hero-visual { max-width: 560px; }
+    .after { padding: var(--space-8) 0; }
+  }
+
+  @media (max-width: 640px) {
+    .sx-section { padding: var(--space-5) 0 calc(var(--space-5) + var(--space-1)); }
+    .steps { grid-template-columns: 1fr; }
+    .after-covers ul { grid-template-columns: 1fr; gap: var(--space-2); }
+    .opt { padding: var(--space-3); }
+    .cta { width: 100%; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta, .faq-icon::before, .faq-icon::after { transition: none; }
+  }
+</style>

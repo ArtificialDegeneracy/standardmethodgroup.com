@@ -1,0 +1,163 @@
+---
+// Selected work. Reads src/data/work.json; only entries with "approved": true render.
+// To add an approved client project, add an entry with status "Client project", the
+// approved name/summary/facts, and image file names from src/assets/work/ (no extension).
+// Do not add a client name, logo, or screenshot without written permission.
+import SiteComposition from './SiteComposition.astro';
+import { Image } from 'astro:assets';
+import work from '../data/work.json';
+
+const items = work.filter((w) => w.approved);
+const files = import.meta.glob('../assets/work/*.webp', { eager: true }) as Record<string, { default: ImageMetadata }>;
+const get = (name: string) => files[`../assets/work/${name}.webp`]?.default;
+---
+
+{items.map((w) => (
+  <article class="work">
+    <header class="work-head">
+      <p class="status">{w.status}</p>
+      <h3>{w.title}</h3>
+      <p class="summary">{w.summary}</p>
+    </header>
+
+    <div class="work-main">
+      <SiteComposition
+        desktop={w.desktop[0].image}
+        mobile={w.mobile[0].image}
+        desktopAlt={`${w.title}: ${w.desktop[0].caption}`}
+        mobileAlt={`${w.title} on a phone: ${w.mobile[0].caption}`}
+        dark={false}
+      />
+    </div>
+
+    <div class="work-more">
+      {w.desktop[1] && (
+        <figure class="more-desktop">
+          <div class="more-frame">
+            <Image src={get(w.desktop[1].image)} alt={`${w.title}: ${w.desktop[1].caption}`} widths={[480, 720, 960]} sizes="(max-width: 960px) 80vw, 430px" format="webp" quality={82} loading="lazy" />
+          </div>
+          <figcaption>{w.desktop[1].caption}</figcaption>
+        </figure>
+      )}
+      {w.mobile[1] && (
+        <figure class="more-mobile">
+          <div class="more-phone">
+            <Image src={get(w.mobile[1].image)} alt={`${w.title} on a phone: ${w.mobile[1].caption}`} widths={[200, 300, 400]} sizes="(max-width: 960px) 150px, 200px" format="webp" quality={82} loading="lazy" />
+          </div>
+          <figcaption>{w.mobile[1].caption}</figcaption>
+        </figure>
+      )}
+      <ul class="facts">
+        {w.facts.map((f) => <li>{f}</li>)}
+      </ul>
+    </div>
+  </article>
+))}
+
+<style>
+  .work {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    grid-template-areas:
+      "head main"
+      "more more";
+    gap: var(--space-5) var(--space-8);
+    align-items: start;
+  }
+
+  .work-head { grid-area: head; }
+  .work-main { grid-area: main; }
+  .work-more { grid-area: more; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    border: 1px solid rgba(31, 95, 83, 0.4);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: var(--space-2);
+  }
+
+  h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.5rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .summary { font-size: 1.125rem; color: var(--color-text-secondary); max-width: 40ch; }
+
+  .work-more {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 2fr) minmax(0, 5fr);
+    gap: var(--space-5);
+    align-items: start;
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .more-frame,
+  .more-phone {
+    overflow: hidden;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .more-frame { border-radius: 10px; }
+  .more-phone { border-radius: 16px; border: 3px solid var(--color-navy); }
+  .more-frame :global(img), .more-phone :global(img) { display: block; width: 100%; height: auto; }
+
+  figcaption {
+    margin-top: var(--space-1);
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--color-text-secondary);
+  }
+
+  .facts {
+    list-style: none;
+    align-self: start;
+  }
+
+  .facts li {
+    position: relative;
+    padding-left: var(--space-3);
+    margin-bottom: 6px;
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+
+  .facts li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 10px;
+    height: 2px;
+    background: var(--color-teal);
+  }
+
+  @media (max-width: 960px) {
+    .work {
+      grid-template-columns: 1fr;
+      grid-template-areas: "head" "main" "more";
+      gap: 32px;
+    }
+
+    .work-more { grid-template-columns: minmax(0, 1fr) 150px; gap: var(--space-3); }
+    .facts { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 480px) {
+    .work-more { grid-template-columns: minmax(0, 1fr) 96px; gap: var(--space-2); }
+  }
+</style>

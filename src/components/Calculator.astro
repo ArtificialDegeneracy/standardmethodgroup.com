@@ -1,3 +1,12 @@
+---
+// Missed-enquiry model defaults. These are placeholders the visitor replaces, not industry data.
+const lead = { perWeek: 5, shareLost: 50, closeRate: 30, jobValue: 2500, margin: 20 };
+const fmt = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
+const leadJobs = lead.perWeek * 52 * (lead.shareLost / 100) * (lead.closeRate / 100);
+const leadRevenue = leadJobs * lead.jobValue;
+const leadProfit = leadRevenue * (lead.margin / 100);
+---
+
 <section class="calc-section reveal">
   <div class="calc-inner">
     <div class="calc-inputs">
@@ -36,7 +45,7 @@
 
       <div class="result-headline">
         <span class="result-headline-label">Annual cost</span>
-        <span class="result-headline-number" id="annual-cost">$116,100</span>
+        <span class="result-headline-number" id="annual-cost">$12,900</span>
         <span class="result-headline-sub">in time spent on work a system could handle</span>
       </div>
 
@@ -46,15 +55,77 @@
           <span class="result-label">Monthly hours on admin</span>
         </div>
         <div class="result-stat">
-          <span class="result-number" id="monthly-cost">$9,675</span>
+          <span class="result-number" id="monthly-cost">$1,075</span>
           <span class="result-label">Monthly cost</span>
         </div>
       </div>
 
       <div class="result-recovery">
-        <h3>What typically changes</h3>
-        <p class="recovery-text">Businesses like yours typically recover <strong id="recovery-low">26</strong> to <strong id="recovery-high">32</strong> hours per month, roughly <strong id="savings-low">$1,290</strong> to <strong id="savings-high">$1,613</strong> back in your pocket.</p>
-        <p class="recovery-annual">That's <strong id="annual-low">$15,480</strong> to <strong id="annual-high">$19,350</strong> per year in time your team gets back.</p>
+        <h2>What recovering part of it could mean</h2>
+        <p class="recovery-text">If a fix recovered 40 to 50% of this time, that would be <strong id="recovery-low">17</strong> to <strong id="recovery-high">22</strong> hours per month, roughly <strong id="savings-low">$430</strong> to <strong id="savings-high">$538</strong>. That range is an assumption for illustration. The real figure depends on the work.</p>
+        <p class="recovery-annual">Over a year, that is <strong id="annual-low">$5,160</strong> to <strong id="annual-high">$6,456</strong> in time returned to you or your team.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-inner calc-inner-lead">
+    <div class="calc-inputs">
+      <span class="calc-card-label">Missed enquiries</span>
+      <div class="input-group">
+        <label for="missed">Enquiries you miss or answer late, per week</label>
+        <p class="input-hint">Calls that go to voicemail, messages answered a day later, quote requests that stall</p>
+        <div class="slider-row">
+          <input type="range" id="missed" min="0" max="40" value={lead.perWeek} step="1" />
+          <output for="missed" class="slider-value" id="missed-value">{lead.perWeek}</output>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="lost">Share of those that end up with someone else</label>
+        <p class="input-hint">Some people call back or wait. Be conservative.</p>
+        <div class="slider-row">
+          <input type="range" id="lost" min="5" max="100" value={lead.shareLost} step="5" />
+          <output for="lost" class="slider-value" id="lost-value">{lead.shareLost}%</output>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="close">Share of enquiries you normally turn into a job</label>
+        <div class="slider-row">
+          <input type="range" id="close" min="5" max="80" value={lead.closeRate} step="5" />
+          <output for="close" class="slider-value" id="close-value">{lead.closeRate}%</output>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="jobvalue">Average job value (revenue)</label>
+        <div class="custom-rate-wrap">
+          <span class="dollar-sign">$</span>
+          <input type="number" id="jobvalue" min="50" max="500000" step="50" value={lead.jobValue} />
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="margin">Profit margin on a typical job</label>
+        <p class="input-hint">Revenue is not profit. Use your own margin after materials, labor and overhead.</p>
+        <div class="slider-row">
+          <input type="range" id="margin" min="5" max="60" value={lead.margin} step="1" />
+          <output for="margin" class="slider-value" id="margin-value">{lead.margin}%</output>
+        </div>
+      </div>
+    </div>
+    <div class="calc-results">
+      <span class="calc-card-label calc-card-label-light">What that could add up to</span>
+      <div class="result-headline">
+        <span class="result-headline-label">Potential revenue per year</span>
+        <span class="result-headline-number" id="lead-revenue">{fmt(leadRevenue)}</span>
+        <span class="result-headline-sub">from <strong id="lead-jobs">{Math.round(leadJobs)}</strong> jobs you may be losing</span>
+      </div>
+      <div class="result-grid">
+        <div class="result-stat">
+          <span class="result-number" id="lead-profit">{fmt(leadProfit)}</span>
+          <span class="result-label">Estimated profit on that revenue</span>
+        </div>
+      </div>
+      <div class="result-recovery">
+        <h2>How to read this</h2>
+        <p class="recovery-text">This is an estimate built from the numbers you entered. The starting values are placeholders, not industry data. It shows revenue you may be missing, not what a fix would recover: some callers would have called back, and not every job is won.</p>
       </div>
     </div>
   </div>
@@ -62,7 +133,7 @@
   <div class="calc-lead">
     <div class="calc-lead-texture" aria-hidden="true"></div>
     <div class="calc-lead-inner">
-      <h3>Want to talk through these numbers?</h3>
+      <h2>Want to talk through these numbers?</h2>
       <p>Book a 30-minute conversation and we'll walk through what's realistic for your business.</p>
       <a href="https://calendar.app.google/hH5ewNekVCHFKrcc9" target="_blank" rel="noopener" class="lead-book">Book a discovery conversation</a>
       <p class="lead-alt">or email your results to <a href="mailto:dan@standardmethodgroup.com">dan@standardmethodgroup.com</a></p>
@@ -139,9 +210,41 @@
   });
 </script>
 
+<script>
+  // Missed-enquiry model. Same arithmetic as the server-rendered defaults in the frontmatter.
+  document.addEventListener('astro:page-load', () => {
+    const el = (id: string) => document.getElementById(id) as HTMLInputElement | null;
+    const missed = el('missed'), lost = el('lost'), close = el('close'), job = el('jobvalue'), margin = el('margin');
+    if (!missed || !lost || !close || !job || !margin) return;
+
+    const money = (n: number) => '$' + Math.round(n).toLocaleString('en-US');
+    const set = (id: string, text: string) => { const e = document.getElementById(id); if (e) e.textContent = text; };
+
+    function run() {
+      const jobs = Number(missed!.value) * 52 * (Number(lost!.value) / 100) * (Number(close!.value) / 100);
+      const revenue = jobs * (Number(job!.value) || 0);
+      const profit = revenue * (Number(margin!.value) / 100);
+      set('missed-value', missed!.value);
+      set('lost-value', lost!.value + '%');
+      set('close-value', close!.value + '%');
+      set('margin-value', margin!.value + '%');
+      set('lead-jobs', String(Math.round(jobs)));
+      set('lead-revenue', money(revenue));
+      set('lead-profit', money(profit));
+    }
+
+    [missed, lost, close, job, margin].forEach((i) => i!.addEventListener('input', run));
+    run();
+  });
+</script>
+
 <style>
   .calc-section {
     padding: var(--space-8) 0;
+  }
+
+  .calc-inner-lead {
+    margin-top: var(--space-8);
   }
 
   .calc-inner {
@@ -427,7 +530,7 @@
     padding: var(--space-3);
   }
 
-  .result-recovery h3 {
+  .result-recovery h2 {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
     font-size: 1rem;
@@ -484,7 +587,7 @@
     text-align: center;
   }
 
-  .calc-lead h3 {
+  .calc-lead h2 {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
     font-size: 1.5rem;

@@ -1,0 +1,85 @@
+---
+// Case-study template. Not routed anywhere yet. To publish one:
+//   1. Get written approval for the name, the text, the figures, and the quote.
+//   2. Create src/pages/work/<slug>.astro that renders this component with approved={true}.
+// Build fails on purpose if a case study is rendered without approval.
+// status: "Client case study" | "Client case study (anonymized)" | "Our own project" | "Concept"
+interface Props {
+  title: string;
+  status: 'Client case study' | 'Client case study (anonymized)' | 'Our own project' | 'Concept';
+  client?: string;
+  problem: string;
+  cost?: string;
+  baseline?: string;
+  built: string;
+  result: string;
+  evaluatedOn?: string;
+  didNotMove?: string;
+  quote?: string;
+  quoteBy?: string;
+  approved: boolean;
+}
+
+const p = Astro.props;
+if (!p.approved && p.status !== 'Concept') {
+  throw new Error(`Case study "${p.title}" rendered without approval. Set approved only with written client permission.`);
+}
+const facts = [
+  { label: 'The problem', value: p.problem },
+  { label: 'What it was costing', value: p.cost ?? 'Not measured' },
+  { label: 'Where it started', value: p.baseline ?? 'No baseline was practical' },
+  { label: 'What we built', value: p.built },
+  { label: p.evaluatedOn ? `Result (evaluated ${p.evaluatedOn})` : 'Result', value: p.result },
+];
+---
+
+<article class="case">
+  <p class="case-status">{p.status}</p>
+  <h1>{p.title}</h1>
+  {p.client && <p class="case-client">{p.client}</p>}
+  <dl>
+    {facts.map((f) => (<><dt>{f.label}</dt><dd>{f.value}</dd></>))}
+    {p.didNotMove && (<><dt>What did not move</dt><dd>{p.didNotMove}</dd></>)}
+  </dl>
+  {p.quote && (
+    <blockquote>
+      <p>{p.quote}</p>
+      {p.quoteBy && <footer>{p.quoteBy}</footer>}
+    </blockquote>
+  )}
+</article>
+
+<style>
+  .case { max-width: 720px; margin: 0 auto; padding: var(--space-8) var(--space-3); }
+  .case-status {
+    font-family: var(--font-heading);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    margin-bottom: var(--space-1);
+  }
+  h1 {
+    font-family: var(--font-heading);
+    font-size: var(--text-h2);
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+  }
+  .case-client { color: var(--color-text-secondary); margin-top: var(--space-1); }
+  dl { margin-top: var(--space-5); }
+  dt {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 0.9375rem;
+    color: var(--color-navy);
+    margin-top: var(--space-3);
+  }
+  dd { font-size: 1.125rem; margin-top: 4px; }
+  blockquote {
+    margin-top: var(--space-5);
+    padding-left: var(--space-3);
+    border-left: 3px solid var(--color-teal);
+    font-size: 1.25rem;
+  }
+  footer { font-family: var(--font-heading); font-size: 0.9375rem; margin-top: var(--space-1); }
+</style>

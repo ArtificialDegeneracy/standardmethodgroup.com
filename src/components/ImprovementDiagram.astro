@@ -1,0 +1,127 @@
+---
+// Current state -> operational improvement -> better way of working.
+// Illustrative only. Tangled, crossing lines resolve into clean parallel ones.
+// Same connected-systems language as MethodDiagram and CycleDiagram, different story.
+interface Props {
+  caption?: string;
+  idPrefix?: string;
+}
+const {
+  caption = 'Illustrative: how a tangled current state becomes a clearer way of working. Not a customer result.',
+  idPrefix = 'improve',
+} = Astro.props;
+const p = idPrefix;
+
+const before = [
+  ['Handoffs', 'by text'],
+  ['Data', 're-typed'],
+  ['Deadlines', 'in heads'],
+];
+const after = [
+  ['One owner', 'per step'],
+  ['Entered', 'once'],
+  ['Deadlines', 'tracked'],
+];
+const xs = [0, 110, 220];
+const cx = [50, 160, 270];
+// Crossing paths: node i ends at hub position tangle[i]
+const tangle = [230, 70, 150];
+---
+
+<figure class="improve">
+  <svg viewBox="0 0 320 392" role="img" aria-labelledby={`${p}-t ${p}-d`}>
+    <title id={`${p}-t`}>From a tangled current state to a clearer way of working</title>
+    <desc id={`${p}-d`}>Three common problems, handoffs by text, data re-typed, and deadlines in people's heads, are connected by crossing lines. An operational improvement step untangles them into three clean lines: one owner per step, information entered once, and deadlines tracked.</desc>
+    <defs>
+      <linearGradient id={`${p}-g`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A7D6E" /><stop offset="1" stop-color="#1F5F53" /></linearGradient>
+    </defs>
+
+    <text class="lbl fade" style="--d:0s" x="0" y="11">Current state</text>
+
+    <g fill="none">
+      {cx.map((x, i) => (
+        <path class="tangle draw" style={`--d:${0.5 + i * 0.12}s`} pathLength="1" d={`M${x} 74 C${x} 124 ${tangle[i]} 116 ${tangle[i]} 170`} />
+      ))}
+      {cx.map((x, i) => (
+        <path class="clean draw" style={`--d:${1.7 + i * 0.12}s`} pathLength="1" d={`M${x} 230 V292`} />
+      ))}
+    </g>
+
+    {before.map((l, i) => (
+      <g class="fade" style={`--d:${0.1 + i * 0.1}s`}>
+        <rect class="node" x={xs[i]} y="22" width="100" height="52" rx="6" />
+        <text class="t" x={xs[i] + 50} y="40" text-anchor="middle">{l[0]}</text>
+        <text class="t" x={xs[i] + 50} y="58" text-anchor="middle">{l[1]}</text>
+      </g>
+    ))}
+
+    <g class="fade" style="--d:1.1s">
+      <rect class="hub" x="0" y="170" width="320" height="60" rx="8" fill={`url(#${p}-g)`} />
+      <text class="hub-t" x="160" y="193" text-anchor="middle">Operational improvement</text>
+      <text class="hub-s" x="160" y="213" text-anchor="middle">Map it. Redesign it. Connect it.</text>
+    </g>
+
+    {after.map((l, i) => (
+      <g class="fade fade-late" style={`--d:${2.3 + i * 0.1}s`}>
+        <path class="arrow" d={`M${cx[i] - 4} 286 L${cx[i]} 292 L${cx[i] + 4} 286`} />
+        <rect class="good" x={xs[i]} y="292" width="100" height="52" rx="6" />
+        <text class="t t-good" x={xs[i] + 50} y="310" text-anchor="middle">{l[0]}</text>
+        <text class="t t-good" x={xs[i] + 50} y="328" text-anchor="middle">{l[1]}</text>
+      </g>
+    ))}
+
+    <text class="lbl fade fade-late" style="--d:2.6s" x="0" y="372">Better way of working</text>
+  </svg>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .improve {
+    padding: var(--space-3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  @media (max-width: 480px) { .improve { padding: var(--space-2); } }
+
+  svg { display: block; width: 100%; max-width: 400px; height: auto; margin: 0 auto; }
+
+  figcaption {
+    margin-top: var(--space-2);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .lbl {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: rgba(255, 255, 255, 0.56);
+  }
+
+  .node { fill: rgba(255, 255, 255, 0.04); stroke: rgba(255, 255, 255, 0.18); stroke-width: 1; }
+  .good { fill: rgba(95, 201, 181, 0.12); stroke: rgba(95, 201, 181, 0.65); stroke-width: 1; }
+  .hub { stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
+
+  .t { font-family: var(--font-heading); font-weight: 500; font-size: 13px; fill: rgba(255, 255, 255, 0.82); }
+  .t-good { fill: var(--color-white); font-weight: 600; }
+  .hub-t { font-family: var(--font-heading); font-weight: 600; font-size: 15px; fill: var(--color-white); }
+  .hub-s { font-family: var(--font-heading); font-size: 11.5px; fill: rgba(255, 255, 255, 0.85); }
+
+  .tangle { stroke: rgba(255, 255, 255, 0.4); stroke-width: 1.5; stroke-linecap: round; }
+  .clean { stroke: var(--color-teal-light); stroke-width: 1.5; stroke-linecap: round; opacity: 0.9; }
+  .arrow { fill: none; stroke: var(--color-teal-light); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade { animation: i-fade 0.5s ease-out both; animation-delay: var(--d, 0s); }
+    .draw { stroke-dasharray: 1; animation: i-draw 0.8s ease-out both; animation-delay: var(--d, 0s); }
+  }
+
+  @keyframes i-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes i-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+</style>

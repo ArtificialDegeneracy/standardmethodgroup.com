@@ -4,11 +4,12 @@
 // Use directly for page heroes, or via PageHeader for simple headline/subheadline pages.
 interface Props {
   compact?: boolean; // tighter vertical padding for simple header pages
+  wide?: boolean; // align the content column with the page grid instead of the narrow reading column
 }
-const { compact = false } = Astro.props;
+const { compact = false, wide = false } = Astro.props;
 ---
 
-<section class:list={["hero", { "hero-compact": compact }]}>
+<section class:list={["hero", { "hero-compact": compact, "hero-wide": wide }]}>
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-inner">
@@ -64,6 +65,10 @@ const { compact = false } = Astro.props;
     max-width: 760px;
     margin: 0 auto;
     padding: 0 var(--space-3);
+  }
+
+  .hero-wide .hero-inner {
+    max-width: var(--max-width);
   }
 
   .section-divider {

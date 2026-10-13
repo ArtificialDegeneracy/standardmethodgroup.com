@@ -1,0 +1,170 @@
+---
+// The 90-day improvement cycle in the same connected-systems language as MethodDiagram.
+// Assess -> roadmap -> three months of working sessions -> evaluate -> repeat.
+// Two compositions chosen by the component's own width (container query). SVG + CSS only.
+interface Props {
+  caption?: string;
+  idPrefix?: string;
+}
+const {
+  caption = 'Your assessment and roadmap come together in month one. Every 90 days: review progress, update the roadmap, and set the next priorities.',
+  idPrefix = 'cycle',
+} = Astro.props;
+const p = idPrefix;
+const wideMonths = [58, 128, 198];
+const narrowMonths = [0, 94, 188];
+---
+
+<figure class="cycle">
+  <div class="cycle-art">
+    <!-- Wide composition -->
+    <svg class="art art-wide" viewBox="0 0 560 312" role="img" aria-labelledby={`${p}-w-t ${p}-w-d`}>
+      <title id={`${p}-w-t`}>The 90-day improvement cycle</title>
+      <desc id={`${p}-w-d`}>An assessment leads to a prioritized 90-day roadmap. Three months of working sessions follow, with questions answered between sessions. Progress is then evaluated and the next priorities set, and the cycle repeats.</desc>
+      <defs>
+        <linearGradient id={`${p}-w-g`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A7D6E" /><stop offset="1" stop-color="#1F5F53" /></linearGradient>
+      </defs>
+
+      <g fill="none">
+        <path class="line draw" style="--d:.3s" pathLength="1" d="M104 128 H132" />
+        {wideMonths.map((cy, i) => <path class="line draw" style={`--d:${0.8 + i * 0.08}s`} pathLength="1" d={`M272 128 C292 128 292 ${cy} 312 ${cy}`} />)}
+        {wideMonths.map((cy, i) => <path class="line draw" style={`--d:${1.5 + i * 0.08}s`} pathLength="1" d={`M432 ${cy} C446 ${cy} 446 128 460 128`} />)}
+        <path class="line line-loop fade" style="--d:2.1s" pathLength="1" d="M510 156 C510 262 202 262 202 160" />
+        <path class="arrow" d="M198 167 L202 160 L206 167" />
+      </g>
+
+      <g class="fade" style="--d:0s">
+        <rect class="node" x="0" y="100" width="104" height="56" rx="6" />
+        <text class="t-main" x="14" y="122">Assess</text>
+        <text class="t-sub" x="14" y="141">Where you are</text>
+      </g>
+      <g class="fade" style="--d:.5s">
+        <rect class="node" x="132" y="100" width="140" height="56" rx="6" />
+        <text class="t-main" x="146" y="122">90-day roadmap</text>
+        <text class="t-sub" x="146" y="141">Prioritized</text>
+      </g>
+      {wideMonths.map((cy, i) => (
+        <g class="fade" style={`--d:${1.0 + i * 0.2}s`}>
+          <rect class="node" x="312" y={cy - 22} width="120" height="44" rx="6" />
+          <text class="t-main" x="326" y={cy - 3}>Month {i + 1}</text>
+          <text class="t-sub" x="326" y={cy + 13}>2 working sessions</text>
+        </g>
+      ))}
+      <g class="fade" style="--d:1.9s">
+        <rect class="focus" x="460" y="100" width="100" height="56" rx="6" fill={`url(#${p}-w-g)`} />
+        <text class="t-main t-on-focus" x="474" y="122">Evaluate</text>
+        <text class="t-sub t-on-focus" x="474" y="141">Next priorities</text>
+      </g>
+      <text class="t-loop fade" style="--d:2.4s" x="360" y="256" text-anchor="middle">Repeat every 90 days</text>
+
+      <g class="fade" style="--d:1.2s">
+        <rect class="band" x="132" y="272" width="428" height="32" rx="6" />
+        <text class="t-band" x="346" y="288" text-anchor="middle" dominant-baseline="central">Between sessions: initial substantive response within two business days</text>
+      </g>
+    </svg>
+
+    <!-- Narrow composition -->
+    <svg class="art art-narrow" viewBox="0 0 300 372" role="img" aria-labelledby={`${p}-n-t ${p}-n-d`}>
+      <title id={`${p}-n-t`}>The 90-day improvement cycle</title>
+      <desc id={`${p}-n-d`}>An assessment leads to a prioritized 90-day roadmap. Three months of working sessions follow, with questions answered between sessions. Progress is then evaluated and the next priorities set, and the cycle repeats.</desc>
+      <defs>
+        <linearGradient id={`${p}-n-g`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A7D6E" /><stop offset="1" stop-color="#1F5F53" /></linearGradient>
+      </defs>
+
+      <g fill="none">
+        <path class="line draw" style="--d:.3s" pathLength="1" d="M135 44 V72" />
+        <path class="line draw" style="--d:.8s" pathLength="1" d="M135 116 V128 C135 140 41 134 41 146" />
+        <path class="line draw" style="--d:.88s" pathLength="1" d="M135 116 V146" />
+        <path class="line draw" style="--d:.96s" pathLength="1" d="M135 116 V128 C135 140 229 134 229 146" />
+        <path class="line draw" style="--d:1.5s" pathLength="1" d="M41 206 C41 226 135 220 135 240" />
+        <path class="line draw" style="--d:1.58s" pathLength="1" d="M135 206 V240" />
+        <path class="line draw" style="--d:1.66s" pathLength="1" d="M229 206 C229 226 135 220 135 240" />
+        <path class="line line-loop fade" style="--d:2.1s" pathLength="1" d="M270 264 C298 264 298 94 272 94" />
+        <path class="arrow" d="M279 90 L272 94 L279 98" />
+      </g>
+
+      <g class="fade" style="--d:0s">
+        <rect class="node" x="0" y="0" width="270" height="44" rx="6" />
+        <text class="t-main" x="14" y="22" dominant-baseline="central">Assess</text>
+        <text class="t-sub" x="256" y="22" text-anchor="end" dominant-baseline="central">Goals, tools, gaps</text>
+      </g>
+      <g class="fade" style="--d:.5s">
+        <rect class="node" x="0" y="72" width="270" height="44" rx="6" />
+        <text class="t-main" x="14" y="94" dominant-baseline="central">90-day roadmap</text>
+        <text class="t-sub" x="256" y="94" text-anchor="end" dominant-baseline="central">Prioritized</text>
+      </g>
+      {narrowMonths.map((x, i) => (
+        <g class="fade" style={`--d:${1.0 + i * 0.2}s`}>
+          <rect class="node" x={x} y="146" width="82" height="60" rx="6" />
+          <text class="t-main t-c" x={x + 41} y="168" text-anchor="middle">Month {i + 1}</text>
+          <text class="t-sub t-c" x={x + 41} y="188" text-anchor="middle">2 sessions</text>
+        </g>
+      ))}
+      <g class="fade" style="--d:1.9s">
+        <rect class="focus" x="0" y="240" width="270" height="48" rx="6" fill={`url(#${p}-n-g)`} />
+        <text class="t-main t-on-focus" x="14" y="264" dominant-baseline="central">Evaluate</text>
+        <text class="t-sub t-on-focus" x="256" y="264" text-anchor="end" dominant-baseline="central">Next priorities</text>
+      </g>
+      <g class="fade" style="--d:1.2s">
+        <rect class="band" x="0" y="312" width="270" height="48" rx="6" />
+        <text class="t-band" x="135" y="329" text-anchor="middle" dominant-baseline="central">Between sessions, an initial substantive</text>
+        <text class="t-band" x="135" y="347" text-anchor="middle" dominant-baseline="central">response within two business days</text>
+      </g>
+    </svg>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .cycle {
+    padding: var(--space-3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    background: var(--color-navy);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+  }
+
+  @media (max-width: 480px) { .cycle { padding: var(--space-2); } }
+
+  .cycle-art { container-type: inline-size; }
+
+  .art { display: block; width: 100%; height: auto; }
+  .art-narrow { display: none; }
+
+  @container (max-width: 519px) {
+    .art-wide { display: none; }
+    .art-narrow { display: block; }
+  }
+
+  figcaption {
+    margin-top: var(--space-2);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .node { fill: rgba(255, 255, 255, 0.05); stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
+  .band { fill: rgba(95, 201, 181, 0.1); stroke: rgba(95, 201, 181, 0.5); stroke-width: 1; }
+  .focus { stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
+
+  .t-main { font-family: var(--font-heading); font-weight: 600; font-size: 14px; fill: var(--color-white); }
+  .t-sub { font-family: var(--font-heading); font-size: 11px; fill: rgba(255, 255, 255, 0.72); }
+  .t-on-focus { fill: var(--color-white); }
+  .t-band { font-family: var(--font-heading); font-size: 11.5px; fill: rgba(255, 255, 255, 0.88); }
+  .t-loop { font-family: var(--font-heading); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; fill: rgba(255, 255, 255, 0.56); }
+  .t-c { font-size: 13px; }
+
+  .line { stroke: var(--color-teal-light); stroke-width: 1.5; stroke-linecap: round; opacity: 0.85; }
+  .line-loop { stroke-dasharray: 0.02 0.02; }
+  .arrow { fill: none; stroke: var(--color-teal-light); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade { animation: c-fade 0.5s ease-out both; animation-delay: var(--d, 0s); }
+    .draw { stroke-dasharray: 1; animation: c-draw 0.8s ease-out both; animation-delay: var(--d, 0s); }
+  }
+
+  @keyframes c-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes c-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+</style>

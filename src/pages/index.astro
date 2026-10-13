@@ -1,6 +1,60 @@
 ---
 import Base from '../layouts/Base.astro';
 import CTAStrip from '../components/CTAStrip.astro';
+import MethodDiagram from '../components/MethodDiagram.astro';
+import resultsData from '../data/results.json';
+
+// Only entries with approved: true render. See src/data/results.json.
+const results = resultsData.filter((r) => r.approved);
+
+const goingWrong = [
+  "Your office runs on texts, emails, and one person who knows where everything is.",
+  "Month-end reporting takes two days because nobody's pulling the data until the last minute.",
+  "A customer calls while you're on a job. By the time you call back, they've hired someone else.",
+  "You spend your evenings on paperwork instead of with your family.",
+];
+
+const comingNext = [
+  "You want to take on more work without hiring another person to hold it together.",
+  "You're adding a crew, a service, or a second location, and the way you run things won't stretch that far.",
+  "You want to know which jobs actually make money.",
+  "You want your website and your phone to bring in the work you want, then hand it off cleanly.",
+];
+
+const steps = [
+  { title: "We talk", body: "A 30-minute conversation about how your business runs and where it is costing you. Nothing to prepare." },
+  { title: "We agree the measures", body: "We write down the problem, the measures, and where you are today. Then we come back with a working example before you spend anything." },
+  { title: "We build it", body: "Inside tools you already use, or inexpensive ones that fit. Tested, documented, and built to keep working when we are not looking at it." },
+  { title: "We stay on it", body: "A monthly report against the measures we agreed, including the ones that did not move, and what we are doing about them." },
+];
+
+const offerings = [
+  {
+    key: "systems",
+    tag: "Our primary service",
+    name: "Business systems and process improvement",
+    body: "We identify the operational problem, design the solution, and implement it. That might be a redesigned process, automation, connected software, a custom tool, or call coverage where a client's needs justify it.",
+    href: "/services",
+    cta: "See how this works",
+  },
+  {
+    key: "concierge",
+    tag: "Ongoing advisory",
+    name: "AI Concierge",
+    lead: "Your AI partner. Without the full-time hire.",
+    body: "For owners who want to adopt AI and automation and make measurable progress without the time to work it all out alone.",
+    href: "/services/ai-concierge",
+    cta: "See AI Concierge",
+  },
+  {
+    key: "web",
+    tag: "Secondary service",
+    name: "Website development",
+    body: "A website that helps the right customers find you and captures their enquiry properly.",
+    href: "/services/websites",
+    cta: "See website development",
+  },
+];
 
 const faqs = [
   {
@@ -16,127 +70,170 @@ const faqs = [
     a: "We show you a working version before you commit. The first build is something you can actually look at and react to, not a proposal full of promises.",
   },
   {
+    q: "Do you guarantee results?",
+    a: "No. We agree the problem, the measures, and what success looks like in writing before we build, record where you are today, and report against those measures. We are accountable for delivering what we agreed and for telling you honestly what happened. We don't promise revenue or any outcome that depends on things outside our control.",
+  },
+  {
+    q: "Can you help us start using AI?",
+    a: "Yes. If you want to adopt AI but do not have the time to work out where it helps, AI Concierge is an ongoing advisory relationship: an assessment, a 90-day roadmap, two working sessions a month, and questions answered in between. Many of the businesses we work with start with a specific problem instead, and we recommend whichever fits.",
+  },
+  {
+    q: "Do you build websites?",
+    a: "Yes. A website is one of the solutions we build when the problem is how customers find you or reach you. We design it around what happens to an enquiry once it arrives, not only how it looks.",
+  },
+  {
     q: "What happens after it's built?",
-    a: "A monthly check-in and quality report that shows exactly what ran, what needs attention, and what's improving. We stay on it as an operations partner, not a help desk you have to chase.",
+    a: "A monthly check-in and report that shows what ran, what needs attention, and how the agreed measures are moving. One person who knows your business, not a help desk you have to chase.",
   },
 ];
 ---
 
 <Base>
+  <!-- 1. Hero: outcome -->
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-glow" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <span class="hero-eyebrow">Operations partner for Tampa Bay small businesses</span>
-      <h1 class="hero-headline">We build systems that run your business the way you'd run it, if you had the time.</h1>
-      <p class="hero-sub">Standard Method Group helps small business owners in Tampa Bay stop losing time to paperwork, missed steps, and manual processes. We find what's falling through the cracks and build something that catches it.</p>
-      <div class="hero-ctas">
-        <a href="/contact" class="hero-cta">Let's talk about how your business runs</a>
-        <a href="/calculator" class="hero-cta-secondary">See what manual work is costing you &rarr;</a>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">Business improvement consultancy &middot; Pinellas County, FL</p>
+        <h1 class="hero-headline">
+          <span class="hero-line">Better systems.</span>
+          <span class="hero-line hero-line-accent">Better business outcomes.</span>
+        </h1>
+        <p class="hero-sub">We find what is costing your business time, money, or growth, and design the practical fix. That can mean repairing a process that breaks every week, or building toward a goal you have not had time to start. We agree the measures first and report against them.</p>
+        <div class="hero-ctas">
+          <a href="/contact" class="hero-cta">Book a 30-minute call</a>
+          <a href="/calculator" class="hero-cta-secondary">See what it's costing you &rarr;</a>
+        </div>
+        <p class="hero-note">30 minutes. No pitch, no obligation.</p>
+      </div>
+
+      <div class="hero-visual">
+        <MethodDiagram />
       </div>
     </div>
-    <div class="section-divider section-divider-light" aria-hidden="true"></div>
+    <div class="section-divider" aria-hidden="true"></div>
   </section>
 
-  <!-- Problem Recognition Strip -->
-  <section class="problem-strip">
-    <div class="problem-inner">
-      <p>Your office runs on texts, emails, and one person who knows where everything is.</p>
-      <p>Month-end reporting takes two days because nobody's pulling the data until the last minute.</p>
-      <p>A customer calls while you're on a job. By the time you call back, they've already hired someone else.</p>
-      <p>You spend your evenings on paperwork instead of with your family.</p>
-    </div>
-  </section>
-
-  <!-- Service Summary (interactive tabs) -->
-  <section class="services reveal">
-    <div class="services-inner">
-      <h2 class="services-heading">How we work with you</h2>
-
-      <div class="tabs">
-        <input type="radio" name="svc" id="svc-1" class="tab-input" checked />
-        <input type="radio" name="svc" id="svc-2" class="tab-input" />
-        <input type="radio" name="svc" id="svc-3" class="tab-input" />
-
-        <div class="tab-list" role="tablist">
-          <label for="svc-1" class="tab-label">
-            <span class="tab-num">01</span>
-            <span class="tab-title">We find the problem first</span>
-          </label>
-          <label for="svc-2" class="tab-label">
-            <span class="tab-num">02</span>
-            <span class="tab-title">We build the system</span>
-          </label>
-          <label for="svc-3" class="tab-label">
-            <span class="tab-num">03</span>
-            <span class="tab-title">We stay on it</span>
-          </label>
+  <!-- 2. Problem and objective -->
+  <section class="kinds reveal">
+    <div class="wrap">
+      <p class="kicker">What we work on</p>
+      <h2 class="section-title section-title-wide">Something that keeps going wrong, or something you want to build.</h2>
+      <div class="kinds-grid">
+        <div class="kind kind-wrong">
+          <h3>When something keeps going wrong</h3>
+          <ul>
+            {goingWrong.map((t) => <li>{t}</li>)}
+          </ul>
         </div>
-
-        <div class="tab-panels">
-          <div class="tab-panel" id="panel-1">
-            <div class="service-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </div>
-            <h3>We find the problem first</h3>
-            <p>A free 30-minute conversation about how your business actually runs today. No pitch, no demo. We come back with a working example before you spend a dollar.</p>
-          </div>
-          <div class="tab-panel" id="panel-2">
-            <div class="service-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"></path><path d="M3 12h18"></path><path d="M3 17h12"></path><circle cx="18" cy="17" r="2.5"></circle></svg>
-            </div>
-            <h3>We build systems that handle the routine</h3>
-            <p>Document routing, status updates, approvals, reports, even the phone. The stuff that happens the same way every time gets built into a system that runs it without you. We'll show you a working version before you spend a dollar.</p>
-          </div>
-          <div class="tab-panel" id="panel-3">
-            <div class="service-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12a8.5 8.5 0 1 1-2.5-6"></path><polyline points="20.5 4 20.5 9 15.5 9"></polyline></svg>
-            </div>
-            <h3>We stay on it</h3>
-            <p>A monthly check-in and quality report that shows exactly what ran, what needs attention, and what's improving. Not a help desk. An operations partner.</p>
-          </div>
+        <div class="kind kind-next">
+          <h3>When you want to do something new</h3>
+          <ul>
+            {comingNext.map((t) => <li>{t}</li>)}
+          </ul>
         </div>
       </div>
     </div>
-    <div class="services-cta">
-      <a href="/how-we-work" class="service-link">See how it works &rarr;</a>
-      <span class="services-cta-divider">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-      <a href="/calculator" class="service-link">Calculate your costs &rarr;</a>
+  </section>
+
+  <!-- 3. Cost -->
+  <section class="cost reveal">
+    <div class="wrap cost-grid">
+      <div>
+        <p class="kicker">What it costs</p>
+        <h2 class="section-title">Put a number on it before you decide anything.</h2>
+      </div>
+      <div class="cost-example">
+        <p class="cost-sentence">Ten hours a week of paperwork at $25 an hour is <strong>$12,900 a year</strong>.</p>
+        <p class="cost-note">An example from our calculator. It counts only admin time, so it leaves out late payments and work you never got. Enter your own hours and rate.</p>
+        <a href="/calculator" class="text-link">Open the calculator &rarr;</a>
+      </div>
     </div>
   </section>
 
-  <!-- Testimonial (Edge Marine) -->
-  <section class="testimonial reveal">
-    <div class="testimonial-inner">
-      <div class="testimonial-mark" aria-hidden="true">&ldquo;</div>
-      <blockquote class="testimonial-quote">
-        Within the first month of working together, overdue invoices that had been sitting for weeks got paid, because the follow-up went out on its own instead of waiting for someone to remember.
-      </blockquote>
-      <p class="testimonial-attr">Edge Marine Construction <span>&middot; St. Petersburg, FL</span></p>
+  <!-- 4. Results: renders only approved entries -->
+  {results.length > 0 && (
+    <section class="results reveal">
+      <div class="wrap">
+        <p class="kicker">Results</p>
+        <h2 class="section-title">What changed for clients.</h2>
+        <div class="results-grid">
+          {results.map((r) => (
+            <article class="result">
+              <p class="result-text">{r.result}</p>
+              <p class="result-attr">{r.client}{r.location && <span> &middot; {r.location}</span>}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 5. Approach -->
+  <section class="approach reveal">
+    <div class="wrap">
+      <p class="kicker">How we work</p>
+      <h2 class="section-title">We agree what success looks like before we build anything.</h2>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <span class="step-num" aria-hidden="true">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="accountable">
+        <div>
+          <h3>What we are accountable for</h3>
+          <p>Delivering what we agreed and telling you honestly what happened. We do not promise revenue or outcomes that depend on things outside our control.</p>
+          <a href="/how-we-work" class="text-link text-link-light">See the full process &rarr;</a>
+        </div>
+        <ul class="accountable-points">
+          <li><strong>Written first.</strong> The problem, the measures, and what success looks like.</li>
+          <li><strong>A starting point.</strong> Where you are today, recorded where it can be measured.</li>
+          <li><strong>Reported honestly.</strong> Each month, including measures that did not move.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- Credibility Strip -->
-  <section class="credibility">
-    <div class="credibility-inner">
-      <p>Small businesses deal with the same operational problems as Fortune 500 companies: missed steps, lost information, processes that depend on one person's memory. The difference is they can't afford a seven-figure solution. SMG brings enterprise-grade discipline to small business operations, at a scale and price that actually makes sense.</p>
+  <!-- 6. Ways we work -->
+  <section class="solutions reveal">
+    <div class="wrap">
+      <p class="kicker">Three ways we work</p>
+      <h2 class="section-title">The problem decides the solution.</h2>
+      <p class="section-lead">We do not start with a tool. Depending on what we find, we work with you in one of three ways.</p>
+      <ul class="offerings">
+        {offerings.map((o) => (
+          <li class={`offering offering-${o.key}`}>
+            <p class="offering-tag">{o.tag}</p>
+            <h3>{o.name}</h3>
+            {o.lead && <p class="offering-lead">{o.lead}</p>}
+            <p>{o.body}</p>
+            <a href={o.href} class="offering-link">{o.cta} &rarr;</a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
-  <!-- Problem Grid -->
+  <!-- 7. Industries -->
   <section class="industries reveal">
-    <h2 class="industries-heading">Sound familiar?</h2>
-    <div class="industries-inner">
-      <a href="/who-we-help" class="industry-card"><span class="industry-text">Paperwork piles up every evening</span><span class="industry-more" aria-hidden="true">Learn more &rarr;</span></a>
-      <a href="/who-we-help" class="industry-card"><span class="industry-text">One person holds all the process knowledge</span><span class="industry-more" aria-hidden="true">Learn more &rarr;</span></a>
-      <a href="/never-miss-a-call" class="industry-card"><span class="industry-text">Calls go to voicemail when you're on a job</span><span class="industry-more" aria-hidden="true">Learn more &rarr;</span></a>
-      <a href="/who-we-help" class="industry-card"><span class="industry-text">Month-end reporting takes days</span><span class="industry-more" aria-hidden="true">Learn more &rarr;</span></a>
-      <a href="/who-we-help" class="industry-card"><span class="industry-text">You bought software nobody uses</span><span class="industry-more" aria-hidden="true">Learn more &rarr;</span></a>
-      <a href="/contact" class="industry-card industry-card-other"><span class="industry-text">Something else?</span><span class="industry-more" aria-hidden="true">Tell us &rarr;</span></a>
+    <div class="wrap industries-inner">
+      <h2>Industries we know well</h2>
+      <ul class="industry-list">
+        <li><a href="/who-we-help">Trades and construction</a></li>
+        <li><a href="/who-we-help">Marine contracting</a></li>
+        <li><a href="/who-we-help">Property management</a></li>
+        <li><a href="/who-we-help">Law offices</a></li>
+        <li><a href="/who-we-help">Other service businesses</a></li>
+      </ul>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- 8. FAQ -->
   <section class="faq reveal">
     <div class="faq-inner">
       <h2 class="faq-heading">Questions owners usually ask</h2>
@@ -154,12 +251,15 @@ const faqs = [
     </div>
   </section>
 
-  <CTAStrip />
+  <CTAStrip
+    headline="30 minutes. No pitch. Just a conversation about how your business runs."
+    buttonText="Book a 30-minute call"
+  />
 </Base>
 
 <script>
-  import { animate } from 'motion/mini'; // WAAPI build, ~2KB
   import { inView } from 'motion';
+  import { animate } from 'motion/mini'; // WAAPI build, ~2KB
 
   // Runs on every page-load (ClientRouter). Homepage only: this script ships with index.astro.
   document.addEventListener('astro:page-load', () => {
@@ -175,16 +275,72 @@ const faqs = [
 </script>
 
 <style>
-  /* Hero — navy with layered abstract backdrop */
+  /* Shared bits */
+  .wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .kicker {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    margin-bottom: var(--space-2);
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: var(--text-h2);
+    letter-spacing: var(--tracking-heading);
+    line-height: 1.15;
+    color: var(--color-navy);
+    max-width: 20ch;
+  }
+
+  .section-title-wide { max-width: 28ch; }
+
+  .section-lead {
+    font-size: var(--text-lead);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-2);
+    max-width: 56ch;
+  }
+
+  .text-link {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    color: var(--color-deep-teal);
+  }
+
+  .text-link:hover { text-decoration: underline; }
+
+  .text-link-light { color: var(--color-teal-light); }
+  .text-link-light:hover { color: var(--color-white); }
+
+  section.kinds,
+  section.cost,
+  section.results,
+  section.approach,
+  section.solutions {
+    padding: var(--space-12) 0;
+  }
+
+  /* 1. Hero */
   .hero {
     position: relative;
     overflow: hidden;
-    padding: calc(var(--space-12) + var(--space-5)) 0 calc(var(--space-12) + var(--space-8));
-    background: var(--color-navy);
     isolation: isolate;
+    background: var(--color-navy);
+    padding: var(--space-12) 0 calc(var(--space-12) + var(--space-5));
   }
 
-  /* Dot-grid texture */
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -195,7 +351,6 @@ const faqs = [
     -webkit-mask-image: radial-gradient(ellipse 90% 80% at 70% 20%, #000 30%, transparent 75%);
   }
 
-  /* Soft teal glow drifting behind the headline */
   .hero-glow {
     position: absolute;
     top: -20%;
@@ -205,7 +360,7 @@ const faqs = [
     max-width: 760px;
     max-height: 760px;
     z-index: -1;
-    background: radial-gradient(circle, rgba(42, 125, 110, 0.55) 0%, rgba(42, 125, 110, 0) 65%);
+    background: radial-gradient(circle, rgba(42, 125, 110, 0.5) 0%, rgba(42, 125, 110, 0) 65%);
     animation: hero-glow-drift 20s ease-in-out infinite;
   }
 
@@ -215,75 +370,59 @@ const faqs = [
     100% { transform: translate(0, 0) scale(1); }
   }
 
-  .hero-inner {
+  .hero-grid {
     position: relative;
-    max-width: 760px;
+    max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-3);
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: var(--space-8);
+    align-items: center;
   }
 
   .hero-eyebrow {
-    display: inline-block;
     font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: 0.8125rem;
-    letter-spacing: 0.08em;
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
-    color: #5FC9B5;
-    margin-bottom: var(--space-2);
+    color: var(--color-teal-light);
+    margin-bottom: var(--space-3);
   }
 
   .hero-headline {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
-    font-size: 3.25rem;
+    font-size: var(--text-display);
+    line-height: 1.02;
+    letter-spacing: var(--tracking-display);
     color: var(--color-white);
-    line-height: 1.08;
-    letter-spacing: -0.015em;
   }
 
-  /* Entrance: pure CSS so it starts at first paint (JS-driven hiding delays LCP). */
+  .hero-line { display: block; }
+  .hero-line-accent { color: var(--color-teal-light); }
+
+  .hero-sub {
+    font-size: var(--text-lead);
+    color: var(--color-ink-on-dark);
+    line-height: 1.6;
+    margin-top: var(--space-3);
+    max-width: 38em;
+  }
+
+  /* Entrance: pure CSS so it starts at first paint. */
   @media (prefers-reduced-motion: no-preference) {
-    .hero-headline, .hero-sub {
+    .hero-headline, .hero-sub, .hero-visual {
       animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     .hero-sub { animation-delay: 0.08s; }
+    .hero-visual { animation-delay: 0.16s; }
   }
 
   @keyframes hero-rise {
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: none; }
-  }
-
-  .hero-sub {
-    font-family: var(--font-body);
-    font-size: 1.3125rem;
-    color: rgba(255, 255, 255, 0.78);
-    line-height: 1.6;
-    margin-top: var(--space-3);
-    max-width: 620px;
-  }
-
-  /* Curved divider that sits at the bottom of dark sections */
-  .section-divider {
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 56px;
-    z-index: 1;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-  }
-
-  .section-divider-light {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 56' preserveAspectRatio='none'%3E%3Cpath d='M0 56h1440V28c-240 24-480 24-720 12C480 28 240 4 0 28z' fill='%23F7F5F2'/%3E%3C/svg%3E");
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-glow {
-      animation: none;
-    }
   }
 
   .hero-ctas {
@@ -303,7 +442,6 @@ const faqs = [
     background: var(--color-teal);
     padding: 15px 30px;
     border-radius: var(--radius);
-    text-decoration: none;
     box-shadow: var(--shadow-md);
     transition: background 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
   }
@@ -316,16 +454,15 @@ const faqs = [
   }
 
   .hero-cta:focus-visible {
-    outline: 3px solid rgba(42, 125, 110, 0.4);
-    outline-offset: 2px;
+    outline: 3px solid var(--color-teal-light);
+    outline-offset: 3px;
   }
 
   .hero-cta-secondary {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading-medium);
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
+    color: rgba(255, 255, 255, 0.88);
   }
 
   .hero-cta-secondary:hover {
@@ -333,393 +470,294 @@ const faqs = [
     text-decoration: underline;
   }
 
-  .services-cta-divider {
-    color: var(--color-border);
+  .hero-cta-secondary:focus-visible {
+    outline: 3px solid var(--color-teal-light);
+    outline-offset: 3px;
+    border-radius: var(--radius);
   }
 
-  /* Problem Recognition Strip */
-  .problem-strip {
-    position: relative;
-    overflow: hidden;
-    background: var(--color-navy);
-    padding: var(--space-12) 0;
-    isolation: isolate;
+  .hero-note {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.62);
+    margin-top: var(--space-2);
   }
 
-  .problem-strip::before {
-    content: '';
+  .section-divider {
     position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
-    background-size: 28px 28px;
-    mask-image: radial-gradient(ellipse 80% 90% at 85% 80%, #000 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 85% 80%, #000 20%, transparent 70%);
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 56' preserveAspectRatio='none'%3E%3Cpath d='M0 56h1440V28c-240 24-480 24-720 12C480 28 240 4 0 28z' fill='%23F7F5F2'/%3E%3C/svg%3E");
   }
 
-  .problem-inner {
-    position: relative;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-3);
+  /* 2. Problem and objective */
+  .kinds { background: var(--color-warm-white); }
+
+  .kinds-grid {
+    margin-top: var(--space-5);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-5);
   }
 
-  .problem-inner p {
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: 1.1875rem;
-    color: rgba(255, 255, 255, 0.92);
-    line-height: 1.55;
-    position: relative;
-    padding-top: var(--space-2);
-    border-top: 2px solid var(--color-teal);
-  }
+  .kind { border-top: 3px solid var(--color-navy); padding-top: var(--space-3); }
+  .kind-wrong { border-top-color: var(--color-teal); }
 
-  /* Service Summary (tabs) */
-  .services {
-    padding: var(--space-12) 0 var(--space-8);
-  }
-
-  .services-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-3);
-  }
-
-  .services-heading {
+  .kind h3 {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     color: var(--color-navy);
-    text-align: center;
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-1);
   }
 
-  .tabs {
+  .kind ul { list-style: none; }
+
+  .kind li {
+    font-size: 1.125rem;
+    line-height: 1.55;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .kind li:last-child { border-bottom: none; }
+
+  /* 3. Cost */
+  .cost { background: var(--color-warm-white-alt); }
+
+  .cost-grid {
     display: grid;
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .cost-sentence {
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.125rem);
+    line-height: 1.3;
+    color: var(--color-navy);
+  }
+
+  .cost-sentence strong {
+    font-weight: var(--font-weight-body-semibold);
+    color: var(--color-deep-teal);
+    white-space: nowrap;
+  }
+
+  .cost-note {
+    margin: var(--space-2) 0 var(--space-2);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    max-width: 52ch;
+  }
+
+  /* 4. Results */
+  .results { background: var(--color-white); }
+
+  .results-grid {
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .result {
+    border-left: 3px solid var(--color-teal);
+    padding: var(--space-1) 0 var(--space-1) var(--space-3);
+  }
+
+  .result-text { font-size: 1.25rem; line-height: 1.5; color: var(--color-navy); }
+
+  .result-attr {
+    margin-top: var(--space-2);
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    color: var(--color-navy);
+  }
+
+  .result-attr span { font-weight: 400; color: var(--color-text-secondary); }
+
+  /* 5. Approach */
+  .approach { background: var(--color-warm-white); }
+
+  .steps {
+    list-style: none;
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .step {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-2);
+  }
+
+  .step-num {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 2.75rem;
+    line-height: 1;
+    color: var(--color-teal);
+    margin-bottom: var(--space-2);
+  }
+
+  .step h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.125rem;
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .step p { font-size: 1rem; line-height: 1.55; color: var(--color-text); }
+
+  .accountable {
+    margin-top: var(--space-8);
+    padding: var(--space-5);
+    background: var(--color-navy);
+    border-radius: var(--radius-lg);
+    color: var(--color-ink-on-dark);
+  }
+
+  .accountable {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--space-5);
     align-items: start;
   }
 
-  /* Hidden radio inputs drive the tab state — no JS. */
-  .tab-input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
+  .accountable-points { list-style: none; }
+
+  .accountable-points li {
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: var(--space-1) 0 var(--space-1) var(--space-2);
+    border-left: 2px solid var(--color-teal);
+    margin-bottom: var(--space-2);
   }
 
-  .tab-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-  }
+  .accountable-points li:last-child { margin-bottom: 0; }
+  .accountable-points strong { color: var(--color-white); font-weight: var(--font-weight-body-semibold); }
 
-  .tab-label {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-3);
-    border-radius: var(--radius);
-    border-left: 3px solid transparent;
-    cursor: pointer;
-    transition: background 200ms var(--ease), border-color 200ms var(--ease);
-  }
-
-  .tab-label:hover {
-    background: var(--color-warm-white-alt);
-  }
-
-  .tab-num {
+  .accountable h3 {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading);
-    font-size: 0.875rem;
-    color: var(--color-placeholder);
+    font-size: 1.25rem;
+    color: var(--color-white);
+    margin-bottom: var(--space-1);
   }
 
-  .tab-title {
+  .accountable p { max-width: 62ch; font-size: 1.0625rem; margin-bottom: var(--space-2); }
+
+  /* 6. Ways we work */
+  .solutions { background: var(--color-warm-white-alt); }
+
+  .offerings {
+    list-style: none;
+    margin-top: var(--space-5);
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .offering {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .offering-systems { border-top: 4px solid var(--color-teal); box-shadow: var(--shadow-md); }
+
+  .offering-concierge {
+    border-color: rgba(42, 125, 110, 0.45);
+    border-left: 4px solid var(--color-teal);
+  }
+
+  .offering-tag {
     font-family: var(--font-heading);
     font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    margin-bottom: var(--space-1);
+  }
+
+  .offering h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .offering-lead {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    color: var(--color-deep-teal);
+    margin-bottom: var(--space-1);
+  }
+
+  .offering p:not(.offering-tag):not(.offering-lead) { font-size: 1rem; line-height: 1.55; margin-bottom: var(--space-2); }
+
+  .offering-link {
+    margin-top: auto;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    color: var(--color-deep-teal);
+  }
+
+  .offering-link:hover { text-decoration: underline; }
+
+  /* 7. Industries */
+  .industries { background: var(--color-warm-white); padding: var(--space-8) 0; }
+
+  .industries-inner {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+  }
+
+  .industries h2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
     font-size: 1.125rem;
     color: var(--color-navy);
   }
 
-  .tab-panels {
-    position: relative;
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    padding: var(--space-5);
-    min-height: 240px;
-  }
-
-  .tab-panel {
-    display: none;
-    animation: panel-in 300ms var(--ease) both;
-  }
-
-  @keyframes panel-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Active-tab wiring: each checked radio lights its label + shows its panel. */
-  #svc-1:checked ~ .tab-list .tab-label:nth-of-type(1),
-  #svc-2:checked ~ .tab-list .tab-label:nth-of-type(2),
-  #svc-3:checked ~ .tab-list .tab-label:nth-of-type(3) {
-    background: var(--color-warm-white-alt);
-    border-left-color: var(--color-teal);
-  }
-
-  #svc-1:checked ~ .tab-list .tab-label:nth-of-type(1) .tab-num,
-  #svc-2:checked ~ .tab-list .tab-label:nth-of-type(2) .tab-num,
-  #svc-3:checked ~ .tab-list .tab-label:nth-of-type(3) .tab-num {
-    color: var(--color-teal);
-  }
-
-  #svc-1:checked ~ .tab-panels #panel-1,
-  #svc-2:checked ~ .tab-panels #panel-2,
-  #svc-3:checked ~ .tab-panels #panel-3 {
-    display: block;
-  }
-
-  /* Keyboard focus indicator on the visible label */
-  .tab-input:focus-visible ~ .tab-list .tab-label {
-    outline: none;
-  }
-  #svc-1:focus-visible ~ .tab-list .tab-label:nth-of-type(1),
-  #svc-2:focus-visible ~ .tab-list .tab-label:nth-of-type(2),
-  #svc-3:focus-visible ~ .tab-list .tab-label:nth-of-type(3) {
-    outline: 3px solid var(--color-teal);
-    outline-offset: 2px;
-  }
-
-  .service-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    border-radius: var(--radius);
-    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-deep-teal) 100%);
-    color: var(--color-white);
-    box-shadow: 0 6px 16px rgba(42, 125, 110, 0.3);
-    margin-bottom: var(--space-3);
-  }
-
-  .service-icon svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .tab-panel h3 {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading-medium);
-    font-size: 1.5rem;
-    color: var(--color-navy);
-    margin-bottom: var(--space-2);
-  }
-
-  .tab-panel p {
-    font-family: var(--font-body);
-    font-size: 1.1875rem;
-    color: var(--color-text);
-    line-height: 1.6;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .tab-panel {
-      animation: none;
-    }
-  }
-
-  .services-cta {
-    max-width: var(--max-width);
-    margin: var(--space-5) auto 0;
-    padding: 0 var(--space-3);
-    text-align: center;
-  }
-
-  .service-link {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: 1rem;
-    color: var(--color-teal);
-    text-decoration: none;
-  }
-
-  .service-link:hover {
-    color: var(--color-deep-teal);
-    text-decoration: underline;
-  }
-
-  /* Testimonial */
-  .testimonial {
-    background: var(--color-warm-white-alt);
-    padding: var(--space-12) 0;
-  }
-
-  .testimonial-inner {
-    max-width: var(--max-width-narrow);
-    margin: 0 auto;
-    padding: 0 var(--space-3);
-    text-align: center;
-  }
-
-  .testimonial-mark {
-    font-family: var(--font-heading);
-    font-size: 4.5rem;
-    line-height: 0.6;
-    color: var(--color-teal);
-    margin-bottom: var(--space-2);
-  }
-
-  .testimonial-quote {
-    font-family: var(--font-body);
-    font-size: 1.625rem;
-    font-weight: var(--font-weight-body-semibold);
-    color: var(--color-navy);
-    line-height: 1.45;
-    margin: 0 auto;
-    max-width: 740px;
-  }
-
-  .testimonial-attr {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: 1rem;
-    color: var(--color-navy);
-    margin-top: var(--space-3);
-  }
-
-  .testimonial-attr span {
-    font-weight: var(--font-weight-heading-medium);
-    color: var(--color-text-secondary);
-  }
-
-  /* Credibility Strip — strong color block */
-  .credibility {
-    position: relative;
-    overflow: hidden;
-    background: var(--color-deep-teal);
-    padding: var(--space-12) 0;
-    isolation: isolate;
-  }
-
-  .credibility::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
-    background-size: 28px 28px;
-    mask-image: radial-gradient(ellipse 70% 90% at 15% 50%, #000 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 90% at 15% 50%, #000 20%, transparent 70%);
-  }
-
-  .credibility-inner {
-    position: relative;
-    max-width: var(--max-width-narrow);
-    margin: 0 auto;
-    padding: 0 var(--space-3);
-  }
-
-  .credibility-inner p {
-    font-family: var(--font-body);
-    font-size: 1.375rem;
-    color: rgba(255, 255, 255, 0.95);
-    line-height: 1.6;
-  }
-
-  /* Problem Grid */
-  .industries {
-    padding: var(--space-12) 0 var(--space-8);
-  }
-
-  .industries-heading {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: 1.75rem;
-    color: var(--color-navy);
-    text-align: center;
-    max-width: var(--max-width);
-    margin: 0 auto var(--space-5);
-    padding: 0 var(--space-3);
-  }
-
-  .industries-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 var(--space-3);
+  .industry-list {
+    list-style: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-2);
+    gap: var(--space-1) var(--space-3);
   }
 
-  .industry-card {
+  .industry-list a {
     font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: 1.0625rem;
-    color: var(--color-navy);
-    text-decoration: none;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    padding: var(--space-3);
-    background: var(--color-white);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    transition: transform 200ms var(--ease), box-shadow 200ms var(--ease), color 200ms var(--ease);
-    flex: 1 1 calc(33.333% - var(--space-2));
-    min-width: 220px;
-  }
-
-  .industry-card:hover {
-    transform: var(--lift);
-    box-shadow: var(--shadow-md);
-    color: var(--color-teal);
-  }
-
-  .industry-more {
-    font-size: 0.875rem;
     font-weight: var(--font-weight-heading-medium);
-    color: var(--color-teal);
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transform: translateY(-4px);
-    transition: max-height 200ms var(--ease), opacity 200ms var(--ease), transform 200ms var(--ease);
+    font-size: 1rem;
+    color: var(--color-deep-teal);
+    border-bottom: 1px solid rgba(31, 95, 83, 0.35);
   }
 
-  .industry-card:hover .industry-more,
-  .industry-card:focus-visible .industry-more {
-    max-height: 2em;
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .industry-list a:hover { border-bottom-color: var(--color-deep-teal); }
 
-  .industry-card-other {
-    border-style: dashed;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .industry-more {
-      transition: none;
-    }
-  }
-
-  /* FAQ */
+  /* 8. FAQ */
   .faq {
     background: var(--color-warm-white-alt);
     padding: var(--space-12) 0;
@@ -824,69 +862,43 @@ const faqs = [
     outline-offset: -3px;
   }
 
-  /* Mobile */
+  @media (max-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+
+    .hero-visual { max-width: 460px; }
+
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .offerings { grid-template-columns: 1fr; }
+    .cost-grid { grid-template-columns: 1fr; gap: var(--space-3); }
+  }
+
   @media (max-width: 768px) {
-    .hero {
-      padding: var(--space-8) 0 calc(var(--space-8) + var(--space-5));
-    }
+    .hero { padding: var(--space-8) 0 calc(var(--space-8) + var(--space-5)); }
 
-    .hero-inner {
-      max-width: 100%;
-    }
+    section.kinds,
+    section.cost,
+    section.results,
+    section.approach,
+    section.solutions,
+    .faq { padding: var(--space-8) 0; }
 
-    .hero-headline {
-      font-size: 2.125rem;
-    }
+    .kinds-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+    .kind li { font-size: 1.0625rem; }
 
-    .hero-sub {
-      font-size: 1.125rem;
-    }
+    .hero-cta { width: 100%; text-align: center; }
 
-    .problem-inner {
-      grid-template-columns: 1fr;
-      gap: var(--space-3);
-    }
+    .steps { grid-template-columns: 1fr; }
 
-    .problem-inner p {
-      font-size: 1.125rem;
-    }
-
-    .tabs {
-      grid-template-columns: 1fr;
-      gap: var(--space-3);
-    }
-
-    .tab-list {
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .tab-label {
-      flex: 1 1 auto;
-      border-left: none;
-      border-bottom: 3px solid transparent;
-    }
-
-    #svc-1:checked ~ .tab-list .tab-label:nth-of-type(1),
-    #svc-2:checked ~ .tab-list .tab-label:nth-of-type(2),
-    #svc-3:checked ~ .tab-list .tab-label:nth-of-type(3) {
-      border-left-color: transparent;
-      border-bottom-color: var(--color-teal);
-    }
-
-    .industry-card {
-      flex: 1 1 100%;
-    }
-
-    .testimonial-quote {
-      font-size: 1.375rem;
-    }
+    .accountable { padding: var(--space-3); grid-template-columns: 1fr; gap: var(--space-3); }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .hero-glow { animation: none; }
+
     .hero-cta,
-    .service-card,
-    .industry-card,
     .faq-icon::before,
     .faq-icon::after {
       transition: none;

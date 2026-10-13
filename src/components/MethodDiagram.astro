@@ -1,0 +1,322 @@
+---
+// Business problems -> SMG method -> outcomes we work toward.
+// Pure SVG + CSS. Two compositions: a wider one and a simplified narrow one,
+// chosen by the width of the component's own box (container query), so text stays readable.
+interface Props {
+  caption?: string;
+  idPrefix?: string;
+}
+
+const {
+  caption = 'The outcomes are what we work toward. Measures are agreed and results reported for each engagement.',
+  idPrefix = 'method',
+} = Astro.props;
+
+const stages = ['Diagnose', 'Design', 'Deliver'];
+
+// Wide composition: viewBox 400 x 404, single-line labels.
+const wide = {
+  problems: ['Missed opportunities', 'Manual work', 'Disconnected systems', 'Operational bottlenecks'],
+  outcomes: ['Time recovered', 'Costs reduced', 'Growth enabled'],
+};
+const wideProblems = wide.problems.map((label, i) => {
+  const left = i % 2 === 0;
+  const x = left ? 0 : 216;
+  const y = i < 2 ? 28 : 84;
+  const cy = y + 22;
+  const ex = left ? 184 : 216;
+  return { label, x, y, cy, path: `M${ex} ${cy} C200 ${cy} 200 ${cy + 44} 200 150`, d: 0.1 + i * 0.07, ld: 0.4 + i * 0.09 };
+});
+const wideStages = stages.map((label, i) => ({ label, x: 22 + i * 124, d: 1.5 + i * 0.4 }));
+const wideOutcomes = wide.outcomes.map((label, i) => {
+  const x = i * 138;
+  const cx = x + 62;
+  const path =
+    i === 1 ? 'M200 270 V330' : `M200 270 V286 C200 310 ${cx} 306 ${cx} 330`;
+  return { label, x, cx, path, d: 2.5 + i * 0.1, ld: 2.1 + i * 0.06 };
+});
+
+// Narrow composition: viewBox 300 x 432, two-line labels, centered.
+const narrowProblems = [
+  ['Missed', 'opportunities'],
+  ['Manual work'],
+  ['Disconnected', 'systems'],
+  ['Operational', 'bottlenecks'],
+].map((lines, i) => {
+  const left = i % 2 === 0;
+  const x = left ? 0 : 162;
+  const y = i < 2 ? 26 : 90;
+  const cy = y + 26;
+  const ex = left ? 138 : 162;
+  return { lines, x, y, cy, path: `M${ex} ${cy} C150 ${cy} 150 ${cy + 40} 150 176`, d: 0.1 + i * 0.07, ld: 0.4 + i * 0.09 };
+});
+const narrowStages = stages.map((label, i) => ({ label, x: 6 + i * 100, d: 1.5 + i * 0.4 }));
+const narrowOutcomes = [
+  ['Time', 'recovered'],
+  ['Costs', 'reduced'],
+  ['Growth', 'enabled'],
+].map((lines, i) => {
+  const x = i * 104;
+  const cx = x + 46;
+  const path = i === 1 ? 'M150 298 V346' : `M150 298 V312 C150 334 ${cx} 328 ${cx} 346`;
+  return { lines, x, cx, path, d: 2.5 + i * 0.1, ld: 2.1 + i * 0.06 };
+});
+
+const p = idPrefix;
+---
+
+<figure class="method">
+  <div class="method-art">
+    <!-- Wide composition -->
+    <svg class="art art-wide" viewBox="0 0 400 404" role="img" aria-labelledby={`${p}-w-title ${p}-w-desc`}>
+      <title id={`${p}-w-title`}>From business problems to outcomes</title>
+      <desc id={`${p}-w-desc`}>Four common business problems, missed opportunities, manual work, disconnected systems and operational bottlenecks, feed the SMG method of diagnose, design and deliver. The method works toward three outcomes: time recovered, costs reduced and growth enabled.</desc>
+      <defs>
+        <linearGradient id={`${p}-w-grad`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#2A7D6E" />
+          <stop offset="1" stop-color="#1F5F53" />
+        </linearGradient>
+      </defs>
+
+      <text class="col-label fade" style="--d:0s" x="0" y="11">Business problems</text>
+
+      <g class="lines" fill="none">
+        {wideProblems.map((n) => <path class="line draw" style={`--d:${n.ld}s`} pathLength="1" d={n.path} />)}
+        {wideOutcomes.map((n) => <path class="line draw" style={`--d:${n.ld + 0}s`} pathLength="1" d={n.path} />)}
+      </g>
+
+      {wideProblems.map((n) => (
+        <g class="fade" style={`--d:${n.d}s`}>
+          <rect class="node" x={n.x} y={n.y} width="184" height="44" rx="6" />
+          <text class="node-label" x={n.x + 14} y={n.cy} dominant-baseline="central">{n.label}</text>
+        </g>
+      ))}
+
+      <g class="fade" style="--d:1.0s">
+        <rect class="panel" x="0" y="150" width="400" height="120" rx="10" fill={`url(#${p}-w-grad)`} />
+        <text class="panel-label" x="20" y="176">The SMG method</text>
+        {wideStages.map((s, i) => (
+          <>
+            <rect class="chip" style={`--d:${s.d}s`} x={s.x} y="190" width="108" height="44" rx="6" />
+            <text class="chip-label" x={s.x + 54} y="212" text-anchor="middle" dominant-baseline="central">{s.label}</text>
+            {i < 2 && <path class="chevron" d={`M${s.x + 112} 208 L${s.x + 116} 212 L${s.x + 112} 216`} />}
+          </>
+        ))}
+        <text class="panel-sub" x="200" y="256" text-anchor="middle">Find the right fix. Measure what matters.</text>
+      </g>
+
+      {wideOutcomes.map((n) => (
+        <g class="fade fade-late" style={`--d:${n.d}s`}>
+          <path class="arrow" d={`M${n.cx - 4} 323 L${n.cx} 329 L${n.cx + 4} 323`} />
+          <rect class="outcome" x={n.x} y="330" width="124" height="44" rx="6" />
+          <text class="outcome-label" x={n.x + 62} y="352" text-anchor="middle" dominant-baseline="central">{n.label}</text>
+        </g>
+      ))}
+
+      <text class="col-label fade fade-late" style="--d:2.7s" x="200" y="396" text-anchor="middle">Outcomes we work toward</text>
+    </svg>
+
+    <!-- Narrow composition -->
+    <svg class="art art-narrow" viewBox="0 0 300 432" role="img" aria-labelledby={`${p}-n-title ${p}-n-desc`}>
+      <title id={`${p}-n-title`}>From business problems to outcomes</title>
+      <desc id={`${p}-n-desc`}>Four common business problems, missed opportunities, manual work, disconnected systems and operational bottlenecks, feed the SMG method of diagnose, design and deliver. The method works toward three outcomes: time recovered, costs reduced and growth enabled.</desc>
+      <defs>
+        <linearGradient id={`${p}-n-grad`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#2A7D6E" />
+          <stop offset="1" stop-color="#1F5F53" />
+        </linearGradient>
+      </defs>
+
+      <text class="col-label fade" style="--d:0s" x="0" y="11">Business problems</text>
+
+      <g class="lines" fill="none">
+        {narrowProblems.map((n) => <path class="line draw" style={`--d:${n.ld}s`} pathLength="1" d={n.path} />)}
+        {narrowOutcomes.map((n) => <path class="line draw" style={`--d:${n.ld}s`} pathLength="1" d={n.path} />)}
+      </g>
+
+      {narrowProblems.map((n) => (
+        <g class="fade" style={`--d:${n.d}s`}>
+          <rect class="node" x={n.x} y={n.y} width="138" height="52" rx="6" />
+          <text class="node-label node-label-c" x={n.x + 69} y={n.cy} text-anchor="middle" dominant-baseline="central">
+            {n.lines.length === 1
+              ? n.lines[0]
+              : <><tspan x={n.x + 69} dy="-9">{n.lines[0]}</tspan><tspan x={n.x + 69} dy="18">{n.lines[1]}</tspan></>}
+          </text>
+        </g>
+      ))}
+
+      <g class="fade" style="--d:1.0s">
+        <rect class="panel" x="0" y="176" width="300" height="122" rx="10" fill={`url(#${p}-n-grad)`} />
+        <text class="panel-label" x="14" y="199">The SMG method</text>
+        {narrowStages.map((s, i) => (
+          <>
+            <rect class="chip" style={`--d:${s.d}s`} x={s.x} y="212" width="88" height="40" rx="6" />
+            <text class="chip-label chip-label-n" x={s.x + 44} y="232" text-anchor="middle" dominant-baseline="central">{s.label}</text>
+            {i < 2 && <path class="chevron" d={`M${s.x + 91} 228 L${s.x + 95} 232 L${s.x + 91} 236`} />}
+          </>
+        ))}
+        <text class="panel-sub" x="150" y="278" text-anchor="middle">Find the right fix. Measure what matters.</text>
+      </g>
+
+      {narrowOutcomes.map((n) => (
+        <g class="fade fade-late" style={`--d:${n.d}s`}>
+          <path class="arrow" d={`M${n.cx - 4} 339 L${n.cx} 345 L${n.cx + 4} 339`} />
+          <rect class="outcome" x={n.x} y="346" width="92" height="52" rx="6" />
+          <text class="outcome-label outcome-label-n" x={n.x + 46} y="372" text-anchor="middle" dominant-baseline="central">
+            <tspan x={n.x + 46} dy="-9">{n.lines[0]}</tspan><tspan x={n.x + 46} dy="18">{n.lines[1]}</tspan>
+          </text>
+        </g>
+      ))}
+
+      <text class="col-label fade fade-late" style="--d:2.7s" x="150" y="422" text-anchor="middle">Outcomes we work toward</text>
+    </svg>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .method {
+    padding: var(--space-3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  @media (max-width: 480px) {
+    .method { padding: var(--space-2); }
+  }
+
+  .method-art { container-type: inline-size; }
+
+  .art { display: block; width: 100%; height: auto; }
+  .art-narrow { display: none; }
+
+  @container (max-width: 339px) {
+    .art-wide { display: none; }
+    .art-narrow { display: block; }
+  }
+
+  figcaption {
+    margin-top: var(--space-2);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  /* Type */
+  .col-label,
+  .panel-label {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: rgba(255, 255, 255, 0.56);
+  }
+
+  .panel-label { fill: rgba(255, 255, 255, 0.88); }
+
+  .node-label,
+  .outcome-label {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 13.5px;
+    fill: rgba(255, 255, 255, 0.92);
+  }
+
+  .node-label-c,
+  .outcome-label-n { font-size: 13.5px; }
+
+  .outcome-label { fill: var(--color-white); font-weight: 600; }
+
+  .chip-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 15px;
+    fill: var(--color-white);
+  }
+
+  .chip-label-n { font-size: 13.5px; }
+
+  .panel-sub {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    fill: rgba(255, 255, 255, 0.84);
+  }
+
+  /* Shapes */
+  .node {
+    fill: rgba(255, 255, 255, 0.05);
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 1;
+  }
+
+  .panel { stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
+
+  .chip {
+    fill: rgba(255, 255, 255, 0.14);
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 1;
+  }
+
+  .chevron,
+  .arrow {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+  }
+
+  .chevron { stroke: rgba(255, 255, 255, 0.85); }
+  .arrow { stroke: var(--color-teal-light); }
+
+  .outcome {
+    fill: rgba(95, 201, 181, 0.12);
+    stroke: rgba(95, 201, 181, 0.65);
+    stroke-width: 1;
+  }
+
+  .line {
+    stroke: var(--color-teal-light);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    opacity: 0.85;
+  }
+
+  /* Motion: one pass, about 3 seconds, transform-free. Static when reduced motion is requested. */
+  @media (prefers-reduced-motion: no-preference) {
+    .fade {
+      animation: m-fade 0.5s ease-out both;
+      animation-delay: var(--d, 0s);
+    }
+
+    .draw {
+      stroke-dasharray: 1;
+      animation: m-draw 0.8s ease-out both;
+      animation-delay: var(--d, 0s);
+    }
+
+    .chip {
+      animation: m-chip 0.9s ease-out both;
+      animation-delay: var(--d, 0s);
+    }
+  }
+
+  @keyframes m-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes m-draw {
+    from { stroke-dashoffset: 1; }
+    to   { stroke-dashoffset: 0; }
+  }
+
+  @keyframes m-chip {
+    0%   { fill: rgba(255, 255, 255, 0.14); }
+    40%  { fill: rgba(95, 201, 181, 0.5); }
+    100% { fill: rgba(255, 255, 255, 0.14); }
+  }
+</style>

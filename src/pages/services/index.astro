@@ -1,0 +1,359 @@
+---
+import Base from '../../layouts/Base.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import ImprovementDiagram from '../../components/ImprovementDiagram.astro';
+import CTAStrip from '../../components/CTAStrip.astro';
+
+const expect = [
+  { title: "We get to the bottom of it.", body: "A clear picture of the problem or opportunity, before anyone proposes a solution." },
+  { title: "We agree what success looks like.", body: "What we are aiming for, and how we will know we got there." },
+  { title: "We put it in place.", body: "A redesigned process, connected software, a custom tool, or call coverage where it fits." },
+  { title: "We review and adjust.", body: "A monthly look at progress against what we agreed, and changes as the business changes." },
+];
+
+const situations = [
+  {
+    title: "Work gets dropped or runs late",
+    body: "Hours every week, rework, and deadlines that slip.",
+  },
+  {
+    title: "Money is leaking",
+    body: "Slow-paid invoices, undocumented change orders, and work that never gets billed.",
+  },
+  {
+    title: "Customers and enquiries slip away",
+    body: "Jobs won by whoever answered first, and leads that go cold.",
+  },
+  {
+    title: "The business depends on one person",
+    body: "A ceiling on growth, and a problem the day that person is out.",
+  },
+  {
+    title: "You want to do something new",
+    body: "A new service, a better way of working, or an idea you've been meaning to pursue, but no clear place to start.",
+  },
+];
+---
+
+<Base>
+  <ServiceHero
+    eyebrow="Services"
+    headline="Start with the problem. The right fix follows."
+    sub="Standard Method Group helps service businesses improve how they operate, put practical solutions in place, and pursue what comes next. Most of our work is process and systems improvement. Some owners want an ongoing AI partner, and some need a website that brings in the right work."
+    primaryText="Book a 30-minute call"
+    primaryHref="/contact"
+    note="30 minutes. No pitch, no obligation."
+  />
+
+  <!-- Situations: editorial numbered list -->
+  <section class="sx-section situations reveal">
+    <div class="sx-wrap situations-grid">
+      <div class="situations-head">
+        <p class="sx-kicker">What we are usually called about</p>
+        <h2 class="sx-title">What's getting in the way of your business?</h2>
+      </div>
+      <div class="situations-body">
+        <ol class="situations-list">
+          {situations.map((s, i) => (
+            <li>
+              <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured primary service -->
+  <section class="featured reveal" id="business-systems" aria-labelledby="primary-title">
+    <div class="featured-texture" aria-hidden="true"></div>
+    <div class="sx-wrap featured-grid">
+      <div class="featured-copy">
+        <p class="featured-kicker">Our primary service</p>
+        <h2 id="primary-title">Business systems and process improvement</h2>
+        <p class="featured-lead">Bring us a problem or an opportunity. We work out what is going on, then build the fix with you.</p>
+        <ol class="expect">
+          {expect.map((e, i) => (
+            <li>
+              <span class="expect-num" aria-hidden="true">{i + 1}</span>
+              <p><strong>{e.title}</strong> {e.body}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="featured-actions">
+          <a href="/contact" class="sx-btn">Book a 30-minute call</a>
+          <a href="/how-we-work" class="featured-link">How an engagement runs &rarr;</a>
+        </div>
+      </div>
+      <div class="featured-visual">
+        <ImprovementDiagram />
+      </div>
+    </div>
+  </section>
+
+  <!-- Supporting offerings -->
+  <section class="sx-section sx-section-alt support reveal">
+    <div class="sx-wrap">
+      <h2 class="support-title">Two other ways to work with us</h2>
+      <div class="support-grid">
+        <article class="concierge">
+          <p class="tag">Ongoing advisory</p>
+          <h3>AI Concierge</h3>
+          <p class="concierge-line">Your AI partner. Without the full-time hire.</p>
+          <p>An ongoing relationship for business owners who want to adopt AI and automation and make measurable progress, without the time or expertise to work it all out alone. An assessment, a 90-day roadmap, two working sessions a month, and questions answered between them.</p>
+          <a href="/services/ai-concierge" class="concierge-link">See AI Concierge &rarr;</a>
+        </article>
+        <article class="web">
+          <p class="tag">Secondary service</p>
+          <h3>Website development</h3>
+          <p>A website that helps the right customers find you and captures their enquiry properly, designed around what happens after someone gets in touch.</p>
+          <a href="/services/websites" class="sx-link">See website development &rarr;</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <CTAStrip
+    headline="Not sure which one fits? Describe what is going on and we will tell you."
+    buttonText="Book a 30-minute call"
+    buttonHref="/contact"
+    note="30 minutes. No pitch, no obligation."
+  />
+</Base>
+
+<style>
+  /* Situations */
+  .situations-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .situations-head .sx-title { max-width: 16ch; }
+
+  .situations-list { list-style: none; border-bottom: 1px solid var(--color-border); }
+
+  .situations-list li {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: var(--space-2);
+    padding: 32px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .num {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-teal);
+    padding-top: 5px;
+  }
+
+  .situations-list h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.375rem;
+    line-height: 1.25;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .situations-list p { font-size: 1.125rem; line-height: 1.55; max-width: 54ch; text-wrap: pretty; }
+
+  /* Featured primary */
+  .featured {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--color-navy);
+    padding: calc(var(--space-12) + var(--space-3)) 0;
+  }
+
+  .featured-texture {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 80% 90% at 70% 40%, #000 25%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 70% 40%, #000 25%, transparent 75%);
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  .featured-kicker {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-teal-light);
+    margin-bottom: var(--space-2);
+  }
+
+  .featured h2 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: var(--tracking-display);
+    color: var(--color-white);
+    max-width: 16ch;
+  }
+
+  .featured-copy .featured-lead {
+    font-size: var(--text-lead);
+    color: var(--color-white);
+    margin-top: var(--space-3);
+    max-width: 40ch;
+  }
+
+  .expect { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: var(--space-2); max-width: 52ch; }
+  .expect li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--space-1); }
+
+  .expect-num {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 0.9375rem;
+    color: var(--color-teal-light);
+    padding-top: 2px;
+  }
+
+  .expect p { color: var(--color-ink-on-dark); font-size: 1.0625rem; line-height: 1.55; }
+  .expect strong { color: var(--color-white); font-weight: var(--font-weight-body-semibold); }
+
+  .featured-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .featured-link {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .featured-link:hover { color: var(--color-white); text-decoration: underline; }
+
+  /* Supporting */
+  .support-title {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+  }
+
+  .support-grid {
+    margin-top: var(--space-3);
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-3);
+  }
+
+  .tag {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    margin-bottom: var(--space-1);
+  }
+
+  .concierge {
+    background: var(--color-white);
+    border: 1px solid rgba(42, 125, 110, 0.45);
+    border-left: 4px solid var(--color-teal);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .concierge h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.5rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+  }
+
+  .concierge-line {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    color: var(--color-deep-teal);
+    margin: var(--space-1) 0 var(--space-2);
+  }
+
+  .concierge p:not(.tag):not(.concierge-line) { margin-bottom: var(--space-3); }
+
+  .concierge-link {
+    align-self: flex-start;
+    margin-top: auto;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 0.9375rem;
+    color: var(--color-deep-teal);
+    border: 1px solid var(--color-teal);
+    border-radius: var(--radius);
+    padding: 10px 18px;
+  }
+
+  .concierge-link:hover { background: var(--color-teal); color: var(--color-white); }
+
+  .web {
+    padding: var(--space-5) var(--space-3);
+    border-left: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .web h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.25rem;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+    margin-bottom: var(--space-1);
+  }
+
+  .web p:not(.tag) { margin-bottom: var(--space-2); }
+  .web .sx-link { margin-top: auto; }
+
+  @media (max-width: 960px) {
+    .situations-grid, .featured-grid, .support-grid { grid-template-columns: 1fr; gap: var(--space-5); }
+    .situations-head .sx-title { max-width: 24ch; }
+    .featured-visual { max-width: 460px; }
+    .web { border-left: none; border-top: 1px solid var(--color-border); padding: var(--space-3) 0 0; }
+  }
+
+  @media (max-width: 640px) {
+    .situations-list li { grid-template-columns: 40px minmax(0, 1fr); gap: var(--space-1); padding: var(--space-3) 0; }
+    .situations-list h3 { font-size: 1.1875rem; }
+    .situations-list p { font-size: 1.0625rem; }
+    .featured { padding: var(--space-8) 0; }
+    .concierge { padding: var(--space-3); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .concierge-link { transition: none; }
+  }
+</style>

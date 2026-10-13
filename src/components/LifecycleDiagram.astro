@@ -1,0 +1,135 @@
+---
+// Plan and design -> build and test -> launch -> either handoff or ongoing management.
+// Same connected-systems language as the other diagrams. Two compositions by container width.
+interface Props { idPrefix?: string; }
+const { idPrefix = 'life' } = Astro.props;
+const p = idPrefix;
+---
+
+<figure class="life">
+  <div class="life-art">
+    <svg class="art art-wide" viewBox="0 0 650 300" role="img" aria-labelledby={`${p}-w-t ${p}-w-d`}>
+      <title id={`${p}-w-t`}>From design to launch, then handoff or ongoing management</title>
+      <desc id={`${p}-w-d`}>A website is planned and designed, built and tested, then launched with domain, HTTPS and redirects configured where applicable. After launch the customer either takes it over with agreed access and documentation, or SMG manages it month to month.</desc>
+      <defs>
+        <linearGradient id={`${p}-w-g`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A7D6E" /><stop offset="1" stop-color="#1F5F53" /></linearGradient>
+      </defs>
+      <g fill="none">
+        <path class="line draw" style="--d:.3s" pathLength="1" d="M120 150 H148" />
+        <path class="line draw" style="--d:.7s" pathLength="1" d="M268 150 H296" />
+        <path class="line draw" style="--d:1.3s" pathLength="1" d="M426 150 C448 150 448 62 470 62" />
+        <path class="line draw" style="--d:1.4s" pathLength="1" d="M426 150 C448 150 448 238 470 238" />
+      </g>
+
+      <g class="fade" style="--d:0s">
+        <rect class="node" x="0" y="122" width="120" height="56" rx="6" />
+        <text class="t-main" x="14" y="146">Plan and design</text>
+        <text class="t-sub" x="14" y="164">Direction first</text>
+      </g>
+      <g class="fade" style="--d:.5s">
+        <rect class="node" x="148" y="122" width="120" height="56" rx="6" />
+        <text class="t-main" x="162" y="146">Build and test</text>
+        <text class="t-sub" x="162" y="164">A working version</text>
+      </g>
+      <g class="fade" style="--d:1s">
+        <rect class="focus" x="296" y="114" width="130" height="72" rx="8" fill={`url(#${p}-w-g)`} />
+        <text class="t-main" x="312" y="140">Launch</text>
+        <text class="t-sub t-on" x="312" y="158">Domain, HTTPS,</text>
+        <text class="t-sub t-on" x="312" y="173">redirects</text>
+      </g>
+      <g class="fade" style="--d:1.7s">
+        <rect class="node" x="470" y="26" width="180" height="72" rx="6" />
+        <text class="t-main" x="486" y="52">Build + Handoff</text>
+        <text class="t-sub" x="486" y="70">Agreed access and</text>
+        <text class="t-sub" x="486" y="85">documentation</text>
+      </g>
+      <g class="fade" style="--d:1.9s">
+        <rect class="good" x="470" y="202" width="180" height="72" rx="6" />
+        <text class="t-main" x="486" y="228">Build + Manage</text>
+        <text class="t-sub" x="486" y="246">Hosting, maintenance,</text>
+        <text class="t-sub" x="486" y="261">agreed updates, monthly</text>
+      </g>
+    </svg>
+
+    <svg class="art art-narrow" viewBox="0 0 300 368" role="img" aria-labelledby={`${p}-n-t ${p}-n-d`}>
+      <title id={`${p}-n-t`}>From design to launch, then handoff or ongoing management</title>
+      <desc id={`${p}-n-d`}>A website is planned and designed, built and tested, then launched with domain, HTTPS and redirects configured where applicable. After launch the customer either takes it over with agreed access and documentation, or SMG manages it month to month.</desc>
+      <defs>
+        <linearGradient id={`${p}-n-g`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A7D6E" /><stop offset="1" stop-color="#1F5F53" /></linearGradient>
+      </defs>
+      <g fill="none">
+        <path class="line draw" style="--d:.3s" pathLength="1" d="M150 44 V64" />
+        <path class="line draw" style="--d:.7s" pathLength="1" d="M150 108 V128" />
+        <path class="line draw" style="--d:1.3s" pathLength="1" d="M150 188 V204 C150 222 71 214 71 232" />
+        <path class="line draw" style="--d:1.4s" pathLength="1" d="M150 188 V204 C150 222 229 214 229 232" />
+      </g>
+      <g class="fade" style="--d:0s">
+        <rect class="node" x="0" y="0" width="300" height="44" rx="6" />
+        <text class="t-main" x="14" y="22" dominant-baseline="central">Plan and design</text>
+        <text class="t-sub" x="286" y="22" text-anchor="end" dominant-baseline="central">Direction first</text>
+      </g>
+      <g class="fade" style="--d:.5s">
+        <rect class="node" x="0" y="64" width="300" height="44" rx="6" />
+        <text class="t-main" x="14" y="86" dominant-baseline="central">Build and test</text>
+        <text class="t-sub" x="286" y="86" text-anchor="end" dominant-baseline="central">A working version</text>
+      </g>
+      <g class="fade" style="--d:1s">
+        <rect class="focus" x="0" y="128" width="300" height="60" rx="8" fill={`url(#${p}-n-g)`} />
+        <text class="t-main" x="14" y="152">Launch</text>
+        <text class="t-sub t-on" x="14" y="171">Domain, HTTPS, redirects where applicable</text>
+      </g>
+      <g class="fade" style="--d:1.7s">
+        <rect class="node" x="0" y="232" width="142" height="108" rx="6" />
+        <text class="t-main t-c" x="71" y="258" text-anchor="middle">Build + Handoff</text>
+        <text class="t-sub" x="71" y="282" text-anchor="middle">Agreed access</text>
+        <text class="t-sub" x="71" y="298" text-anchor="middle">and documentation</text>
+      </g>
+      <g class="fade" style="--d:1.9s">
+        <rect class="good" x="158" y="232" width="142" height="108" rx="6" />
+        <text class="t-main t-c" x="229" y="258" text-anchor="middle">Build + Manage</text>
+        <text class="t-sub" x="229" y="282" text-anchor="middle">Hosting, maintenance,</text>
+        <text class="t-sub" x="229" y="298" text-anchor="middle">agreed updates</text>
+        <text class="t-sub" x="229" y="314" text-anchor="middle">month to month</text>
+      </g>
+    </svg>
+  </div>
+</figure>
+
+<style>
+  .life {
+    padding: var(--space-3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  @media (max-width: 480px) { .life { padding: var(--space-2); } }
+
+  .life-art { container-type: inline-size; }
+  .art { display: block; width: 100%; height: auto; }
+  .art-narrow { display: none; }
+
+  @container (max-width: 519px) {
+    .art-wide { display: none; }
+    .art-narrow { display: block; }
+  }
+
+  .node { fill: rgba(255, 255, 255, 0.05); stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
+  .good { fill: rgba(95, 201, 181, 0.12); stroke: rgba(95, 201, 181, 0.7); stroke-width: 1; }
+  .focus { stroke: rgba(255, 255, 255, 0.2); stroke-width: 1; }
+
+  .t-main { font-family: var(--font-heading); font-weight: 600; font-size: 14px; fill: var(--color-white); }
+  .t-c { font-size: 13.5px; }
+  .t-sub { font-family: var(--font-heading); font-size: 11.5px; fill: rgba(255, 255, 255, 0.76); }
+  .t-on { fill: rgba(255, 255, 255, 0.9); }
+
+  .line { stroke: var(--color-teal-light); stroke-width: 1.5; stroke-linecap: round; opacity: 0.85; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade { animation: l-fade 0.5s ease-out both; animation-delay: var(--d, 0s); }
+    .draw { stroke-dasharray: 1; animation: l-draw 0.8s ease-out both; animation-delay: var(--d, 0s); }
+  }
+
+  @keyframes l-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes l-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+</style>

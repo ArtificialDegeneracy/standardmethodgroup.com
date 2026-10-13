@@ -1,3 +1,8 @@
+---
+import InquiryForm from './InquiryForm.astro';
+import site from '../data/site.json';
+---
+
 <section class="contact-section reveal">
   <div class="contact-inner">
     <div class="contact-card">
@@ -15,6 +20,15 @@
     <div class="divider">
       <span>or</span>
     </div>
+
+    {site.inquiryEndpoint && (
+      <>
+        <InquiryForm />
+        <div class="divider">
+          <span>or</span>
+        </div>
+      </>
+    )}
 
     <div class="contact-card">
       <div class="contact-icon" aria-hidden="true">

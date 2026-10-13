@@ -1,11 +1,11 @@
 {
   "/": {
-    "title": "Standard Method Group | Operations Consulting for Small Business | Pinellas County, FL",
-    "description": "Standard Method Group helps small businesses in trades, construction, marine contracting, and property management get their operations running right. Free 30-minute discovery call."
+    "title": "Business Improvement Consulting | Standard Method Group",
+    "description": "Business improvement consultancy in Pinellas County. We find what is costing you time, money, or growth, then design and build the fix. Free 30-minute call."
   },
   "/how-we-work": {
     "title": "How We Work | Standard Method Group",
-    "description": "From discovery call to working engagement, here's what happens when you reach out to Standard Method Group. No contracts, no jargon, just results."
+    "description": "From discovery call to working engagement, here's what happens when you reach out to Standard Method Group. Clear scope, agreed expectations, no jargon."
   },
   "/who-we-help": {
     "title": "Who We Help | Standard Method Group",
@@ -24,7 +24,19 @@
     "description": "See how much time and money your business spends on repetitive admin work, and what you could get back. Free calculator from Standard Method Group."
   },
   "/never-miss-a-call": {
-    "title": "Never Miss a Call | Call Coverage for Small Business | Standard Method Group",
-    "description": "Every call answered, every lead captured, every meeting booked, even when you can't pick up. Call coverage for Tampa Bay small businesses. Free 30-minute call."
+    "title": "Call Coverage | Standard Method Group",
+    "description": "Call coverage is one operational solution we may recommend. See how we start with the problem and choose the fix."
+  },
+  "/services": {
+    "title": "Business Improvement Services | Standard Method Group",
+    "description": "Business improvement for service businesses in Pinellas County: process and systems work, an ongoing AI Concierge relationship, and website development."
+  },
+  "/services/ai-concierge": {
+    "title": "AI Concierge for Business Owners | Standard Method Group",
+    "description": "Ongoing AI and automation advisory for business owners: an assessment, a 90-day roadmap, two working sessions a month, and practical help. Book a call."
+  },
+  "/services/websites": {
+    "title": "Custom Websites for Service Businesses | Standard Method Group",
+    "description": "Custom websites for service businesses: fast, professional, and easy to contact. Build and hand off, or let SMG take care of it after launch."
   }
 }

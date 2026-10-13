@@ -1,20 +1,21 @@
 ---
-// Sticky contact tab pinned to the right edge of the viewport, sitewide.
+// Sticky contact tab pinned to the bottom-right of the viewport, sitewide.
+// Hidden on /contact (redundant) and on mobile.
+const onContact = new URL(Astro.request.url).pathname.replace(/\/$/, '') === '/contact';
 ---
 
-<a href="/contact" class="floating-contact" aria-label="Contact Standard Method Group">
+{!onContact && <a href="/contact" class="floating-contact" aria-label="Contact Standard Method Group">
   <svg class="floating-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
   </svg>
   <span class="floating-contact-label">Contact</span>
-</a>
+</a>}
 
 <style>
   .floating-contact {
     position: fixed;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: var(--space-3);
     z-index: 90;
     display: flex;
     align-items: center;
@@ -47,14 +48,10 @@
     height: 18px;
   }
 
+  /* On mobile it would sit over content, and every page has inline booking CTAs plus the menu button. */
   @media (max-width: 768px) {
     .floating-contact {
-      top: auto;
-      bottom: var(--space-3);
-      right: var(--space-3);
-      transform: none;
-      border-radius: var(--radius);
-      padding: 12px 18px;
+      display: none;
     }
   }
 

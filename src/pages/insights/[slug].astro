@@ -1,0 +1,181 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ArticleCTA from '../../components/ArticleCTA.astro';
+
+const SITE = 'https://standardmethodgroup.com';
+const DEFAULT_IMAGE = `${SITE}/og-image.png`;
+
+export async function getStaticPaths() {
+  // Drafts render in dev only.
+  const notes = await getCollection('insights', ({ data }) => import.meta.env.DEV || !data.draft);
+  return notes.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+const url = `${SITE}/insights/${entry.id}/`;
+const words = (entry.body ?? '').split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 225));
+const dateLabel = (d: Date) => d.toLocaleDateString('en-US', { dateStyle: 'long', timeZone: 'UTC' });
+
+// Structured-data and social images are only emitted when the URL is valid.
+const isHttpUrl = (u?: string) => {
+  try { return !!u && ['http:', 'https:'].includes(new URL(u).protocol); } catch { return false; }
+};
+const image = isHttpUrl(data.ogImage) ? data.ogImage! : DEFAULT_IMAGE;
+
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  datePublished: data.publishedAt.toISOString(),
+  dateModified: (data.updatedAt ?? data.publishedAt).toISOString(),
+  author: { '@type': 'Person', name: data.author },
+  publisher: { '@type': 'Organization', name: 'Standard Method Group', url: SITE },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  ...(isHttpUrl(image) ? { image: [image] } : {}),
+};
+const breadcrumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: 'Operations Notes', item: `${SITE}/insights/` },
+    { '@type': 'ListItem', position: 3, name: data.title, item: url },
+  ],
+};
+---
+
+<Base
+  title={`${data.title} | Standard Method Group`}
+  description={data.description}
+  canonical={url}
+  ogType="article"
+  ogImage={image}
+  jsonLd={[article, breadcrumbs]}
+>
+  <Fragment slot="head">
+    <meta property="article:published_time" content={data.publishedAt.toISOString()} />
+    <meta property="article:modified_time" content={(data.updatedAt ?? data.publishedAt).toISOString()} />
+    <meta property="article:author" content={data.author} />
+  </Fragment>
+
+  <article class="note">
+    <header class="note-head">
+      <a href="/insights/" class="note-kicker">Operations Notes</a>
+      <h1>{data.title}</h1>
+      <p class="note-dek">{data.dek}</p>
+      <p class="note-byline">
+        {data.author}<span aria-hidden="true"> · </span><time datetime={data.publishedAt.toISOString().slice(0, 10)}>{dateLabel(data.publishedAt)}</time><span aria-hidden="true"> · </span>{minutes} min read
+      </p>
+    </header>
+
+    <div class="note-body">
+      <Content />
+    </div>
+  </article>
+
+  <ArticleCTA />
+</Base>
+
+<style>
+  .note-head,
+  .note-body {
+    max-width: calc(40rem + 2 * var(--space-3));
+    margin: 0 auto;
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+
+  .note-head {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-5);
+  }
+
+  .note-kicker {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-deep-teal);
+    margin-bottom: var(--space-2);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 1.5rem + 2.4vw, 3.25rem);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.1;
+    color: var(--color-navy);
+    margin: 0;
+  }
+
+  .note-dek {
+    font-size: var(--text-lead);
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+    margin: var(--space-3) 0 0;
+  }
+
+  .note-byline {
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    margin: var(--space-3) 0 0;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Article body: MDX output is not scope-tagged, so these reach in with :global. */
+  .note-body { font-size: 1.1875rem; line-height: 1.7; }
+
+  .note-body :global(p) { margin: 0 0 var(--space-3); }
+
+  .note-body :global(h2) {
+    font-size: 1.625rem;
+    letter-spacing: var(--tracking-heading);
+    line-height: 1.2;
+    color: var(--color-navy);
+    margin: var(--space-8) 0 var(--space-2);
+  }
+
+  .note-body :global(a) {
+    color: var(--color-deep-teal);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  .note-body :global(a:hover) { text-decoration-thickness: 2px; }
+
+  .note-body :global(ul) { margin: 0 0 var(--space-3); padding-left: 1.25em; }
+  .note-body :global(li) { margin-bottom: var(--space-1); }
+
+  .note-body :global(blockquote) {
+    margin: var(--space-5) 0;
+    padding: 0 0 0 var(--space-3);
+    border-left: 3px solid var(--color-navy);
+  }
+
+  .note-body :global(blockquote p) {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading-medium);
+    font-size: 1.5rem;
+    line-height: 1.35;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-navy);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .note-head { padding-top: var(--space-5); padding-bottom: var(--space-3); }
+    .note-body { font-size: 1.125rem; }
+    .note-body :global(h2) { font-size: 1.4375rem; margin-top: var(--space-5); }
+    .note-body :global(blockquote p) { font-size: 1.3125rem; }
+  }
+</style>

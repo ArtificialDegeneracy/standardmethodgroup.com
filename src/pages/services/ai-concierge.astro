@@ -8,33 +8,19 @@ import CTAStrip from '../../components/CTAStrip.astro';
 const benefits = [
   {
     title: "Know where to start",
-    body: "A required assessment looks at your business, your goals, and the tools you already use. It ends with a personalized 90-day roadmap: the opportunities worth pursuing, in the order that makes sense.",
-    details: [
-      "Business and AI opportunity assessment",
-      "A personalized roadmap that is yours to keep",
-    ],
+    body: "A required assessment of your business, your goals, and the tools you already use produces a personalized 90-day roadmap: the opportunities worth pursuing, in the order that makes sense.",
   },
   {
     title: "Make real progress",
-    body: "Two 45-minute working sessions every month. We review priorities, work through the next challenge together, make practical progress where we can, and agree what happens next.",
-    details: [
-      "Six working sessions in your first 90 days",
-      "Small improvements alongside you, such as refining AI workflows, improving prompts, and configuring straightforward tools",
-    ],
+    body: "Two 45-minute working sessions every month, six in your first 90 days, focused on moving your priorities forward.",
   },
   {
     title: "Have someone to ask",
     body: "Ongoing advisory access between sessions. Reach out through your dedicated communication channel and receive an initial substantive response within two business days.",
-    details: [
-      "Guidance on the tools you use or are weighing, including ChatGPT, Claude, and Claude Skills",
-    ],
   },
   {
     title: "Know what's improving. Know what's next.",
-    body: "We keep the roadmap current as priorities change, and each month you get a short written summary: what was done, what is underway, what has measurably improved, and what comes next.",
-    details: [
-      "Where practical, we record a starting point so you can see the change",
-    ],
+    body: "We keep the roadmap current as priorities change, and each month you get a short written summary of what was done, what has improved, and what comes next. Where practical, we record a starting point so you can see the change.",
   },
 ];
 
@@ -61,8 +47,6 @@ const faqs = [
   { q: "Do I need to know anything technical?", a: "No. You need to know your business. We bring the tools and the judgment about what is worth doing." },
   { q: "How is this different from using ChatGPT or Claude myself?", a: "ChatGPT and Claude are good tools, and we use them. What the relationship adds is someone who knows your business, helps decide what is worth doing first, sets it up around how you work, and checks back to see that it stuck." },
   { q: "What happens in a working session?", a: "We review your priorities, work through the next challenge together, make practical progress where we can, and agree what happens next." },
-  { q: "What if I need something built?", a: "Small improvements happen in your sessions. Larger solutions are scoped separately. We design and implement them directly, with specialist support where it helps, and you approve the scope before work starts." },
-  { q: "Do I have to commit to 90 days?", a: "No. You can start month to month with a one-time assessment fee. The 90-day start includes the assessment at no additional charge. The ongoing service is the same either way." },
   { q: "What does it cost?", a: "Pricing depends on how you start. It is shared on your call and confirmed in writing before anything begins." },
 ];
 ---
@@ -103,9 +87,6 @@ const faqs = [
             <span class="chain-node" aria-hidden="true">{i + 1}</span>
             <h3>{b.title}</h3>
             <p>{b.body}</p>
-            <ul class="details">
-              {b.details.map((d) => <li>{d}</li>)}
-            </ul>
           </li>
         ))}
       </ol>
@@ -154,16 +135,7 @@ const faqs = [
         </article>
       </div>
 
-      <div class="either">
-        <p class="either-label">Either way you receive</p>
-        <ul>
-          <li>Two 45-minute working sessions each month</li>
-          <li>Ongoing advisory access between sessions</li>
-          <li>Monthly progress reporting</li>
-          <li>Your assessment and roadmap, yours to keep</li>
-        </ul>
-        <p class="either-note">Pricing is shared on your call and confirmed in writing before you begin.</p>
-      </div>
+      <p class="either-note">Both options include the same ongoing advisory relationship. The only difference is the initial commitment and how the assessment is paid for. You keep your completed assessment and roadmap whichever you choose.</p>
     </div>
   </section>
 
@@ -192,7 +164,7 @@ const faqs = [
 
   <section class="sx-section sx-section-alt reveal">
     <div class="sx-wrap faq-grid">
-      <h2 class="sx-title">Questions owners ask</h2>
+      <h2 class="sx-title">Common questions about AI Concierge</h2>
       <div class="faq">
         {faqs.map((f) => (
           <details class="faq-item">
@@ -206,11 +178,9 @@ const faqs = [
 
   <CTAStrip
     headline="Start with a 30-minute conversation about where AI could help your business."
-    sub="We will talk through how the business runs, where the opportunities might be, and how the engagement works. It is an introduction, not the assessment."
-    steps={["A free 30-minute call", "You choose how to begin", "Your assessment and 90-day roadmap"]}
+    sub="We'll talk about your business, the opportunities you're considering, and whether AI Concierge makes sense. No pitch, no obligation."
     buttonText="Book a 30-minute call"
     buttonHref="/contact"
-    note="30 minutes. No pitch, no obligation."
   />
 </Base>
 
@@ -288,34 +258,10 @@ const faqs = [
     line-height: 1.2;
     padding-top: 6px;
     margin-bottom: var(--space-1);
+    text-wrap: balance;
   }
 
   .chain > li > p { font-size: 1.1875rem; line-height: 1.55; max-width: 48ch; text-wrap: pretty; }
-
-  .details {
-    list-style: none;
-    margin-top: var(--space-2);
-    max-width: 48ch;
-  }
-
-  .details li {
-    position: relative;
-    padding: 0 0 0 var(--space-3);
-    margin-bottom: 6px;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: var(--color-text-secondary);
-  }
-
-  .details li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.62em;
-    width: 10px;
-    height: 2px;
-    background: var(--color-teal);
-  }
 
   /* 90 days */
   .ninety-grid {
@@ -397,45 +343,16 @@ const faqs = [
 
   .option-tag-quiet { color: var(--color-text-secondary); }
 
-  .either {
+  .either-note {
     margin-top: var(--space-5);
     padding-top: var(--space-3);
     border-top: 1px solid var(--color-border);
-  }
-
-  .either-label {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: 0.9375rem;
-    color: var(--color-navy);
-    margin-bottom: var(--space-1);
-  }
-
-  .either ul {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-1) 32px;
-    max-width: 760px;
-  }
-
-  .either li {
-    position: relative;
-    padding-left: var(--space-3);
+    max-width: 62ch;
     font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    text-wrap: pretty;
   }
-
-  .either li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.65em;
-    width: 10px;
-    height: 2px;
-    background: var(--color-teal);
-  }
-
-  .either-note { margin-top: var(--space-2); color: var(--color-text-secondary); font-size: 1rem; }
 
   /* Scope */
   .scope-grid {
@@ -518,8 +435,17 @@ const faqs = [
 
     .situation { padding: var(--space-8) 0; }
     .statement { max-width: 18ch; }
+
     .option, .option-a { padding: var(--space-3); }
-    .either ul { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .sx-section { padding: var(--space-5) 0 calc(var(--space-5) + var(--space-1)); }
+    .situation { padding: var(--space-8) 0 var(--space-5); }
+    .chain > li { padding-bottom: var(--space-3); }
+    .ninety-grid, .begin-grid, .scope-grid { margin-top: var(--space-3); gap: var(--space-3); }
+    .either-note { margin-top: var(--space-3); padding-top: var(--space-2); }
+    .faq { gap: var(--space-1); }
   }
 
   @media (max-width: 480px) {

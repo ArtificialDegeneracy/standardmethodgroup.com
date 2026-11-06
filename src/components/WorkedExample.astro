@@ -1,36 +1,37 @@
 ---
 // Illustrative arithmetic only. Always labelled as made-up numbers, never as a client result.
+// Time mode: pass jobs/before/after. Custom mode: pass cells (last one is highlighted) and math.
 interface Props {
-  jobs: number;
-  before: number; // minutes per job today
-  after: number; // minutes per job after the fix
+  jobs?: number;
+  before?: number; // minutes per job today
+  after?: number; // minutes per job after the fix
+  cells?: { label: string; value: string }[];
+  math?: string;
 }
-const { jobs, before, after } = Astro.props;
+const { jobs = 0, before = 0, after = 0, cells, math } = Astro.props;
 const hoursBefore = (jobs * before) / 60;
 const hoursAfter = (jobs * after) / 60;
 const saved = hoursBefore - hoursAfter;
 const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
+const items = cells ?? [
+  { label: 'jobs per month', value: String(jobs) },
+  { label: `at ${before} minutes per job`, value: `${fmt(hoursBefore)} hours` },
+  { label: `saved at ${after} minutes per job`, value: `about ${Math.round(saved)} hours` },
+];
+const mathText = math ?? `${jobs} jobs × ${before} minutes = ${fmt(hoursBefore)} hours. ${jobs} jobs × ${after} minutes ≈ ${fmt(Math.round(hoursAfter * 10) / 10)} hours. The difference is about ${Math.round(saved)} hours a month.`;
 ---
 
 <figure class="example">
   <figcaption class="example-label">Illustrative example based on hypothetical figures.</figcaption>
   <dl class="example-calc">
-    <div class="cell">
-      <dt>jobs per month</dt>
-      <dd>{jobs}</dd>
-    </div>
-    <div class="cell">
-      <dt>at {before} minutes per job</dt>
-      <dd>{fmt(hoursBefore)} hours</dd>
-    </div>
-    <div class="cell cell-saved">
-      <dt>saved at {after} minutes per job</dt>
-      <dd>about {Math.round(saved)} hours</dd>
-    </div>
+    {items.map((c, i) => (
+      <div class:list={['cell', { 'cell-saved': i === items.length - 1 }]}>
+        <dt>{c.label}</dt>
+        <dd>{c.value}</dd>
+      </div>
+    ))}
   </dl>
-  <p class="example-math">
-    {jobs} jobs × {before} minutes = {fmt(hoursBefore)} hours. {jobs} jobs × {after} minutes ≈ {fmt(Math.round(hoursAfter * 10) / 10)} hours. The difference is about {Math.round(saved)} hours a month.
-  </p>
+  <p class="example-math">{mathText}</p>
 </figure>
 
 <style>
